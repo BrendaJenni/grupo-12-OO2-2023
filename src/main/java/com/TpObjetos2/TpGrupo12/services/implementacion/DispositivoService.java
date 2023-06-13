@@ -11,11 +11,11 @@ import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
 
-@Service("personService")
+@Service("dispositivoService")
 public class DispositivoService implements IDispositivoService{
 	
 	@Autowired
-	@Qualifier("personRepository")
+	@Qualifier("dispositivoRepository")
 	private IDispositivoRepository dispositivoRepository;
 
 	private ModelMapper modelMapper = new ModelMapper();
