@@ -17,15 +17,15 @@ import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
 public class DispositivoController {
 
 	@Autowired
-	@Qualifier("personService")
-	private IDispositivoService personService;
+	@Qualifier("dispositivoService")
+	private IDispositivoService dispositivoService;
 
 	private ModelMapper modelMapper = new ModelMapper();
 	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.DISPOSITIVO_INDEX);
-		mAV.addObject("persons", personService.getAll());
+		mAV.addObject("dispositivos", dispositivoService.getAll());
 		return mAV;
 	}
 
