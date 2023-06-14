@@ -20,5 +20,5 @@ public class ViewRouteHelper {
     public final static String MEDICION_ROOT = "/medicion/";
 
     //Redirect
-    public final static String  ROUTE_INDEX = "/index";
+    public final static String  ROUTE_INDEX = "/home";
 }
