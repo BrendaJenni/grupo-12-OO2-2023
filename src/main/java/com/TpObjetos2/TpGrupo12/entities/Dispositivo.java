@@ -26,8 +26,7 @@ public class Dispositivo {
     @Column(name="activo")
     protected boolean activo;
 
-    public Dispositivo(int id, String nombre, boolean activo){
-        this.id=id;
+    public Dispositivo(String nombre, boolean activo){
         this.nombre=nombre;
         this.activo=activo;
     }
@@ -36,7 +35,7 @@ public class Dispositivo {
         return id;
     }
 
-    public void setId(int id) {
+    protected void setId(int id) {
         this.id = id;
     }
 

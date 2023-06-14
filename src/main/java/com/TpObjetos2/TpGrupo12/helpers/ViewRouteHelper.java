@@ -10,6 +10,14 @@ public class ViewRouteHelper {
     //DispositivoController
     public final static String DISPOSITIVO_INDEX = "dispositivo/dispositivo";
     public final static String DISPOSITIVO_ROOT = "/dispositivo/";
+    
+    //EventoController
+    public final static String EVENTO_INDEX = "evento/evento";
+    public final static String EVENTO_ROOT = "/evento/";
+    
+    //MedicionController
+    public final static String MEDICION_INDEX = "medicion/medicion";
+    public final static String MEDICION_ROOT = "/medicion/";
 
     //Redirect
     public final static String  ROUTE_INDEX = "/index";
