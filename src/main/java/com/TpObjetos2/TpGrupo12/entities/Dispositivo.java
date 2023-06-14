@@ -14,6 +14,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
+
 @Table(name="Dispositivo")
 public class Dispositivo {
     @Id
@@ -25,11 +26,11 @@ public class Dispositivo {
 
     @Column(name="activo")
     protected boolean activo;
-
+    /*
     public Dispositivo(String nombre, boolean activo){
         this.nombre=nombre;
         this.activo=activo;
-    }
+    }*/
     
     public int getId() {
         return id;
@@ -61,10 +62,10 @@ public class Dispositivo {
         this.nombre=nombre;
         this.activo=activo;
     }
-    */
+    *//*
 	public Dispositivo() {
 		// TODO Auto-generated constructor stub
 	}
-
+*/
 	
 }
