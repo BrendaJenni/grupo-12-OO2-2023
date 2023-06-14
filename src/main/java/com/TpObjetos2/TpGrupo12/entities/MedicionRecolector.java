@@ -1,7 +1,5 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -11,18 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "id_medicion")
+@PrimaryKeyJoinColumn(name = "id_recolector")
 @Getter @Setter @NoArgsConstructor
-@Table(name="MedicionAlumbrado")
-public class MedicionAlumbrado extends Medicion{
-	@Column(name="estadoActual")
-	private boolean estadoActual;
-	
-	@Column(name="oscuridadActualPor")
-	private double oscuridadActualPor;
-	
-
+@Table(name="MedicionRecolector")
+public class MedicionRecolector extends Medicion{
+	@Column(name="estadoLlenoAhora")
+	private boolean estadoLlenoAhora;
 }
-
-
-
