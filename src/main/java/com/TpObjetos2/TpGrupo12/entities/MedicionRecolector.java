@@ -15,8 +15,4 @@ import lombok.Setter;
 public class MedicionRecolector extends Medicion{
 	@Column(name="estadoLlenoAhora")
 	private boolean estadoLlenoAhora;
-	
-	@Column(name="oscuridadActualPor")
-	private double oscuridadActualPor;
-	
 }
