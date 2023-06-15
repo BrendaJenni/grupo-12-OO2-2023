@@ -9,13 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "id_dispositivo")
+@PrimaryKeyJoinColumn(name = "id_medicion")
 @Getter @Setter @NoArgsConstructor
-@Table(name="RecolectorInteligente")
-public class RecolectorInteligente extends Dispositivo{
-	@Column(name="estadoLlenoAhora")
-	private boolean estadoLlenoAhora;
-	
-	@Column(name="ubicacion")
-	private String ubicacion;
+@Table(name="MedicioEstacionamiento")
+public class MedicioEstacionamiento extends Medicion{
+	@Column(name="estadoLibre")
+	private boolean estadoLlibre;
 }

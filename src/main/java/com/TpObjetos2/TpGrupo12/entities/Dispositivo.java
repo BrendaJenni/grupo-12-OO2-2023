@@ -20,7 +20,7 @@ import lombok.Setter;
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected int id;
+    protected int id_dispositivo;
 
     @Column(name="nombre")
     protected String nombre;
@@ -33,12 +33,12 @@ public class Dispositivo {
         this.activo=activo;
     }
     
-    public int getId() {
-        return id;
+    public int getIdDispositivo() {
+        return id_dispositivo;
     }
 
-    protected void setId(int id) {
-        this.id = id;
+    protected void setIdDispositivo(int id) {
+        this.id_dispositivo = id;
     }
 
     public String getNombre() {
