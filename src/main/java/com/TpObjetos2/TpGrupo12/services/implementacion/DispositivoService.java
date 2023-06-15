@@ -31,9 +31,9 @@ public class DispositivoService implements IDispositivoService{
     }
 
     @Override
-    public boolean remove(int id) {
+    public boolean remove(int id_dispositivo) {
         try{
-            dispositivoRepository.deleteById(id);
+            dispositivoRepository.deleteById(id_dispositivo);
             return true;
         } catch(Exception e){
             return false;

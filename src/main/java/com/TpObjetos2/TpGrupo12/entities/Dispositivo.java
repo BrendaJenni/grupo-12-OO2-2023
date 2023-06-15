@@ -6,12 +6,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Getter @Setter @NoArgsConstructor
 
@@ -19,7 +21,7 @@ import lombok.Setter;
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected int id;
+    protected int id_dispositivo;
 
     @Column(name="nombre")
     protected String nombre;
@@ -32,12 +34,12 @@ public class Dispositivo {
         this.activo=activo;
     }*/
     
-    public int getId() {
-        return id;
+    public int getIdDispositivo() {
+        return id_dispositivo;
     }
 
-    protected void setId(int id) {
-        this.id = id;
+    protected void setIdDispositivo(int id) {
+        this.id_dispositivo = id;
     }
 
     public String getNombre() {

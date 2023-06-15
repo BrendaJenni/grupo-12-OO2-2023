@@ -10,5 +10,5 @@ public interface IDispositivoService {
 
     public DispositivoModel insertOrUpdate(DispositivoModel dispositivoModel);
     
-    public boolean remove(int id);
+    public boolean remove(int id_dispositivo);
 }

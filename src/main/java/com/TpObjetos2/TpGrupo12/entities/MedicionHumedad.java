@@ -11,8 +11,11 @@ import lombok.Setter;
 @Entity
 @PrimaryKeyJoinColumn(name = "id_medicion")
 @Getter @Setter @NoArgsConstructor
-@Table(name="MedicionRecolector")
-public class MedicionRecolector extends Medicion{
-	@Column(name="estadoLlenoAhora")
-	private boolean estadoLlenoAhora;
+@Table(name="MedicionHumedad")
+public class MedicionHumedad extends Medicion{
+	@Column(name="humedad")
+	private double humedad;
+	
+	@Column(name="estadoCesped")
+	private boolean estadoCesped;
 }
