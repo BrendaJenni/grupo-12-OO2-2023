@@ -15,8 +15,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.TpObjetos2.TpGrupo12.entities.UserRole;
 import com.TpObjetos2.TpGrupo12.repositories.IUserRepository;
+import com.TpObjetos2.TpGrupo12.entities.UserRoles;
+
+
+
 
 @Service("userService")
 public class UserService implements UserDetailsService {
@@ -37,9 +40,9 @@ public class UserService implements UserDetailsService {
 						grantedAuthorities);
 	}
 
-	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRole> userRoles) {
+	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRoles> userRoles) {
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		for(UserRole userRole: userRoles) {
+		for(UserRoles userRole: userRoles) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole()));
 		}
 		return new ArrayList<>(grantedAuthorities);

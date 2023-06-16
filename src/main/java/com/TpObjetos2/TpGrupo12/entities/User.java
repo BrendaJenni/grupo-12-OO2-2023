@@ -26,10 +26,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="username", unique=true, nullable=false, length=45)
+	@Column(name="username", unique=true, nullable=false, length=1000)
 	private String username;
 
-	@Column(name="password", nullable=false, length=60)
+	@Column(name="password", nullable=false, length=1000)
 	private String password;
 
 	@Column(name="enabled")
@@ -44,7 +44,7 @@ public class User {
 	private LocalDateTime updatedAt;
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
-	private Set<UserRole> userRoles = new HashSet<>();
+	private Set<UserRoles> userRoles = new HashSet<>();
 
 	public int getId() {
 		return id;
@@ -94,11 +94,11 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public Set<UserRole> getUserRoles() {
+	public Set<UserRoles> getUserRoles() {
 		return userRoles;
 	}
 
-	public void setUserRoles(Set<UserRole> userRoles) {
+	public void setUserRoles(Set<UserRoles> userRoles) {
 		this.userRoles = userRoles;
 	}
 

@@ -21,8 +21,8 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Table(name="user_role", uniqueConstraints=@UniqueConstraint(columnNames= {"role", "user_id"}))
-public class UserRole {
+@Table(name="user_roles", uniqueConstraints=@UniqueConstraint(columnNames= {"role", "user_id"}))
+public class UserRoles {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class UserRole {
 	@JoinColumn(name="user_id", nullable=false)
 	private User user;
 
-	@Column(name="role", nullable=false, length=100)
+	@Column(name="role", nullable=false, length=1000)
 	private String role;
 
 	@Column(name="createdat")
@@ -83,6 +83,4 @@ public class UserRole {
 		this.updatedAt = updatedAt;
 	}
 	
-	
-
 }

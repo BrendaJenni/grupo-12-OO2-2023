@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 
 
+
+
 @Controller
-public class userController {
+public class UserController {
 
 	@GetMapping("/login")
 	public String login(Model model,
@@ -27,6 +29,6 @@ public class userController {
 
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		return "redirect:/index";
+		return "redirect:/dispositivo/";
 	}
 }

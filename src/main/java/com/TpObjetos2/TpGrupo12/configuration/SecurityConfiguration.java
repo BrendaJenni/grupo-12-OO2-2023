@@ -13,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.TpObjetos2.TpGrupo12.services.implementacion.UserService;
 
+
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -42,7 +44,7 @@ public class SecurityConfiguration {
 		return http.build();
 	}
 
-	 /*//No usado en este ejemplo
+	/* No usado en este ejemplo
 	@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/webjars/**");

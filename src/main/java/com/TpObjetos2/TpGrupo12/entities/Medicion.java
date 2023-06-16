@@ -44,40 +44,6 @@ public class Medicion {
 
     @Column(name="fechaRegistro")
     private LocalDateTime fechaRegistro;
-    /*
-    public Medicion(LocalDateTime fechaRegistro) {
-        super();
-        this.fechaRegistro = fechaRegistro;
-    }
-    
-    public Medicion() {
-        super();
-    }
-
-    public int getIdMedicion() {
-        return idMedicion;
-    }
-
-    protected void setIdMedicion(int idMedicion) {
-        this.idMedicion = idMedicion;
-    }
-
-    public Dispositivo getDispositivo() {
-        return dispositivo;
-    }
-
-    public void setDispositivo(Dispositivo dispositivo) {
-        this.dispositivo = dispositivo;
-    }
-
-    public LocalDateTime getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }*/
-
 
 
 }
