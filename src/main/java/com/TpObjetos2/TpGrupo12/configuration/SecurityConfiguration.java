@@ -42,7 +42,7 @@ public class SecurityConfiguration {
 		return http.build();
 	}
 
-	/* No usado en este ejemplo
+	 /*//No usado en este ejemplo
 	@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/webjars/**");

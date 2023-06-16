@@ -1,4 +1,4 @@
-package com.TpObjetos2.TpGrupo12.services;
+package com.TpObjetos2.TpGrupo12;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

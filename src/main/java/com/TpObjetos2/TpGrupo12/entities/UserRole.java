@@ -83,12 +83,6 @@ public class UserRole {
 		this.updatedAt = updatedAt;
 	}
 	
-	public UserRole(int id, User user, String role) {
-		this.id = id;
-		this.user = user;
-		this.role = role;
-	}
-	
 	
 
 }

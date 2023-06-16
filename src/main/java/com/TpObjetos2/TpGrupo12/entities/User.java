@@ -102,18 +102,7 @@ public class User {
 		this.userRoles = userRoles;
 	}
 
-	public User(String username, String password, boolean enabled) {
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-	}
 
-	public User(String username, String password, boolean enabled, Set<UserRole> userRoles) {
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-		this.userRoles = userRoles;
-	}
 	
 	
 	
