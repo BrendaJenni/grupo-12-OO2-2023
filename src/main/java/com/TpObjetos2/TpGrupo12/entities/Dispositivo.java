@@ -19,18 +19,17 @@ import lombok.Setter;
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;  
+    private int id;
 
     @Column(name="nombre")
     private String nombre;
 
     @Column(name="activo")
     protected boolean activo;
-    /*
-    public Dispositivo(String nombre, boolean activo){
-        this.nombre=nombre;
-        this.activo=activo;
-    }*/
+
+    protected void setIdDispositivo(int id) {
+        this.id = id;    
+    }
 
     public int getId() {
 		return id;

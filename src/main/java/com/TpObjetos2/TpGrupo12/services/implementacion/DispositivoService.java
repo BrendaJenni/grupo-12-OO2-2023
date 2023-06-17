@@ -56,4 +56,3 @@ public class DispositivoService implements IDispositivoService{
 	public Dispositivo findByName(String name) {
 		return modelMapper.map(dispositivoRepository.findByName(name), Dispositivo.class);
 	}*/
-
