@@ -32,14 +32,18 @@ public class DispositivoService implements IDispositivoService{
     }
 
     @Override
-    public boolean remove(int id_dispositivo) {
+    public boolean remove(int id) {
         try{
-            dispositivoRepository.deleteById(id_dispositivo);
+            dispositivoRepository.deleteById(id);
             return true;
         } catch(Exception e){
             return false;
         }
     }
+    @Override
+	public Dispositivo findByid(int id) {
+		return dispositivoRepository.findById(id);
+	}
 
 }
 /*
