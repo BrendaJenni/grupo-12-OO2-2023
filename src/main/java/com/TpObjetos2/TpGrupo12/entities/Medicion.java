@@ -38,9 +38,5 @@ public class Medicion {
 
     @Column(name="fechaRegistro")
     private LocalDateTime fechaRegistro;
-
-<<<<<<< HEAD
+    
 }
-=======
-}
->>>>>>> fd6efae76c47736dad04abe34eb75aee19d51c97

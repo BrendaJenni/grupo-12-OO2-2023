@@ -36,9 +36,6 @@ public class Evento {
     // normalmente nullable es igual a false, en este caso se deja como true porque el ejemplo es simple
     @JoinColumn(name="idDispositivo", nullable=true)
     private Dispositivo dispositivo;
-<<<<<<< HEAD
-=======
 
->>>>>>> fd6efae76c47736dad04abe34eb75aee19d51c97
 }
 

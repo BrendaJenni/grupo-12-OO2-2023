@@ -25,20 +25,12 @@ public class Dispositivo {
     private String nombre;
 
     @Column(name="activo")
-<<<<<<< HEAD
     protected boolean activo;
     /*
     public Dispositivo(String nombre, boolean activo){
         this.nombre=nombre;
         this.activo=activo;
     }*/
-
-    protected void setIdDispositivo(int id) {
-        this.id_dispositivo = id;    
-    }
-=======
-    private boolean activo;
->>>>>>> fd6efae76c47736dad04abe34eb75aee19d51c97
 
     public int getId() {
 		return id;

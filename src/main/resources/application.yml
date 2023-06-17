@@ -1,13 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/bd-grupo12
-<<<<<<< HEAD
     username: root
     password: 4V474r44ng
-=======
-    username: johann
-    password: popoyo123456
->>>>>>> fd6efae76c47736dad04abe34eb75aee19d51c97
   jpa:
     show-sql: true
     hibernate:
