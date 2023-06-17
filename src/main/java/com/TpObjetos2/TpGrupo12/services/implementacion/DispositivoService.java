@@ -1,13 +1,16 @@
 package com.TpObjetos2.TpGrupo12.services.implementacion;
 
 import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
+import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
+import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
+import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
@@ -33,14 +36,18 @@ public class DispositivoService implements IDispositivoService{
     }
 
     @Override
-    public boolean remove(int id_dispositivo) {
+    public boolean remove(int id) {
         try{
-            dispositivoRepository.deleteById(id_dispositivo);
+            dispositivoRepository.deleteById(id);
             return true;
         } catch(Exception e){
             return false;
         }
     }
+    @Override
+	public Dispositivo findByid(int id) {
+		return dispositivoRepository.findById(id);
+	}
 }
 /*
 	@Override

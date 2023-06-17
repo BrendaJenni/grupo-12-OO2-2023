@@ -1,6 +1,5 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,43 +12,47 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Getter @Setter @NoArgsConstructor
 @Table(name="Dispositivo")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected int id_dispositivo;
+    private int id;  
 
     @Column(name="nombre")
-    protected String nombre;
+    private String nombre;
 
     @Column(name="activo")
     protected boolean activo;
+    
+    protected void setIdDispositivo(int id) {
+        this.id = id;    
+    }
 
-	public int getId_dispositivo() {
-		return id_dispositivo;
+    public int getId() {
+		return id;
 	}
 
-	protected void setId_dispositivo(int id_dispositivo) {
-		this.id_dispositivo = id_dispositivo;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
-		return nombre;
-	}
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public boolean isActivo() {
-		return activo;
-	}
+    public boolean isActivo() {
+        return activo;
+    }
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     
 }

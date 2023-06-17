@@ -11,12 +11,10 @@ import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 
 public interface IDispositivoService {
     public List<Dispositivo> getAll();
-    public List<RecolectorInteligente> getAllR();
-    public List<SensorEstacionamiento> getAllE();
-    public List<SensorAlumbrado> getAllA();
-    public List<SensorHumedad> getAllH();
 
     public DispositivoModel insertOrUpdate(DispositivoModel dispositivoModel);
     
-    public boolean remove(int id_dispositivo);
+    public boolean remove(int id);
+    
+    public Dispositivo findByid(int id);
 }

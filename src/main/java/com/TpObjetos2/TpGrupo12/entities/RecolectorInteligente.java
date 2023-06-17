@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "id_dispositivo")
+@PrimaryKeyJoinColumn(name = "id")
 @Getter @Setter @NoArgsConstructor
 @Table(name="RecolectorInteligente")
 public class RecolectorInteligente extends Dispositivo{
