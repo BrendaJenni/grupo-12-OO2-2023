@@ -1,6 +1,5 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +15,6 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Getter @Setter @NoArgsConstructor
-
 @Table(name="Dispositivo")
 public class Dispositivo {
     @Id
@@ -33,13 +31,17 @@ public class Dispositivo {
         this.nombre=nombre;
         this.activo=activo;
     }*/
-    
-    public int getIdDispositivo() {
+
+    protected void setIdDispositivo(int id) {
+        this.id_dispositivo = id;    
+    }
+
+    public int getId_dispositivo() {
         return id_dispositivo;
     }
 
-    protected void setIdDispositivo(int id) {
-        this.id_dispositivo = id;
+    protected void setId_dispositivo(int id_dispositivo) {
+        this.id_dispositivo = id_dispositivo;
     }
 
     public String getNombre() {
@@ -58,16 +60,4 @@ public class Dispositivo {
         this.activo = activo;
     }
 
-    
-    /*
-    public Dispositivo(String nombre, boolean activo){
-        this.nombre=nombre;
-        this.activo=activo;
-    }
-    *//*
-	public Dispositivo() {
-		// TODO Auto-generated constructor stub
-	}
-*/
-	
 }

@@ -36,49 +36,6 @@ public class Evento {
     // normalmente nullable es igual a false, en este caso se deja como true porque el ejemplo es simple
     @JoinColumn(name="idDispositivo", nullable=true)
     private Dispositivo dispositivo;
-	/*
-	public Evento(String descripcion, LocalDateTime fechaRegistro) {
-		super();
-		this.descripcion = descripcion;
-		this.fechaRegistro = fechaRegistro;
-	}
-
-	public Evento() {
-		super();
-	}*/
-
-	
-	public int getIdEvento() {
-		return idEvento;
-	}
-
-	protected void setIdEvento(int idEvento) {
-		this.idEvento = idEvento;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public LocalDateTime getFechaRegistro() {
-		return fechaRegistro;
-	}
-
-	public void setFechaRegistro(LocalDateTime fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
-	}
-
-	public Dispositivo getDispositivo() {
-		return dispositivo;
-	}
-
-	public void setDispositivo(Dispositivo dispositivo) {
-		this.dispositivo = dispositivo;
-	}
 		
 
 }
