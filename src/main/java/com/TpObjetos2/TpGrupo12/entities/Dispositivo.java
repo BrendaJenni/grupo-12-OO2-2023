@@ -12,19 +12,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Getter @Setter @NoArgsConstructor
 @Table(name="Dispositivo")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected int id_dispositivo;
+    private int id;  
 
     @Column(name="nombre")
-    protected String nombre;
+    private String nombre;
 
     @Column(name="activo")
+<<<<<<< HEAD
     protected boolean activo;
     /*
     public Dispositivo(String nombre, boolean activo){
@@ -35,16 +36,19 @@ public class Dispositivo {
     protected void setIdDispositivo(int id) {
         this.id_dispositivo = id;    
     }
+=======
+    private boolean activo;
+>>>>>>> fd6efae76c47736dad04abe34eb75aee19d51c97
 
-    public int getId_dispositivo() {
-        return id_dispositivo;
-    }
+    public int getId() {
+		return id;
+	}
 
-    protected void setId_dispositivo(int id_dispositivo) {
-        this.id_dispositivo = id_dispositivo;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getNombre() {
+	public String getNombre() {
         return nombre;
     }
 
