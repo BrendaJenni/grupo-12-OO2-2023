@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +24,17 @@ public class DispositivoController {
     @Qualifier("dispositivoService")
     private IDispositivoService dispositivoService;
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public ModelAndView index(){
         ModelAndView mAV = new ModelAndView(ViewRouteHelper.DISPOSITIVO_INDEX);
-        mAV.addObject("dispositivos", dispositivoService.getAll());
+        mAV.addObject("dispositivo", dispositivoService.getAll());
         mAV.addObject("dispositivo", new Dispositivo());
         return mAV;
+    }*/
+    @GetMapping("/")
+    public String index(Model model){
+       model.addAttribute("dispositivos", dispositivoService.getAll());
+       return "dispositivo/dispositivos";
     }
 
     @PostMapping("/")

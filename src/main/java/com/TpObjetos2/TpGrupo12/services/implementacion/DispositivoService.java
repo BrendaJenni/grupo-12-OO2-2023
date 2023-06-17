@@ -11,6 +11,7 @@ import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
 
+//ESTO ES EL ABM :D
 @Service("dispositivoService")
 public class DispositivoService implements IDispositivoService{
     @Autowired
@@ -39,7 +40,10 @@ public class DispositivoService implements IDispositivoService{
             return false;
         }
     }
-
+    @Override
+	public Dispositivo findByid(int id) {
+		return dispositivoRepository.findById(id);
+	}
 
 }
 /*
