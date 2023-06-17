@@ -77,8 +77,13 @@
     <artifactId>spring-beans</artifactId>
     <version>6.0.9</version>
 		</dependency>
+		<dependency>
+			 <!-- https://mvnrepository.com/artifact/org.springframework/springloaded -->
+		    <groupId>org.springframework</groupId>
+		    <artifactId>springloaded</artifactId>
+		    <version>1.2.8.RELEASE</version>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
