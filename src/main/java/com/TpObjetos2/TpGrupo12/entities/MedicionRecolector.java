@@ -13,6 +13,14 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Table(name="MedicionRecolector")
 public class MedicionRecolector extends Medicion{
-	@Column(name="estadoLlenoAhora")
-	private boolean estadoLlenoAhora;
+	@Column(name="estaLlenoAhora")
+	private boolean estaLlenoAhora;
+
+	public boolean isEstaLlenoAhora() {
+		return estaLlenoAhora;
+	}
+
+	public void setEstaLlenoAhora(boolean estaLlenoAhora) {
+		this.estaLlenoAhora = estaLlenoAhora;
+	}
 }

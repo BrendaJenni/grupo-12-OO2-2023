@@ -13,9 +13,14 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Table(name="RecolectorInteligente")
 public class RecolectorInteligente extends Dispositivo{
-	@Column(name="estadoLlenoAhora")
-	private boolean estadoLlenoAhora;
-	
-	@Column(name="ubicacion")
+	@Column(name="ubicacion", columnDefinition = "VARCHAR(255)")
 	private String ubicacion;
+
+	public String getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
+	}
 }

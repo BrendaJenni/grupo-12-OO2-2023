@@ -41,7 +41,6 @@ public class DispositivoService implements IDispositivoService{
             return false;
         }
     }
-
 }
 /*
 	@Override
