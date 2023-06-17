@@ -22,3 +22,6 @@ public class MedicionAlumbrado extends Medicion{
 	private double oscuridadActualPor;
 	
 }
+
+
+

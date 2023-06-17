@@ -18,7 +18,11 @@ public class ViewRouteHelper {
     //MedicionController
     public final static String MEDICION_INDEX = "medicion/medicion";
     public final static String MEDICION_ROOT = "/medicion/";
+    
+  //USER
+  	public final static String USER_LOGIN = "user/login";
+  	public final static String USER_LOGOUT = "user/logout";
 
     //Redirect
-    public final static String  ROUTE_INDEX = "/index";
+    public final static String  ROUTE_INDEX = "/home";
 }

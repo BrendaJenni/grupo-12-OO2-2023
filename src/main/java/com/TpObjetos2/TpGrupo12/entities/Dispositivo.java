@@ -1,6 +1,5 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,5 +26,38 @@ public class Dispositivo {
 
     @Column(name="activo")
     protected boolean activo;
+    /*
+    public Dispositivo(String nombre, boolean activo){
+        this.nombre=nombre;
+        this.activo=activo;
+    }*/
+
+    protected void setIdDispositivo(int id) {
+        this.id_dispositivo = id;    
+    }
+
+    public int getId_dispositivo() {
+        return id_dispositivo;
+    }
+
+    protected void setId_dispositivo(int id_dispositivo) {
+        this.id_dispositivo = id_dispositivo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     
 }
