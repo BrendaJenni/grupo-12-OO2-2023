@@ -68,13 +68,32 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.springframework/springloaded -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>springloaded</artifactId>
 		    <version>1.2.8.RELEASE</version>
 		</dependency>
-    </dependencies>
+    
+
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-beans</artifactId>
+    <version>6.0.9</version>
+		</dependency>
+	</dependencies>
+
 
 	<build>
 		<plugins>

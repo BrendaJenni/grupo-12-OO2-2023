@@ -21,4 +21,6 @@ public class MedicionAlumbrado extends Medicion{
 	@Column(name="oscuridadActualPor")
 	private double oscuridadActualPor;
 	
+
 }
+

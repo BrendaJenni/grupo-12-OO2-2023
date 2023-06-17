@@ -1,6 +1,5 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Getter @Setter @NoArgsConstructor
 @Table(name="Dispositivo")
@@ -21,18 +19,47 @@ import lombok.Setter;
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+
+    protected int id_dispositivo;
 
     @Column(name="nombre")
     private String nombre;
 
     @Column(name="activo")
+
     private boolean activo;
     
     public Dispositivo (int id_dispositivo,String nombre, boolean activo) {
-    	this.id = id_dispositivo;
+    	this.id_dispositivo = id_dispositivo;
     	this.nombre = nombre;
     	this.activo = activo;
     }
     public Dispositivo() {}
+
+
+    public int getId_dispositivo() {
+        return id_dispositivo;
+    }
+
+    protected void setId_dispositivo(int id_dispositivo) {
+        this.id_dispositivo = id_dispositivo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
 }
+

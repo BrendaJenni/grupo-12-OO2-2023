@@ -20,7 +20,13 @@ import lombok.Setter;
 
 import jakarta.persistence.InheritanceType;
 
+
+//@Entity
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Table(name="Medicion")
+//@MappedSuperclass
 @Entity
 @Getter @Setter @NoArgsConstructor
 @Table(name="Medicion")
@@ -38,5 +44,7 @@ public class Medicion {
 
     @Column(name="fechaRegistro")
     private LocalDateTime fechaRegistro;
-    
+
+
 }
+
