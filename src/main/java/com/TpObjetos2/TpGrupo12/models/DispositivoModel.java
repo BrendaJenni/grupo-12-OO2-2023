@@ -1,17 +1,22 @@
 package com.TpObjetos2.TpGrupo12.models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter @NoArgsConstructor
 public class DispositivoModel {
-    protected int id_dispositivo;
+    protected int id;
     protected String nombre;
     protected boolean activo;
 
     public DispositivoModel(int id_dispositivo, String nombre, boolean activo) {
-        this.id_dispositivo = id_dispositivo;
+        this.id = id_dispositivo;
         this.nombre = nombre;
         this.activo = activo;
     }
 
-    public DispositivoModel() {}
+    /*public DispositivoModel() {}
 
     public int getIdDispositivo() {
         return id_dispositivo;
@@ -41,5 +46,5 @@ public class DispositivoModel {
     public String toString() {
         return "DispositivoModel [id=" + id_dispositivo + ", nombre=" + nombre + ", activo=" + activo + "]";
     }
-    
+    */
 }
