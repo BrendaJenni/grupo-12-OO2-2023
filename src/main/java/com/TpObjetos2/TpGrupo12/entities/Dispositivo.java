@@ -20,7 +20,7 @@ public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 
-    protected int id_dispositivo;
+    private int id;  
 
     @Column(name="nombre")
     private String nombre;
@@ -30,22 +30,26 @@ public class Dispositivo {
     private boolean activo;
     
     public Dispositivo (int id_dispositivo,String nombre, boolean activo) {
-    	this.id_dispositivo = id_dispositivo;
+    	this.id = id_dispositivo;
     	this.nombre = nombre;
     	this.activo = activo;
     }
     public Dispositivo() {}
 
 
-    public int getId_dispositivo() {
-        return id_dispositivo;
+    protected void setIdDispositivo(int id) {
+        this.id = id;    
     }
 
-    protected void setId_dispositivo(int id_dispositivo) {
-        this.id_dispositivo = id_dispositivo;
-    }
+    public int getId() {
+		return id;
+	}
 
-    public String getNombre() {
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
         return nombre;
     }
 
