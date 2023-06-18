@@ -43,7 +43,7 @@ public class DispositivoController {
     @PostMapping("new")
     public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
         dispositivoService.insertOrUpdate(dispositivoModel);
-        return new RedirectView("dispositivo/new");
+        return new RedirectView("");
     }
     
     

@@ -14,13 +14,15 @@ import lombok.Setter;
 @Table(name="SensorHumedad")
 public class SensorHumedad extends Dispositivo{
 	@Column(name="encedido")
-	private boolean encedido;
+	private boolean encendido;
 
 	public boolean isEncedido() {
-		return encedido;
+		return encendido;
+	}
+	public SensorHumedad() {}
+	public SensorHumedad(String nombre, boolean activo,boolean encendido) {
+		super(nombre,activo);
+		this.encendido=encendido;
 	}
 
-	public void setEncedido(boolean encedido) {
-		this.encedido = encedido;
-	}
 }
