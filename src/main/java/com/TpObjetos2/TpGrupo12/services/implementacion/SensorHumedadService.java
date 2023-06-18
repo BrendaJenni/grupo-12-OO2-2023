@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorHumedadModel;
-import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
 import com.TpObjetos2.TpGrupo12.repositories.ISensorHumedadRepository;
 import com.TpObjetos2.TpGrupo12.services.ISensorHumedadService;
 
@@ -19,7 +17,7 @@ import com.TpObjetos2.TpGrupo12.services.ISensorHumedadService;
 public class SensorHumedadService implements ISensorHumedadService{
 
 	@Autowired
-    @Qualifier("sensorHuemdadRepository")
+    @Qualifier("sensorHumedadRepository")
     private ISensorHumedadRepository sensorHumedadRepository;
 
     private ModelMapper modelMapper = new ModelMapper();
@@ -30,8 +28,8 @@ public class SensorHumedadService implements ISensorHumedadService{
 	}
 
 	@Override
-	public SensorHumedadModel insertOrUpdate(SensorHumedadModel sensorHumedadModel) {
-		SensorHumedad sensorHumedad = sensorHumedadRepository.save(modelMapper.map(sensorHumedadModel, SensorHumedad.class));
+	public SensorHumedadModel insertOrUpdate(DispositivoModel dispositivoModel) {
+		SensorHumedad sensorHumedad = sensorHumedadRepository.save(modelMapper.map(dispositivoModel, SensorHumedad.class));
         return modelMapper.map(sensorHumedad, SensorHumedadModel.class);
 	}
 

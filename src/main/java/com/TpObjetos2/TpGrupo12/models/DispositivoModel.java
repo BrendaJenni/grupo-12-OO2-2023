@@ -9,19 +9,30 @@ public class DispositivoModel {
     protected int id;
     protected String nombre;
     protected boolean activo;
+    protected boolean encendido;
 
-    public DispositivoModel(int id_dispositivo, String nombre, boolean activo) {
+    public DispositivoModel(int id_dispositivo, String nombre, boolean activo,boolean encendido) {
         this.id = id_dispositivo;
         this.nombre = nombre;
         this.activo = activo;
+        this.encendido=encendido;
     }
 
     public DispositivoModel() {}
 
-    public int getIdDispositivo() {
-        return id;
-    }
+    public boolean isEncendido() {
+		return encendido;
+	}
 
+	public void setEncendido(boolean encendido) {
+		this.encendido = encendido;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	
     public void setId(int id) {
         this.id = id;
     }

@@ -29,8 +29,8 @@ public class Dispositivo {
 
     private boolean activo;
     
-    public Dispositivo (String nombre, boolean activo) {
-    	
+    public Dispositivo (int id,String nombre, boolean activo) {
+    	this.id=id;
     	this.nombre = nombre;
     	this.activo = activo;
     }

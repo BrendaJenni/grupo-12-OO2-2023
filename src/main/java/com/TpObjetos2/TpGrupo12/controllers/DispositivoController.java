@@ -17,7 +17,9 @@ import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
 import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
+import com.TpObjetos2.TpGrupo12.models.SensorHumedadModel;
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
+import com.TpObjetos2.TpGrupo12.services.ISensorHumedadService;
 
 @Controller
 @RequestMapping("/")
@@ -25,6 +27,10 @@ public class DispositivoController {
     @Autowired
     @Qualifier("dispositivoService")
     private IDispositivoService dispositivoService;
+    @Autowired
+    @Qualifier("sensorHumedadService")
+    private ISensorHumedadService sensorHumedadService;
+    
 
     @GetMapping("")
     public String index(Model model){
@@ -36,15 +42,27 @@ public class DispositivoController {
     public ModelAndView index(){
        ModelAndView mAV = new ModelAndView("dispositivo/new");
        mAV.addObject("dispositivos", dispositivoService.getAll());
-       mAV.addObject("dispositivo", new Dispositivo());
+       mAV.addObject("dispositivo", new DispositivoModel());
        return mAV;
     }
 
     @PostMapping("new")
     public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
-        dispositivoService.insertOrUpdate(dispositivoModel);
-        return new RedirectView("");
+    	sensorHumedadService.insertOrUpdate(dispositivoModel);
+    	return new RedirectView("");
     }
+    
+    /*@SuppressWarnings("unused")
+	@PostMapping("new")
+    public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
+    	if(new SensorHumedad(dispositivoModel.getId(),dispositivoModel.getNombre(),dispositivoModel.isActivo(),dispositivoModel.isEncendido()) != null) {
+    		sensorHumedadService.insertOrUpdate(new SensorHumedadModel(dispositivoModel.getId(),dispositivoModel.getNombre(),dispositivoModel.isActivo(),dispositivoModel.isEncendido()));
+    	}else {
+    		dispositivoService.insertOrUpdate(dispositivoModel);
+    	}
+        
+        return new RedirectView("");
+    }*/
     
     
 }
