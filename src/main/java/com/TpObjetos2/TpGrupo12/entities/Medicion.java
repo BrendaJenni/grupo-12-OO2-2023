@@ -29,9 +29,10 @@ public class Medicion {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idMedicion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     // normalmente nullable es igual a false, en este caso se deja como true porque el ejemplo es simple
-    @JoinColumn(name="idDispositivo", nullable=true)
+    //@JoinColumn(name="idDispositivo", nullable=false)
     private Dispositivo dispositivo;
 
     @Column(name="fechaRegistro")

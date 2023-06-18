@@ -9,17 +9,17 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HomeController {
-	@GetMapping("/home")
+	@GetMapping("/")
 	public ModelAndView index() {
 		ModelAndView vista = new ModelAndView(ViewRouteHelper.INDEX);
 		return vista;
 	}
-	
+	/*
 	@GetMapping("/")
     public RedirectView redirectToHomeIndex(){
         return new RedirectView(ViewRouteHelper.ROUTE_INDEX);
-    }
+    }*/
 	
 }
