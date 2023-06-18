@@ -20,16 +20,16 @@ public class SensorEstacionamiento extends Dispositivo{
 	@OneToMany(mappedBy="sensor")
 	private Set<Plaza> plazas = new HashSet<>();
 	
-	public SensorEstacionamiento(int id, String nombre, boolean activo, Set<Plaza> plazas, boolean encendido) {
+	public SensorEstacionamiento(int id, String nombre, boolean activo, Set<Plaza> plazas) {
 		super(id, nombre, activo);
 		this.plazas = plazas;
-		this.encendido=encendido;
+		//this.encendido=encendido;
 	}
 
 	public SensorEstacionamiento() {}
 	
-	@Column(name="encendido")
-	private boolean encendido;
+	//@Column(name="encendido")
+	//private boolean encendido;
 
 	public Set<Plaza> getPlazas() {
 		return plazas;
@@ -38,13 +38,13 @@ public class SensorEstacionamiento extends Dispositivo{
 	public void setPlazas(Set<Plaza> plazas) {
 		this.plazas = plazas;
 	}
-
+	/*
 	public boolean isEncendido() {
 		return encendido;
 	}
 
 	public void setEncendido(boolean encendido) {
 		this.encendido = encendido;
-	}
+	}*/
 
 }

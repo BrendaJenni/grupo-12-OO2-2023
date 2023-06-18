@@ -10,7 +10,7 @@ public class ViewRouteHelper {
     //DispositivoController
     public final static String DISPOSITIVO_INDEX = "dispositivo/new";
     public final static String DISPOSITIVO_ROOT = "/dispositivo/new";
-    
+
     //EventoController
     public final static String EVENTO_INDEX = "evento/evento";
     public final static String EVENTO_ROOT = "/evento/";

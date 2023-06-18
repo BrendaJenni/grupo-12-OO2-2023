@@ -22,12 +22,13 @@ import lombok.Setter;
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private int id;  
 
     @Column(name="nombre")
     private String nombre;
 
     @Column(name="activo")
+
     protected boolean activo;
     
     @OneToMany(mappedBy="dispositivo")
@@ -78,7 +79,5 @@ public class Dispositivo {
 	public Dispositivo() {
 	}
 	
-	
-    
-    
 }
+
