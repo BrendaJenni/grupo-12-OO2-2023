@@ -1,1 +1,47 @@
-<h1>Index de Dispositivo</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="/css/dispositivo.css" rel="stylesheet" />
+	<title>Dispositivo</title>
+</head>
+<body>
+	<div class="col">
+  		<h1>Listado de Sensores</h1>
+  		
+  		<a th:href="@{/new}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;AGREGAR DISPOSITIVO</a>
+		
+	
+	</div>
+	<div class="container col-10" id="myTable">
+  		<div class="col-12">
+    	<h2> </h2>
+  	</div>
+
+  	<table class="table table-stripped table-bordered" >
+    	<thead class="table-dark">
+      		<tr>
+        		<th scope="col">Id</th>
+        		<th scope="col">Activo</th>
+        		<th scope="col">Name</th>
+        		<th scope="col">Info</th>
+        		<th scope="col">Update</th>
+        		<th scope="col">Delete</th>
+      		</tr>
+    	</thead>
+    	<tbody>
+     	 	<tr th:each="dispositivo: ${dispositivos}">
+        		<td th:text="${dispositivo.id}"></td>
+        		<td th:text="${dispositivo.activo}"></td>
+        		<td th:text="${dispositivo.nombre}"></td>
+        		
+        		<td><button type="button" class="btn btn-link">Info</button></td>
+        		<td><button type="button" class="btn btn-primary">Editar</button></td>
+        		<td><button type="button" class="btn btn-danger">Delete</button></td>
+      		</tr>
+    	</tbody>
+  	</table>
+	</div>
+    
+</body>
+</html>

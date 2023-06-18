@@ -8,8 +8,8 @@ public class ViewRouteHelper {
     public final static String HELLO = "home/hello";
 
     //DispositivoController
-    public final static String DISPOSITIVO_INDEX = "dispositivo/dispositivos";
-    public final static String DISPOSITIVO_ROOT = "/dispositivo/";
+    public final static String DISPOSITIVO_INDEX = "dispositvo/new";
+    public final static String DISPOSITIVO_ROOT = "dispositivo/new";
     
     //EventoController
     public final static String EVENTO_INDEX = "evento/evento";

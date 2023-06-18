@@ -15,4 +15,12 @@ import lombok.Setter;
 public class SensorHumedad extends Dispositivo{
 	@Column(name="encedido")
 	private boolean encedido;
+
+	public boolean isEncedido() {
+		return encedido;
+	}
+
+	public void setEncedido(boolean encedido) {
+		this.encedido = encedido;
+	}
 }

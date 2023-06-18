@@ -16,14 +16,14 @@ public class DispositivoModel {
         this.activo = activo;
     }
 
-    /*public DispositivoModel() {}
+    public DispositivoModel() {}
 
     public int getIdDispositivo() {
-        return id_dispositivo;
+        return id;
     }
 
     public void setId(int id) {
-        this.id_dispositivo = id;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -44,7 +44,7 @@ public class DispositivoModel {
 
     @Override
     public String toString() {
-        return "DispositivoModel [id=" + id_dispositivo + ", nombre=" + nombre + ", activo=" + activo + "]";
+        return "DispositivoModel [id=" + id + ", nombre=" + nombre + ", activo=" + activo + "]";
     }
-    */
+    
 }

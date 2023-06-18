@@ -15,4 +15,12 @@ import lombok.Setter;
 public class SensorEstacionamiento extends Dispositivo{
 	@Column(name="plazas")
 	private boolean plazas;
+
+	public boolean isPlazas() {
+		return plazas;
+	}
+
+	public void setPlazas(boolean plazas) {
+		this.plazas = plazas;
+	}
 }
