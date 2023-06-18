@@ -14,17 +14,18 @@
     	<h2> </h2>
   	</div>
 
-  	<table class="table table-stripped table-bordered" >
+  	<table class="table table-stripped table-bordered">
     	<thead class="table-dark">
-      		<tr>
+      		<tr align="center">
         		<th scope="col">Id</th>
         		<th scope="col">Número de plaza</th>
         		<th scope="col">Estado ocupado</th>
         		<th scope="col">Estacionamiento</th>
+        		<th scope="col">Estado sensor</th>
       		</tr>
     	</thead>
     	<tbody>
-     	 	<tr th:each="plaza: ${plazas}">
+     	 	<tr th:each="plaza: ${plazas}"  align="center">
         		<td th:text="${plaza.id}"></td>
         		<td th:text="${plaza.nroPlaza}"></td>
         		<td th:text="${plaza.ocupado}"></td>
