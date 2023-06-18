@@ -20,23 +20,48 @@ import lombok.Setter;
 
 import jakarta.persistence.InheritanceType;
 
-@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Table(name="Medicion")
+@Table(name = "Medicion")
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class Medicion {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int idMedicion;
+	  @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private int idMedicion;
+	  
+	  @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "idDispositivo")
+	    private Dispositivo dispositivo;
+    
+	  @Column(name = "fechaRegistro")
+	    private LocalDateTime fechaRegistro;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    // normalmente nullable es igual a false, en este caso se deja como true porque el ejemplo es simple
-    @JoinColumn(name="idDispositivo", nullable=true)
-    private Dispositivo dispositivo;
+	public int getIdMedicion() {
+		return idMedicion;
+	}
 
-    @Column(name="fechaRegistro")
-    private LocalDateTime fechaRegistro;
+	public void setIdMedicion(int idMedicion) {
+		this.idMedicion = idMedicion;
+	}
+
+	public Dispositivo getDispositivo() {
+		return dispositivo;
+	}
+
+	public void setDispositivo(Dispositivo dispositivo) {
+		this.dispositivo = dispositivo;
+	}
+
+	public LocalDateTime getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(LocalDateTime fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+	  
+	  
 
 }

@@ -1,12 +1,16 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +18,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Table(name="Dispositivo")
+@Table(name = "Dispositivo")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Dispositivo {
     @Id
@@ -26,6 +30,9 @@ public class Dispositivo {
 
     @Column(name="activo")
     private boolean activo;
+    
+    @OneToMany(mappedBy = "dispositivo", fetch = FetchType.LAZY)
+    private List<Medicion> mediciones;
 
     public int getId() {
 		return id;
@@ -50,5 +57,15 @@ public class Dispositivo {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
+	public List<Medicion> getMediciones() {
+		return mediciones;
+	}
+
+	public void setMediciones(List<Medicion> mediciones) {
+		this.mediciones = mediciones;
+	}
+    
+    
 
 }

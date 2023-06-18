@@ -1,12 +1,15 @@
 package com.TpObjetos2.TpGrupo12.services.implementacion;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
@@ -44,6 +47,9 @@ public class DispositivoService implements IDispositivoService{
 	public Dispositivo findByid(int id) {
 		return dispositivoRepository.findById(id);
 	}
+    
+    
+   
 
 }
 /*

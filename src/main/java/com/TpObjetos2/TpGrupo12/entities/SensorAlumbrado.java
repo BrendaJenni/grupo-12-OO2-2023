@@ -22,5 +22,31 @@ public class SensorAlumbrado extends Dispositivo{
 	
 	@Column(name="obscuridadPor")
 	private double obscuridadPor;
+
+	public String getEstacion() {
+		return estacion;
+	}
+
+	public void setEstacion(String estacion) {
+		this.estacion = estacion;
+	}
+
+	public boolean isEncendido() {
+		return encendido;
+	}
+
+	public void setEncendido(boolean encendido) {
+		this.encendido = encendido;
+	}
+
+	public double getObscuridadPor() {
+		return obscuridadPor;
+	}
+
+	public void setObscuridadPor(double obscuridadPor) {
+		this.obscuridadPor = obscuridadPor;
+	}
+	
+	
 }
 
