@@ -6,12 +6,17 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
 public class SensorHumedadModel extends DispositivoModel{
-
-
 	public SensorHumedadModel() {}
+	
 	public SensorHumedadModel (int id,String nombre,boolean activo,boolean encendido) {
 		super(id,nombre,activo, encendido);
-	
 	}
+
+	@Override
+	public String toString() {
+		return "SensorHumedadModel [id=" + id + ", nombre=" + nombre + ", activo=" + activo + ", encendido=" + encendido
+				+ "]";
+	}
+	
 	
 }

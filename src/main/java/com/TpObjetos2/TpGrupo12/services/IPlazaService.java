@@ -1,5 +1,5 @@
 package com.TpObjetos2.TpGrupo12.services;
-
+/*
 import java.util.List;
 
 import com.TpObjetos2.TpGrupo12.entities.Plaza;
@@ -13,4 +13,4 @@ public interface IPlazaService{
 	public boolean remove(int id);
 	
 	public Plaza findById(int id);
-}
+}*/

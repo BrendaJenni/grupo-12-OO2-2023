@@ -18,18 +18,29 @@
     	<thead class="table-dark">
       		<tr align="center">
         		<th scope="col">Id</th>
-        		<th scope="col">Número de plaza</th>
-        		<th scope="col">Estado ocupado</th>
         		<th scope="col">Estacionamiento</th>
+        		<th scope="col">Cantidad de plazas</th>
       		</tr>
     	</thead>
     	<tbody>
-     	 	<tr th:each="plaza: ${plazas}"  align="center">
-        		<td th:text="${plaza.id}"></td>
-        		<td th:text="${plaza.nroPlaza}"></td>
-        		<td th:text="${plaza.ocupado}"></td>
-        		<td th:text="${plaza.sensor.nombre}"></td>
+     	 	<tr th:each="estacionamiento: ${estacionamientos}"  align="center">
+        		<td th:text="${estacionamiento.id}"></td>
+        		<td th:text="${estacionamiento.nombre}"></td>
+        		<td th:text="${estacionamiento.tam}"></td>
+      		</tr>
+    	</tbody>
+    	<tbody>
+     	 	<tr th:each="plazas: ${estacionamiento.plazas}"  align="center">
+        		<td th:text="${plazas}"></td>
       		</tr>
     	</tbody>
   	</table>
+  	<div  align="center">
+		<a th:href="@{plazas}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Ver plazas</a>
 	</div>
+	<div  align="center">
+		<a th:href="@{new}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Agregar Estacionamiento</a>
+	</div>
+	</div>
+</body>
+</html>

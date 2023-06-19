@@ -21,7 +21,6 @@ import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
-import com.TpObjetos2.TpGrupo12.services.IPlazaService;
 import com.TpObjetos2.TpGrupo12.entities.*;
 
 import jakarta.servlet.http.HttpServletRequest;

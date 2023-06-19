@@ -12,9 +12,9 @@ import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+/*
 @Entity
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter  @NoArgsConstructor
 @Table(name="plaza")
 public class Plaza {
 	@Id
@@ -27,10 +27,10 @@ public class Plaza {
 	@Column(name="nroPlaza")
 	private int nroPlaza;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional=false)
-	@JoinColumn(name="sensor_id", nullable=false)
+	@ManyToOne
+	@JoinColumn(name="sensor_id")
 	private SensorEstacionamiento sensor;
-	/*
+	
 	public Plaza(int id, boolean ocupado, int nroPlaza) {
 		this.id = id;
 		this.ocupado = ocupado;
@@ -41,7 +41,7 @@ public class Plaza {
 		this.ocupado = ocupado;
 		this.nroPlaza = nroPlaza;
 	}
-	public Plaza() {}*/
+	public Plaza() {}
 
 	public int getId() {
 		return id;
@@ -75,4 +75,4 @@ public class Plaza {
 		this.sensor = sensor;
 	}
 	
-}
+}*/

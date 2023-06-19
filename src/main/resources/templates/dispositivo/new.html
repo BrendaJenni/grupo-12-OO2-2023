@@ -5,64 +5,9 @@
 <title>Dispositivo</title>
 </head>
 <body>
-	<!--
-	<form action="#" th:action="@{/new}" th:object="${dispositivo}" method="post">
-		
-=======
-<html>
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link href="/css/dispositivo.css" rel="stylesheet" />
-    <title>Dispositivo</title>
-</head>
-<body>
-    
-
-    <form action="#" th:action="@{/new}" th:object="${dispositivo}" method="post">
-		
->>>>>>> 60094ead58bc59703db050c1f32faf506333258e
-        <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
-        <p>Activo: <input type="text" th:field="*{activo}" /></p>
-        <input type="submit" />
-    </form>
-      
-<<<<<<< HEAD
-    <form th:object="${dispositivo}" th:action="@{/new}" method="post">
-=======
-    <form th:object="${dispositivo}" th:action="@{/new}" method="post">
-	  <div class="form-group">
-		  <div class="required-field">
-        <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
-        <p>Activo:
-          <select th:field="*{activo}">
-            <option value="true">Verdadero</option>
-            <option value="false">Falso</option>
-          </select>
-        </p>
-        </div>
-	    <label>Tipo de Dispositivo:</label>
-	    <div class="form-check">
-	      <input class="form-check-input" type="radio" name="tipoDispositivo" id="recolectorInteligente" value="recolectorInteligente">
-	      <label class="form-check-label" for="recolectorInteligente">Recolector Inteligente</label>
-	      <div class="additional-fields">
-	        <p>Ubicación: <input type="text" name="ubicacion"></p>
-
-	      </div>
-	    </div>
-	    <div class="form-check">
-	      <input class="form-check-input" type="radio" name="tipoDispositivo" id="sensorHumedad" value="sensorHumedad">
-	      <label class="form-check-label" for="sensorHumedad">Sensor de Humedad</label>
-	      <div class="additional-fields">
-	          <p>Encendido: <input type="checkbox" th:field="*{encendido}" name="encendido"></p>
-	      </div>
-	    </div>
-	    
-	
-	  <button type="submit" class="btn btn-primary">Guardar</button>
-	</form>
-	-->
 	<h1>Nuevo dispositivo</h1>
 	<br>
+	<!--
     <table class="table table-stripped table-bordered">
         <thead class="table-dark" align="center">
             <tr>
@@ -78,11 +23,9 @@
                 <td><span th:text="${dispositivo.activo}"/></td>
             </tr>
         </tbody>
-    </table>
-    <br>
+    </table>-->
     <form action="#" th:action="@{/dispositivo/new}" th:object="${dispositivo}" method="post">
         <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
-        <br>
 		<p>Activo:
           <select th:field="*{activo}">
             <option value="true">Verdadero</option>
@@ -90,32 +33,26 @@
           </select>
 		</p>
 		<br>
-        <p><input type="submit" value="Enviar" /></p>
-    </form>
-	        <!--<p>Encendido: <input type="checkbox" th:field="*{encendido}" name="encendido"></p>-->
-	        <!-- Agrega más inputs según tus necesidades -->
-	      </div>
-	    </div>
+		<!--
+		<h3>Tipos de sensor</h3>
 	    <div class="form-check">
 	      <input class="form-check-input" type="radio" name="tipoDispositivo" id="sensorAlumbrado" value="sensorAlumbrado">
-	      <label class="form-check-label" for="sensorAlumbrado">Sensor de Alumbrado</label>
+	      <label class="form-check-label" for="sensorAlumbrado"><h4>Sensor de Alumbrado</h4></label>
 	      <div class="additional-fields">
-	        <p>Estación: <input type="text" name="estacion"></p>
 	        <p>Encendido: <input type="checkbox" name="encendido"></p>
-	        <!-- Agrega más inputs según tus necesidades -->
 	      </div>
 	    </div>
 	    <div class="form-check">
 	      <input class="form-check-input" type="radio" name="tipoDispositivo" id="sensorEstacionamiento" value="sensorEstacionamiento">
-	      <label class="form-check-label" for="sensorEstacionamiento">Sensor de Estacionamiento</label>
+	      <label class="form-check-label" for="sensorEstacionamiento"><h4>Sensor de Estacionamiento</h4></label>
 	      <div class="additional-fields">
-	        <p>Plazas: <input type="number" name="plazas"></p>
-	        <!-- Agrega más inputs según tus necesidades -->
+	        <p>Plazas: <input type="number" name="plazas" ></p>
 	      </div>
 	    </div>
-	  </div>
+	  </div>-->
 	
 	  <button type="submit" class="btn btn-primary">Guardar</button>
 	</form>
+	<br>
 </body>
 </html>

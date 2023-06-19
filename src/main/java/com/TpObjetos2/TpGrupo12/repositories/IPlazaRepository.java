@@ -1,5 +1,5 @@
 package com.TpObjetos2.TpGrupo12.repositories;
-
+/*
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,3 +14,4 @@ public interface IPlazaRepository extends JpaRepository<Plaza, Serializable>{
     public abstract Plaza findByOcupado(boolean ocupado);
     public abstract List<Plaza> findAll();
 }
+*/
