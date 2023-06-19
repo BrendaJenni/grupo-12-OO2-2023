@@ -53,7 +53,6 @@ public class Evento {
 
 	public Evento() {
 	}
-
 	public int getIdEvento() {
 		return idEvento;
 	}

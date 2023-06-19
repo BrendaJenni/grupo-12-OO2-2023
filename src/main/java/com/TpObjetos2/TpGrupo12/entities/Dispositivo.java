@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,16 +31,12 @@ public class Dispositivo {
     @Column(name="activo")
     private boolean activo;
     
-    @OneToMany(mappedBy="dispositivo")
+    @OneToMany(mappedBy = "dispositivo", fetch = FetchType.LAZY)
     private List<Medicion> mediciones;
-    
-    @OneToMany(mappedBy="dispositivo")
+
+    @OneToMany(mappedBy = "dispositivo", fetch = FetchType.LAZY)
     private List<Evento> eventos;
-
-    protected void setIdDispositivo(int id) {
-        this.id = id;    
-    }
-
+    
     public int getId() {
 		return id;
 	}

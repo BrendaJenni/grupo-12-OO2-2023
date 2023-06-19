@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.TpObjetos2.TpGrupo12.entities.Evento;
+import com.TpObjetos2.TpGrupo12.entities.Medicion;
 import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 import com.TpObjetos2.TpGrupo12.models.EventoModel;
 import com.TpObjetos2.TpGrupo12.models.MedicionModel;
@@ -29,11 +30,19 @@ public class MedicionController {
     public ModelAndView index(){
         ModelAndView mAV = new ModelAndView(ViewRouteHelper.MEDICION_INDEX);
         mAV.addObject("mediciones",medicionService.getAll());
-        mAV.addObject("medicion", new Evento());
+        mAV.addObject("medicion", new Medicion());
         return mAV;
     }
 	
-	 @PostMapping("/")
+	@GetMapping("/new")
+    public ModelAndView create(){
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.MEDICION_NEW);
+        mAV.addObject("mediciones",medicionService.getAll());
+        mAV.addObject("medicion", new Medicion());
+        return mAV;
+    }
+	
+	 @PostMapping("/new")
 	    public RedirectView create(@ModelAttribute("medicion") MedicionModel medicionModel){
 	        medicionService.insertOrUpdate(medicionModel);
 	        return new RedirectView(ViewRouteHelper.MEDICION_ROOT);
