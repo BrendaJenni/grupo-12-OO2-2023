@@ -83,12 +83,16 @@ public class Dispositivo {
 	}
 
 	public Dispositivo(int id, String nombre, boolean activo) {
+		this.mediciones = new ArrayList<Medicion>();
+		this.eventos = new ArrayList<Evento>();
 		this.id = id;
 		this.nombre = nombre;
 		this.activo = activo;
 	}
 
 	public Dispositivo(String nombre, boolean activo) {
+		this.mediciones = new ArrayList<Medicion>();
+		this.eventos = new ArrayList<Evento>();
 		this.nombre = nombre;
 		this.activo = activo;
 	}

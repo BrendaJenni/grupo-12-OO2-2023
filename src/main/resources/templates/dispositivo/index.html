@@ -5,37 +5,45 @@
 <title>Dispositivo</title>
 </head>
 <body>
-	<div class="col">
-  		<h1>Listado de Dispositivos</h1>
-	</div>
-	<div ass="container col-10" id="myTable">
-  		<div class="col-12">
-    	<h2> </h2>
-  	</div>
-  	
-  	<div  align="center">
-		<a th:href="@{/alumbrado/}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;DISPOSITIVOS ALUMBRADO</a>
-	</div>
-	<div  align="center">
-		<a th:href="@{/recolectorinteligente/}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;DISPOSITIVOS RECOLECTOR</a>
-	</div>
+    <div class="col">
+        <h1>Listado de Dispositivos</h1>
+    </div>
+    <div class="container col-10" id="myTable">
+        <div class="col-12">
+            <h2></h2>
+        </div>
 
-  	<table class="table table-stripped table-bordered" >
-    	<thead class="table-dark" align="center">
-      		<tr>
-        		<th scope="col">Id</th>
-        		<th scope="col">Activo</th>
-        		<th scope="col">Nombre</th>
-      		</tr>
-    	</thead>
-    	<tbody align="center">
-     	 	<tr th:each="dispositivo: ${dispositivos}">
-        		<td th:text="${dispositivo.id}"></td>
-        		<td th:text="${dispositivo.activo}"></td>
-        		<td th:text="${dispositivo.nombre}"></td>
-      		</tr>
-    	</tbody>
-  	</table>
-	</div>	
+        <div class="row justify-content-between mb-3">
+            <div class="col-auto">
+                <a th:href="@{/sensoralumbrado/alumbrado}" class="btn btn-success">DISPOSITIVOS ALUMBRADO</a>
+            </div>
+            <div class="col-auto">
+                <a th:href="@{/recolectorinteligente/}" class="btn btn-success">DISPOSITIVOS RECOLECTOR</a>
+            </div>
+            <div class="col-auto">
+                <a th:href="@{/dispositivo/estacionamiento}" class="btn btn-success">DISPOSITIVOS ESTACIONAMIENTO</a>
+            </div>
+            <div class="col-auto">
+                <a th:href="@{/dispositivo/humedad}" class="btn btn-success">DISPOSITIVOS HUMEDAD</a>
+            </div>
+        </div>
+
+        <table class="table table-stripped table-bordered">
+            <thead class="table-dark" align="center">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Nombre</th>
+                </tr>
+            </thead>
+            <tbody align="center">
+                <tr th:each="dispositivo: ${dispositivos}">
+                    <td th:text="${dispositivo.id}"></td>
+                    <td th:text="${dispositivo.activo}"></td>
+                    <td th:text="${dispositivo.nombre}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

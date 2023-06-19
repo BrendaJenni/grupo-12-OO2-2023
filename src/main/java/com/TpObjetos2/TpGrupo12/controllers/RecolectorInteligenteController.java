@@ -47,10 +47,10 @@ public class RecolectorInteligenteController {
 	    return new RedirectView("/recolectorinteligente/");
 	}
 
-	@PostMapping("bajaLogica")
+	@PostMapping("/bajaLogica")
 	public String eliminarSensor(@ModelAttribute("dispositivo") SensorRecolectorModel sensorRecolectorModel) {
 	   sensorRecolectorModel.setActivo(false);
 	   sensorRecolectorService.insertOrUpdate(sensorRecolectorModel);
-	   return "redirect:recolectorInteligente/recolector";
+	   return "redirect:/recolectorinteligente/";
 	}
 }

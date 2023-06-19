@@ -38,7 +38,7 @@
 							<td th:text="${dispositivo.nombre}"></td>
 							<td th:text="${dispositivo.ubicacion}"></td>
 							<td>
-							<form th:action="@{/dispositivo/bajaLogica}" method="post">
+							<form th:action="@{/recolectorinteligente/bajaLogica}" method="post">
 									<input type="hidden" name="id" th:value="${dispositivo.id}" /> 
 									<button type="submit" class="btn eliminar-btn">Eliminar</button>
 								</form>
@@ -64,7 +64,7 @@
 							<th scope="col">Fecha</th>
 							<th scope="col">Dispositivo Vinculado</th>	
 							<th scope="col">Estado actual</th>		
-							<th scope="col">Esta Lleno</th>				
+							<th scope="col">Ubicacion</th>				
 						</tr>
 					</thead>
 					<tbody>
@@ -154,11 +154,8 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="estaLlenoAhora">Esta lleno:</label>
-						<select class="form-control" id="lleno" name="estaLleno" required>
-							<option value="true">true</option>
-							<option value="false">false</option>
-						</select>
+						<label for="ubicacion">Ubicacion:</label>
+						<input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
 					</div>
 					<button type="submit" class="btn btn-primary">Agregar</button>
 				</form>

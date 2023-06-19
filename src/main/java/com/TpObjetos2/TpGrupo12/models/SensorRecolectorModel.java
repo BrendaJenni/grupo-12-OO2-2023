@@ -1,18 +1,18 @@
 package com.TpObjetos2.TpGrupo12.models;
 
 public class SensorRecolectorModel extends DispositivoModel {
-	boolean estaLleno;
+	String ubicacion;
 	
 	public SensorRecolectorModel() {}
-	public SensorRecolectorModel (int id,String nombre, boolean activo, boolean estaLleno) {
+	public SensorRecolectorModel (int id,String nombre, boolean activo, String ubicacion) {
 		super(id,nombre,activo);
 		
-		this.estaLleno = estaLleno;
+		this.ubicacion = ubicacion;
 	}
-	public boolean isEstaLleno() {
-		return estaLleno;
+	public String getUbicacion() {
+		return ubicacion;
 	}
-	public void setEstaLleno(boolean estaLleno) {
-		this.estaLleno = estaLleno;
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 }

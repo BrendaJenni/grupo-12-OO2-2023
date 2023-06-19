@@ -8,11 +8,6 @@ public class ViewRouteHelper {
     public final static String HELLO = "home/hello";
 
     //DispositivoController
-<<<<<<< HEAD
-    public final static String DISPOSITIVO_INDEX = "dispositivo/new";
-    public final static String DISPOSITIVO_ROOT = "/dispositivo/new";
-
-=======
     public final static String DISPOSITIVO_INDEX = "dispositivo/dispositivos";
     public final static String DISPOSITIVO_ROOT = "/dispositivo/";
     
@@ -20,7 +15,6 @@ public class ViewRouteHelper {
     public final static String ALUMBRADO_INDEX = "dispositivo/alumbrado";
     public final static String ALUMBRADO_ROOT = "dispositivo/alumbrado/";
     
->>>>>>> 64f8447a12c39373ca833a95a90987afc2ca91a5
     //EventoController
     public final static String EVENTO_INDEX = "evento/evento";
     public final static String EVENTO_ROOT = "/evento/";
