@@ -8,11 +8,13 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.MedicionRecolectorModel;
 import com.TpObjetos2.TpGrupo12.models.SensorHumedadModel;
+import com.TpObjetos2.TpGrupo12.models.SensorRecolectorModel;
 import com.TpObjetos2.TpGrupo12.repositories.IRecolectorInteligenteRepository;
 import com.TpObjetos2.TpGrupo12.repositories.ISensorHumedadRepository;
 import com.TpObjetos2.TpGrupo12.services.IRecolectorInteligenteService;
@@ -21,10 +23,11 @@ import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
 import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
 
-public class RecolectorService implements IRecolectorInteligenteService {
+@Service ("recolectorInteligenteService")
+public class RecolectorInteligenteService implements IRecolectorInteligenteService {
 	
 	@Autowired
-    @Qualifier("MedicionRecolectorRepository")
+    @Qualifier("recolectorInteligenteRepository")
     private IRecolectorInteligenteRepository recolectorRepository;
 
     private ModelMapper modelMapper = new ModelMapper();
@@ -35,11 +38,11 @@ public class RecolectorService implements IRecolectorInteligenteService {
 	}
 
     @Override
-	public MedicionRecolectorModel insertOrUpdate(DispositivoModel dispositivoModel) {
+	public SensorRecolectorModel insertOrUpdate(DispositivoModel dispositivoModel) {
     	RecolectorInteligente recolector = recolectorRepository.save(modelMapper.map(dispositivoModel, RecolectorInteligente.class));
-        return modelMapper.map(recolector, MedicionRecolectorModel.class);
+        return modelMapper.map(recolector, SensorRecolectorModel.class);
 	}
-	
+	/*
 	//RECOLECTOR INTELIGENTE
     public MedicionRecolector cambiarEstadoRecolector (MedicionRecolector dispo, boolean nuevoEstado) {
     	dispo.setEstaLlenoAhora(nuevoEstado);
@@ -87,5 +90,5 @@ public class RecolectorService implements IRecolectorInteligenteService {
     public void vaciarRecolector(MedicionRecolector reco, LocalTime hora) {
     	Evento e = new Evento("Se vacio el tacho", LocalDateTime.of(reco.getFechaRegistro().toLocalDate(), 
 				hora.plusMinutes((int)(Math.random()*(20-10+1)+10))), reco.getDispositivo());
-	}
+	}*/
 }

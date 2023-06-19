@@ -8,8 +8,8 @@ import lombok.Setter;
 public class MedicionRecolectorModel extends DispositivoModel {
 	public MedicionRecolectorModel() {}
 	
-	public MedicionRecolectorModel (int id,String nombre,boolean activo,boolean encendido) {
-		super(id,nombre,activo, encendido);
+	public MedicionRecolectorModel (int id,String nombre,boolean activo) {
+		super(id,nombre,activo);
 	
 	}
 }

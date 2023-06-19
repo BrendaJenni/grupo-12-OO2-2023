@@ -37,7 +37,7 @@ public class Evento {
 	@ManyToOne
     //@JoinColumn(name="idDispositivo", nullable=true)
     private Dispositivo dispositivo;
-
+	
 	public Evento(String descripcion, LocalDateTime fechaRegistro, Dispositivo dispositivo) {
 		this.descripcion = descripcion;
 		this.fechaRegistro = fechaRegistro;

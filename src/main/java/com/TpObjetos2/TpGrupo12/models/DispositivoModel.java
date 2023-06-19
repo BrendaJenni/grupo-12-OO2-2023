@@ -1,25 +1,23 @@
 package com.TpObjetos2.TpGrupo12.models;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter 
 public class DispositivoModel {
     protected int id;
     protected String nombre;
     protected boolean activo;
     protected boolean encendido;
 
-    public DispositivoModel(int id_dispositivo, String nombre, boolean activo,boolean encendido) {
-        this.id = id_dispositivo;
+    public DispositivoModel(int id, String nombre, boolean activo) {
+        this.id = id;
         this.nombre = nombre;
         this.activo = activo;
-        this.encendido=encendido;
     }
 
     public DispositivoModel() {}
-
+    
     public boolean isEncendido() {
 		return encendido;
 	}
@@ -28,16 +26,15 @@ public class DispositivoModel {
 		this.encendido = encendido;
 	}
 
-	public int getId() {
+    public int getId() {
 		return id;
 	}
 
-	
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getNombre() {
+	public String getNombre() {
         return nombre;
     }
 

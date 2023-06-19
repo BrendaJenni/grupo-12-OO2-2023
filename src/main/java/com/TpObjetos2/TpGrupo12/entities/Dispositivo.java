@@ -2,9 +2,9 @@ package com.TpObjetos2.TpGrupo12.entities;
 
 import java.util.List;
 import java.util.ArrayList;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter 
-@Table(name="dispositivo")
+@Getter @Setter @NoArgsConstructor
+@Table(name = "Dispositivo")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Dispositivo {
     @Id
@@ -41,7 +41,7 @@ public class Dispositivo {
     protected void setIdDispositivo(int id) {
         this.id = id;    
     }
-
+    
     public int getId() {
 		return id;
 	}
@@ -95,6 +95,5 @@ public class Dispositivo {
 
 	public Dispositivo() {
 	}
-	
 }
 

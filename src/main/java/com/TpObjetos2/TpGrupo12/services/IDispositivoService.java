@@ -7,6 +7,7 @@ import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
 import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
+import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 
 public interface IDispositivoService {
@@ -17,4 +18,7 @@ public interface IDispositivoService {
     public boolean remove(int id);
     
     public Dispositivo findByid(int id);
+
+	DispositivoModel bajaLogica(DispositivoModel dispositivoModel);
+    
 }

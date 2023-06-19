@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
 import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
 
-@Repository("medicionRecolectorRepository")
+@Repository("recolectorInteligenteRepository")
 public interface IRecolectorInteligenteRepository extends JpaRepository<RecolectorInteligente, Serializable>{
 
 	//public abstract MedicionRecolector findById(int id);

@@ -6,12 +6,19 @@
 </head>
 <body>
 	<div class="col">
-  		<h1>Listado de Sensores</h1>
+  		<h1>Listado de Dispositivos</h1>
 	</div>
-	<div class="container col-10" id="myTable">
+	<div ass="container col-10" id="myTable">
   		<div class="col-12">
     	<h2> </h2>
   	</div>
+  	
+  	<div  align="center">
+		<a th:href="@{/alumbrado/}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;DISPOSITIVOS ALUMBRADO</a>
+	</div>
+	<div  align="center">
+		<a th:href="@{/recolectorinteligente/}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;DISPOSITIVOS RECOLECTOR</a>
+	</div>
 
   	<table class="table table-stripped table-bordered" >
     	<thead class="table-dark" align="center">
@@ -19,9 +26,6 @@
         		<th scope="col">Id</th>
         		<th scope="col">Activo</th>
         		<th scope="col">Nombre</th>
-        		<th scope="col">Información</th>
-        		<th scope="col">Modificar</th>
-        		<th scope="col">Eliminar</th>
       		</tr>
     	</thead>
     	<tbody align="center">
@@ -29,16 +33,9 @@
         		<td th:text="${dispositivo.id}"></td>
         		<td th:text="${dispositivo.activo}"></td>
         		<td th:text="${dispositivo.nombre}"></td>
-        		
-        		<td><button type="button" class="btn btn-secondary">Información</button></td>
-        		<td><button type="button" class="btn btn-primary">Editar</button></td>
-        		<td><button type="button" class="btn btn-danger">Eliminar</button></td>
       		</tr>
     	</tbody>
   	</table>
-	</div>
-	<div  align="center">
-		<a th:href="@{/dispositivo/new}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;AGREGAR DISPOSITIVO</a>
-	</div>
+	</div>	
 </body>
 </html>

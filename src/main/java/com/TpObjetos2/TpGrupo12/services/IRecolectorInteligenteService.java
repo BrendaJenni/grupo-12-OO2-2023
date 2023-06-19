@@ -2,13 +2,17 @@ package com.TpObjetos2.TpGrupo12.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
 import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.MedicionRecolectorModel;
+import com.TpObjetos2.TpGrupo12.models.SensorRecolectorModel;
 
 public interface IRecolectorInteligenteService {
 	public List<RecolectorInteligente> getAll();
 
-    public MedicionRecolectorModel insertOrUpdate(DispositivoModel dispositivoModel);
+    public SensorRecolectorModel insertOrUpdate(DispositivoModel dispositivoModel);
 }
