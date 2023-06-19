@@ -11,7 +11,7 @@ import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
 
 @Component
-public class TaskSample {
+public class FuncionesRecolector {
 
 	//RECOLECTOR INTELIGENTE
 	@Scheduled(fixedDelay=30000)
