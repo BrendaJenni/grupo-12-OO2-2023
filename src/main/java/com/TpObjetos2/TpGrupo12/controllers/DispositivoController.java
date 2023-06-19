@@ -2,19 +2,19 @@ package com.TpObjetos2.TpGrupo12.controllers;
 
 import java.util.*;
 
-import org.modelmapper.ModelMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
@@ -55,6 +55,10 @@ public class DispositivoController {
         return new RedirectView(ViewRouteHelper.DISPOSITIVO_ROOT);
     }
     
+    
+    //agrego aca esta funcion porque desde dispositivo puedo ingresar a todos los datos por lo que es importante que pueda quedarme aqui
+    //este mapping manda todos los datos al front ingresado en el return , esos datos pueden ser consumidos desde dispositivos desde el html para mostrar todo lo que queremos
+    //en caso de agregar en otra clase debemos modificar el getmapping y ademas el return para que devuelva la info para la url correspondiente
     @GetMapping("/alumbrado")
     public String indexAlumbrado(Model model) {
         List<Dispositivo> dispositivos = dispositivoService.getAll();
@@ -80,5 +84,13 @@ public class DispositivoController {
 
         return "dispositivo/alumbrado";
     }
+    
+    @PostMapping("/dispositivo/bajaLogica")
+	public String eliminarSensor(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel) {
+		DispositivoModel dispositivoModel1 = new DispositivoModel(0, null, false);
+		dispositivoModel1.setActivo(false); // Establecer el campo "activo" en false
+	    dispositivoService.insertOrUpdate(dispositivoModel1);
+	    return "redirect:/dispositivo/alumbrado";
+	}
     
 }

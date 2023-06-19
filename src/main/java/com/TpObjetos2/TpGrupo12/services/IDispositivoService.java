@@ -14,5 +14,7 @@ public interface IDispositivoService {
     public boolean remove(int id);
     
     public Dispositivo findByid(int id);
+
+	DispositivoModel bajaLogica(DispositivoModel dispositivoModel);
     
 }

@@ -34,8 +34,8 @@ public class Dispositivo {
     @OneToMany(mappedBy = "dispositivo", fetch = FetchType.LAZY)
     private List<Medicion> mediciones;
 
-    /*@OneToMany(mappedBy = "evento", fetch = FetchType.LAZY)
-    private List<Evento> eventos;*/
+    @OneToMany(mappedBy = "dispositivo", fetch = FetchType.LAZY)
+    private List<Evento> eventos;
     
     public int getId() {
 		return id;
@@ -69,13 +69,13 @@ public class Dispositivo {
 		this.mediciones = mediciones;
 	}
 
-	/*public List<Evento> getEventos() {
+	public List<Evento> getEventos() {
 		return eventos;
 	}
 
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
-	}*/
+	}
     
 
 }

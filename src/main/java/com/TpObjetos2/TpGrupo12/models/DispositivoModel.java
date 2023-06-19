@@ -1,7 +1,6 @@
 package com.TpObjetos2.TpGrupo12.models;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter 
