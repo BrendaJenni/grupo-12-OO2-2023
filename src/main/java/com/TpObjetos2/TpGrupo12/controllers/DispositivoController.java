@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
@@ -23,6 +24,7 @@ import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
+
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
 
 @Controller
@@ -70,14 +72,17 @@ public class DispositivoController {
                 List<Medicion> medicionesAlumbrado = new ArrayList<>();
 
                 for (Medicion medicion : mediciones) {
-                    if (medicion instanceof MedicionAlumbrado) {
-                        medicionesAlumbrado.add(medicion);
+                    if (medicion instanceof MedicionAlumbrado) { 
+                    	medicionesAlumbrado.add(medicion);
                     }
                 }
 
+                //agregamos este if para mostrar solo los dispositivos que estan en true
+                //al gestionar la baja logica tenemos que dejar de mostrarlos
+               if (dispositivo.isActivo() == true) {
                 dispositivo.setMediciones(medicionesAlumbrado);
                 dispositivosAlumbrado.add(dispositivo);
-            }
+                }            }
         }
 
         model.addAttribute("dispositivos", dispositivosAlumbrado);
@@ -85,12 +90,13 @@ public class DispositivoController {
         return "dispositivo/alumbrado";
     }
     
-    @PostMapping("/dispositivo/bajaLogica")
-	public String eliminarSensor(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel) {
-		DispositivoModel dispositivoModel1 = new DispositivoModel(0, null, false);
-		dispositivoModel1.setActivo(false); // Establecer el campo "activo" en false
-	    dispositivoService.insertOrUpdate(dispositivoModel1);
-	    return "redirect:/dispositivo/alumbrado";
-	}
+    @PostMapping("/bajaLogica")
+    public String bajaLogica(@RequestParam("id") int id, RedirectAttributes redirectAttributes) {
+        Dispositivo dispositivo = dispositivoService.findByid(id);
+        dispositivo.setActivo(false);
+        dispositivoService.insertOrUpdatealum(dispositivo);
+
+        return "redirect:/dispositivo/alumbrado";
+    }
     
 }

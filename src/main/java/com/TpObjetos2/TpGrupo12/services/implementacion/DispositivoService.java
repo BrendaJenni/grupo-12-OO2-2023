@@ -34,13 +34,31 @@ public class DispositivoService implements IDispositivoService{
         return modelMapper.map(dispositivo, DispositivoModel.class);
     }
     
+    //baja logica , se fija que el dispositivo no existe antes en la base de datos si ya existe, debemos cambiar el campo isactivo a false para que se deje demostrar en el front
     @Override
-    public DispositivoModel bajaLogica(DispositivoModel dispositivoModel) {
-        dispositivoModel.setActivo(false); // Establecer el campo de dispositivo como false
-        Dispositivo dispositivo = dispositivoRepository.save(modelMapper.map(dispositivoModel, Dispositivo.class));
-        return modelMapper.map(dispositivo, DispositivoModel.class);
+    public DispositivoModel insertOrUpdatealum(Dispositivo dispositivoModel) {
+        if (dispositivoModel != null) {
+            Dispositivo dispositivoExistente = dispositivoRepository.findById(dispositivoModel.getId());
+            if (dispositivoExistente != null) {
+                // Realizar la actualización del dispositivoExistente con los datos de dispositivoModel
+                dispositivoExistente.setActivo(false);
+               
+                Dispositivo dispositivoActualizado = dispositivoRepository.save(dispositivoExistente);
+                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
+            }
+        }
+        
+        // Si no se encontró el dispositivo existente o no se proporcionó un ID válido,
+        // puedes implementar el código para manejar ese caso según tus necesidades.
+        
+        return null; // O lanzar una excepción, mostrar un mensaje de error, etc.
     }
 
+    @Override
+    public Dispositivo getById(int id) {
+        Dispositivo dispositivoOptional = dispositivoRepository.findById(id);
+        return dispositivoOptional;
+    }
     @Override
     public boolean remove(int id) {
         try{
