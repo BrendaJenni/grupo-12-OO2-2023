@@ -1,6 +1,7 @@
 package com.TpObjetos2.TpGrupo12.controllers;
 
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.Medicion;
+import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
+import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorAlumbradoModel;
 import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
 
@@ -49,7 +53,7 @@ public class SensorAlumbradoController {
     }	
 	
 	   @PostMapping("/bajaLogica")
-	    public String bajaLogica(@RequestParam("id") int id, RedirectAttributes redirectAttributes) {
+	    public String bajaLogica(@RequestParam("id") int id) {
 	        Dispositivo dispositivo = sensorAlumbradoService.findByid(id);
 	        dispositivo.setActivo(false);  
 	        
@@ -57,6 +61,19 @@ public class SensorAlumbradoController {
 
 	        return "redirect:/sensoralumbrado/alumbrado";
 	    }
+	  
+	   @PostMapping("/agregarMedicion")
+	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
+	                                 @RequestParam("fecha") LocalDateTime fecha,
+	                                 @RequestParam("estadoActual") boolean estadoActual,
+	                                 @RequestParam("obscuridadActualPor") double obscuridadActualPor) {
+	       Dispositivo dispositivo = sensorAlumbradoService.findByid(dispositivoId); 
+	       if (dispositivo != null) {      
+	           sensorAlumbradoService.agregarMedicion(dispositivo,fecha,estadoActual,obscuridadActualPor);
+	       }
+	       
+	       return "redirect:/sensoralumbrado/alumbrado";
+	   }
 	   
 
 	

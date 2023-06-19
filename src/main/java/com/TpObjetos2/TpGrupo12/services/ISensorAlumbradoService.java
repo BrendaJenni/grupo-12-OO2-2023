@@ -1,5 +1,6 @@
 package com.TpObjetos2.TpGrupo12.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
@@ -18,5 +19,8 @@ public interface ISensorAlumbradoService {
 	 public DispositivoModel insertOrUpdatealum(Dispositivo dispositivoModel);
 	 
 	 public Dispositivo findByid(int id);
+
+	public DispositivoModel agregarMedicion(Dispositivo dispositivoModel, LocalDateTime fecha, boolean estadoActual,
+			double obscuridadActualPor);
 
 }
