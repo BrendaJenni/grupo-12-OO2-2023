@@ -14,14 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.Medicion;
-import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
-import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
+
 import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 

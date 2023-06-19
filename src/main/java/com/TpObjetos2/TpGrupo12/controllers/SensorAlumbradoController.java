@@ -51,7 +51,8 @@ public class SensorAlumbradoController {
 	   @PostMapping("/bajaLogica")
 	    public String bajaLogica(@RequestParam("id") int id, RedirectAttributes redirectAttributes) {
 	        Dispositivo dispositivo = sensorAlumbradoService.findByid(id);
-	        dispositivo.setActivo(false);
+	        dispositivo.setActivo(false);  
+	        
 	        sensorAlumbradoService.insertOrUpdatealum(dispositivo);
 
 	        return "redirect:/sensoralumbrado/alumbrado";
