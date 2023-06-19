@@ -35,6 +35,7 @@ public class EventoService implements IEventoService {
         Evento evento = eventoRepository.save(modelMapper.map(eventoModel, Evento.class));
         return modelMapper.map(evento, EventoModel.class);
     }
+    
 
     @Override
     public boolean remove(int id) {

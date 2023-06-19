@@ -10,8 +10,7 @@ public class SensorHumedadModel extends DispositivoModel{
 
 	public SensorHumedadModel() {}
 	public SensorHumedadModel (int id,String nombre,boolean activo,boolean encendido) {
-		super(id,nombre,activo, encendido);
-	
-	}
+		super(id,nombre,activo);
+		this.encendido=encendido;	}
 	
 }

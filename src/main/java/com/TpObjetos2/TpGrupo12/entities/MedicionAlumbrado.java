@@ -20,6 +20,24 @@ public class MedicionAlumbrado extends Medicion{
 	
 	@Column(name="oscuridadActualPor")
 	private double oscuridadActualPor;
+
+	public boolean isEstadoActual() {
+		return estadoActual;
+	}
+
+	public void setEstadoActual(boolean estadoActual) {
+		this.estadoActual = estadoActual;
+	}
+
+	public double getOscuridadActualPor() {
+		return oscuridadActualPor;
+	}
+
+	public void setOscuridadActualPor(double oscuridadActualPor) {
+		this.oscuridadActualPor = oscuridadActualPor;
+	}
+	
+	
 	
 }
 
