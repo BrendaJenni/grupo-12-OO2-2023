@@ -22,4 +22,6 @@ public class SensorHumedadController {
        model.addAttribute("sensor", sensorHumedadService.getAll());
        return "sensorHumedad/index";
     }
+	
+	
 }

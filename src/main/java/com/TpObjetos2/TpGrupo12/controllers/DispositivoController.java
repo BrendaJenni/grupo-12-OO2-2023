@@ -52,17 +52,7 @@ public class DispositivoController {
     	return new RedirectView("");
     }
     
-    /*@SuppressWarnings("unused")
-	@PostMapping("new")
-    public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
-    	if(new SensorHumedad(dispositivoModel.getId(),dispositivoModel.getNombre(),dispositivoModel.isActivo(),dispositivoModel.isEncendido()) != null) {
-    		sensorHumedadService.insertOrUpdate(new SensorHumedadModel(dispositivoModel.getId(),dispositivoModel.getNombre(),dispositivoModel.isActivo(),dispositivoModel.isEncendido()));
-    	}else {
-    		dispositivoService.insertOrUpdate(dispositivoModel);
-    	}
-        
-        return new RedirectView("");
-    }*/
+    
     
     
 }
