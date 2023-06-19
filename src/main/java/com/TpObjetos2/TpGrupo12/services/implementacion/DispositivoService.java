@@ -37,11 +37,19 @@ public class DispositivoService implements IDispositivoService{
         Dispositivo dispositivo = dispositivoRepository.save(modelMapper.map(dispositivoModel, Dispositivo.class));
         return modelMapper.map(dispositivo, DispositivoModel.class);
     }
+<<<<<<< HEAD
     
         // Si no se encontró el dispositivo existente o no se proporcionó un ID válido,
         // puedes implementar el código para manejar ese caso según tus necesidades.
 
+=======
+>>>>>>> abf12c0a4a133dfad922152ccaddc277226a3e94
 
+    @Override
+    public Dispositivo getById(int id) {
+        Dispositivo dispositivoOptional = dispositivoRepository.findById(id);
+        return dispositivoOptional;
+    }
     @Override
     public boolean remove(int id) {
         try{

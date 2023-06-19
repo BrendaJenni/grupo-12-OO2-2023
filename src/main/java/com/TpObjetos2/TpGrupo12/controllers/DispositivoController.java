@@ -32,10 +32,7 @@ import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
 import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.Medicion;
-import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
-import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
+
 import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
@@ -130,5 +127,6 @@ public class DispositivoController {
 
         return "redirect:/alumbrado";
     }
+     
     
 }

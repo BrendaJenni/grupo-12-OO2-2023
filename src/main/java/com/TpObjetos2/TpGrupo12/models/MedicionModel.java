@@ -14,6 +14,8 @@ public class MedicionModel {
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private LocalDateTime fechaRegistro;
 	
+	
+	public MedicionModel() {};
 	public MedicionModel(int idMedicion, LocalDateTime fechaRegistro, Dispositivo dispositivo) {
 		super();
 		this.idMedicion = idMedicion;

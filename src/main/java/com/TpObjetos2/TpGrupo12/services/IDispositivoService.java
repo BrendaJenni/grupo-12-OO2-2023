@@ -19,6 +19,7 @@ public interface IDispositivoService {
     
     public Dispositivo findByid(int id);
 
-	DispositivoModel bajaLogica(DispositivoModel dispositivoModel);
+	Dispositivo getById(int id);
+
     
 }
