@@ -41,10 +41,6 @@ public class Dispositivo {
     public Dispositivo() {}
 
 
-    protected void setIdDispositivo(int id) {
-        this.id = id;    
-    }
-
     @OneToMany(mappedBy = "dispositivo", fetch = FetchType.LAZY)
     private List<Medicion> mediciones;
 

@@ -28,8 +28,8 @@ public class SensorHumedadService implements ISensorHumedadService{
 	}
 
 	@Override
-	public SensorHumedadModel insertOrUpdate(DispositivoModel dispositivoModel) {
-		SensorHumedad sensorHumedad = sensorHumedadRepository.save(modelMapper.map(dispositivoModel, SensorHumedad.class));
+	public SensorHumedadModel insertOrUpdate(SensorHumedadModel sensorHumedadModel) {
+		SensorHumedad sensorHumedad = sensorHumedadRepository.save(modelMapper.map(sensorHumedadModel, SensorHumedad.class));
         return modelMapper.map(sensorHumedad, SensorHumedadModel.class);
 	}
 

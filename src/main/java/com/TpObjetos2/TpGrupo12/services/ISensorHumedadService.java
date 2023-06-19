@@ -9,5 +9,5 @@ import com.TpObjetos2.TpGrupo12.models.SensorHumedadModel;
 public interface ISensorHumedadService {
 	public List<SensorHumedad> getAll();
 
-    public SensorHumedadModel insertOrUpdate(DispositivoModel dispositivoModel);
+    public SensorHumedadModel insertOrUpdate(SensorHumedadModel sensorHumedadModel);
 }

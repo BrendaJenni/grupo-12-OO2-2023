@@ -55,11 +55,11 @@ public class DispositivoController {
        return mAV;
     }
 
-    @PostMapping("new")
+    /*@PostMapping("new")
     public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
     	sensorHumedadService.insertOrUpdate(dispositivoModel);
     	return new RedirectView("");
-    }
+    }*/
 
     //agrego aca esta funcion porque desde dispositivo puedo ingresar a todos los datos por lo que es importante que pueda quedarme aqui
     //este mapping manda todos los datos al front ingresado en el return , esos datos pueden ser consumidos desde dispositivos desde el html para mostrar todo lo que queremos

@@ -14,4 +14,5 @@ public interface ISensorAlumbradoService {
 
 	SensorAlumbradoModel insertOrUpdate(SensorAlumbradoModel sensorAlumbradoModel);
 
+	
 }
