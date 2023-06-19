@@ -6,9 +6,9 @@
 </head>
 	<h1>Nueva medición</h1>
     <br>
-    <form action="#" th:action="@{/medicion/new}" th:object="${medicion}" method="post">
-        <p>Fecha y hora: <input type="datetime" th:field="*{fechaRegistro}" /></p>
-        <p>Id dispositivo:  <input type="number" th:field="*{id_dispositivo}" /></p>
+    <form action="/medicion/new" th:action="@{/medicion/new}" th:object="${medicion}" method="post">
+        <p>Fecha y hora: <input type="datetime-local" th:field="*{fechaRegistro}" /></p>
+        <p>Id dispositivo:  <input type="number" th:field="*{dispositivo.id}" /></p>
 		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>
 	<br>

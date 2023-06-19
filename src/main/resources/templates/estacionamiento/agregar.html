@@ -6,7 +6,7 @@
 </head>
 	<h1>Nuevo estacionamiento</h1>
     <br>
-    <form action="#" th:action="@{/estacionamiento/new}" th:object="${estacionamiento}" method="post">
+    <form action="/estacionamiento/" th:action="@{/estacionamiento/new}" th:object="${estacionamiento}" method="post">
         <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
 		<p>Activo:
           <select th:field="*{activo}">

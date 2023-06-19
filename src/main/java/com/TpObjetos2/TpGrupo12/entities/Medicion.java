@@ -30,14 +30,14 @@ public class Medicion {
 	    private int idMedicion;
 	  
 	  @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "idDispositivo")
+	    @JoinColumn(name = "id")
 	    private Dispositivo dispositivo;
     
 	  @Column(name = "fechaRegistro")
 	    private LocalDateTime fechaRegistro;
 
     //@ManyToOne(fetch = FetchType.LAZY)
-    @ManyToOne
+    //@ManyToOne
     // normalmente nullable es igual a false, en este caso se deja como true porque el ejemplo es simple
     //@JoinColumn(name="idDispositivo", nullable=false)
 	public int getIdMedicion() {
