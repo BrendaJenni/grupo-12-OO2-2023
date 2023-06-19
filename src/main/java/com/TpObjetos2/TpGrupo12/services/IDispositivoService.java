@@ -16,6 +16,5 @@ public interface IDispositivoService {
 
 	Dispositivo getById(int id);
 
-	DispositivoModel insertOrUpdatealum(Dispositivo dispositivo);
     
 }

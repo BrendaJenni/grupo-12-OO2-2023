@@ -42,7 +42,7 @@
 							<td th:text="${dispositivo.estacion}"></td>
 							<td th:text="${dispositivo.obscuridadPor}"></td>
 							<td>
-							<form th:action="@{/dispositivo/bajaLogica}" method="post">
+							<form th:action="@{/sensoralumbrado/bajaLogica}" method="post">
 									<input type="hidden" name="id" th:value="${dispositivo.id}" /> 
 									<button type="submit" class="btn eliminar-btn">Eliminar</button>
 								</form>
