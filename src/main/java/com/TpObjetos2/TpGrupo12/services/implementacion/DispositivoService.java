@@ -34,7 +34,7 @@ public class DispositivoService implements IDispositivoService{
         Dispositivo dispositivo = dispositivoRepository.save(modelMapper.map(dispositivoModel, Dispositivo.class));
         return modelMapper.map(dispositivo, DispositivoModel.class);
     }
-
+   
     @Override
     public boolean remove(int id) {
         try{
@@ -59,4 +59,3 @@ public class DispositivoService implements IDispositivoService{
 	public Dispositivo findByName(String name) {
 		return modelMapper.map(dispositivoRepository.findByName(name), Dispositivo.class);
 	}*/
-

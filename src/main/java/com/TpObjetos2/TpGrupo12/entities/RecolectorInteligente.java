@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Table(name="RecolectorInteligente")
 public class RecolectorInteligente extends Dispositivo{
-	@Column(name="ubicacion", columnDefinition = "VARCHAR(255)")
+	@Column(name="ubicacion")
 	private String ubicacion;
 
 	public String getUbicacion() {

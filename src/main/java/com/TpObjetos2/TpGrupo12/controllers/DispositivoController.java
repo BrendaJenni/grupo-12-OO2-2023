@@ -1,14 +1,19 @@
 package com.TpObjetos2.TpGrupo12.controllers;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -21,70 +26,55 @@ import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
+import com.TpObjetos2.TpGrupo12.services.IPlazaService;
+import com.TpObjetos2.TpGrupo12.entities.*;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import com.TpObjetos2.TpGrupo12.models.SensorHumedadModel;
+import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
+import com.TpObjetos2.TpGrupo12.services.ISensorHumedadService;
 
 @Controller
-@RequestMapping("/dispositivo")
+@RequestMapping("/")
 public class DispositivoController {
     @Autowired
     @Qualifier("dispositivoService")
     private IDispositivoService dispositivoService;
+    @Autowired
+    @Qualifier("sensorHumedadService")
+    private ISensorHumedadService sensorHumedadService;
+    
 
-    /*@GetMapping("/")
-    public ModelAndView index(){
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.DISPOSITIVO_INDEX);
-        mAV.addObject("dispositivo", dispositivoService.getAll());
-        mAV.addObject("dispositivo", new Dispositivo());
-        return mAV;
-    }*/
-    @GetMapping("/")
+    @GetMapping("")
     public String index(Model model){
        model.addAttribute("dispositivos", dispositivoService.getAll());
-       return "dispositivo/dispositivos";
+       return "dispositivo/index";
     }
 
-    @PostMapping("/")
+    @GetMapping("new")
+    public ModelAndView index(){
+       ModelAndView mAV = new ModelAndView("dispositivo/new");
+       mAV.addObject("dispositivos", dispositivoService.getAll());
+       mAV.addObject("dispositivo", new DispositivoModel());
+       return mAV;
+    }
+
+    @PostMapping("new")
     public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
-        dispositivoService.insertOrUpdate(dispositivoModel);
-        
-        return new RedirectView(ViewRouteHelper.DISPOSITIVO_ROOT);
+    	sensorHumedadService.insertOrUpdate(dispositivoModel);
+    	return new RedirectView("");
     }
     
-//    @Autowired
-//    private IDispositivoRepository dispositivoRepository;
-//    
-//    @PostMapping("/dispositivos")
-//    public String guardarDispositivo(@ModelAttribute Dispositivo dispositivo) {
-//        if (dispositivo instanceof RecolectorInteligente) {
-//            RecolectorInteligente recolector = (RecolectorInteligente) dispositivo;
-//            // Acceder a los atributos específicos de RecolectorInteligente
-//            String ubicacion = recolector.getUbicacion();
-//            // ...
-//            dispositivoRepository.save(recolector); // Guardar en la tabla de RecolectorInteligente
-//        } else if (dispositivo instanceof SensorHumedad) {
-//            SensorHumedad sensorHumedad = (SensorHumedad) dispositivo;
-//            // Acceder a los atributos específicos de SensorHumedad
-//            boolean encendido = sensorHumedad.isEncedido();
-//            // ...
-//            dispositivoRepository.save(sensorHumedad); // Guardar en la tabla de SensorHumedad
-//        } else if (dispositivo instanceof SensorAlumbrado) {
-//        	SensorAlumbrado sensorAlumbrado = (SensorAlumbrado) dispositivo;
-//            // Acceder a los atributos específicos de SensorHumedad
-//            String estacion = sensorAlumbrado.getEstacion();
-//            boolean endendido = sensorAlumbrado.isEncendido();
-//            double obcuridadPor = sensorAlumbrado.getObscuridadPor();
-//            // ...
-//            dispositivoRepository.save(sensorAlumbrado);
-//        } else if (dispositivo instanceof SensorEstacionamiento) {
-//        	SensorEstacionamiento sensorEstacionamiento = (SensorEstacionamiento) dispositivo;
-//            // Acceder a los atributos específicos de SensorHumedad
-//            boolean endendido = sensorEstacionamiento.isPlazas();
-//            // ...
-//            dispositivoRepository.save(sensorEstacionamiento);
-//
-//        // Guardar en la tabla de Dispositivo (clase padre)
-//        dispositivoRepository.save(dispositivo);
-//        
-//        return "redirect:/dispositivos";
-//        }
-//    }
+    /*@SuppressWarnings("unused")
+	@PostMapping("new")
+    public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
+    	if(new SensorHumedad(dispositivoModel.getId(),dispositivoModel.getNombre(),dispositivoModel.isActivo(),dispositivoModel.isEncendido()) != null) {
+    		sensorHumedadService.insertOrUpdate(new SensorHumedadModel(dispositivoModel.getId(),dispositivoModel.getNombre(),dispositivoModel.isActivo(),dispositivoModel.isEncendido()));
+    	}else {
+    		dispositivoService.insertOrUpdate(dispositivoModel);
+    	}
+        
+        return new RedirectView("");
+    }*/
 }

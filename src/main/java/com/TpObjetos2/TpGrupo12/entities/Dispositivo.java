@@ -1,5 +1,8 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,14 +10,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
-@Table(name="Dispositivo")
+@Getter @Setter 
+@Table(name="dispositivo")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Dispositivo {
     @Id
@@ -25,8 +29,15 @@ public class Dispositivo {
     private String nombre;
 
     @Column(name="activo")
+
     protected boolean activo;
     
+    @OneToMany(mappedBy="dispositivo")
+    private List<Medicion> mediciones = new ArrayList<Medicion>();
+    
+    @OneToMany(mappedBy="dispositivo")
+    private List<Evento> eventos = new ArrayList<Evento>();
+
     protected void setIdDispositivo(int id) {
         this.id = id;    
     }
@@ -54,5 +65,36 @@ public class Dispositivo {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
+
+	public List<Medicion> getMediciones() {
+		return mediciones;
+	}
+
+	public void setMediciones(List<Medicion> mediciones) {
+		this.mediciones = mediciones;
+	}
+
+	public List<Evento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(List<Evento> eventos) {
+		this.eventos = eventos;
+	}
+
+	public Dispositivo(int id, String nombre, boolean activo) {
+		this.id = id;
+		this.nombre = nombre;
+		this.activo = activo;
+	}
+
+	public Dispositivo(String nombre, boolean activo) {
+		this.nombre = nombre;
+		this.activo = activo;
+	}
+
+	public Dispositivo() {
+	}
+	
 }
+
