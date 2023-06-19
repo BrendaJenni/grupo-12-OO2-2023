@@ -55,7 +55,6 @@ public class DispositivoController {
         return new RedirectView(ViewRouteHelper.DISPOSITIVO_ROOT);
     }
     
-    
     @GetMapping("/alumbrado")
     public String indexAlumbrado(Model model) {
         List<Dispositivo> dispositivos = dispositivoService.getAll();

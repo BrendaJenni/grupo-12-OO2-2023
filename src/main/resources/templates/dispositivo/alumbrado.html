@@ -19,9 +19,9 @@
       			<tr>
         			<th scope="col">Id</th>
         			<th scope="col">Activo</th>
-        			<th scope="col">Name</th>
+        			<th scope="col">Nombre</th>
         			<th scope="col">Encendido</th>
-        			<th scope="col">Estacion</th>
+        			<th scope="col">Estación</th>
         			<th scope="col">Obscuridad</th>
       			</tr>
     		</thead>
@@ -40,11 +40,9 @@
   		<table class="table table-stripped table-bordered">
     		<thead class="table-dark">
       			<tr>
-        			<th scope="col">id</th>
-        			<th scope="col">fecha</th>
-        			<th scope="col">DispositivoVinculado</th>
-        			<th scope="col">EstadoActual</th>
-        			<th scope="col">ObscuridadActual</th> 			
+        			<th scope="col">Id</th>
+        			<th scope="col">Fecha</th>
+        			<th scope="col">Dispositivo Vinculado</th>			
       			</tr>
     		</thead>
     		<tbody>
@@ -64,19 +62,48 @@
             				<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.dispositivo.id}"></li>
           				</ul>
         			</td>
-        			<td>
-          				<ul>
-            				<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoActual}"></li>
-          				</ul>
-        			</td>
-        			<td>
-          				<ul>
-            				<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.oscuridadActualPor}"></li>
-          				</ul>
-        			</td>
       			</tr>
     		</tbody>
   		</table>
+
+      <div class="col-12">
+        <h2>Agregar Dispositivo</h2>
+      </div>
+
+      <form th:action="@{/sensoralumbrado/dispositivo/alumbrado}" method="post">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="activo">Activo:</label>
+          <select class="form-control" id="activo" name="activo" required>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="encendido">Encendido:</label>
+          <select class="form-control" id="encendido" name="encendido" required>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="estacion">Estación:</label>
+          <select class="form-control" id="estacion" name="estacion" required>
+            <option value="Primavera">Primavera</option>
+            <option value="Verano">Verano</option>
+            <option value="Otoño">Otoño</option>
+            <option value="Invierno">Invierno</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="obscuridad">Obscuridad:</label>
+          <input type="number" class="form-control" id="obscuridad" name="obscuridadPor" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar</button>
+      </form>
 	</div>
 </body>
 </html>

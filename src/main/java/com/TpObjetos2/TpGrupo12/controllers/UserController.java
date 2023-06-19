@@ -40,7 +40,6 @@ public class UserController {
 	public String logout(Model model) {
 		return ViewRouteHelper.USER_LOGOUT;
 	}
-
 	
 	//funciona login si es un role admin se dirige a una pagina , si es otro rol se dirije a otra url
 	@GetMapping("/loginsuccess")
@@ -53,6 +52,8 @@ public class UserController {
 	    }
 	    return modelAndView;
 	}
+	
+	
 		
 
 }
