@@ -33,10 +33,10 @@ public class Dispositivo {
     @Column(name="activo")
     private boolean activo;
     
-    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Medicion> mediciones;
+    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Medicion> mediciones = new ArrayList<Medicion>();
     
-    @OneToMany(mappedBy="dispositivo")
+    @OneToMany(mappedBy="dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Evento> eventos = new ArrayList<Evento>();
 
     protected void setIdDispositivo(int id) {
@@ -84,16 +84,12 @@ public class Dispositivo {
 	}
 
 	public Dispositivo(int id, String nombre, boolean activo) {
-		this.mediciones = new ArrayList<Medicion>();
-		this.eventos = new ArrayList<Evento>();
 		this.id = id;
 		this.nombre = nombre;
 		this.activo = activo;
 	}
 
 	public Dispositivo(String nombre, boolean activo) {
-		this.mediciones = new ArrayList<Medicion>();
-		this.eventos = new ArrayList<Evento>();
 		this.nombre = nombre;
 		this.activo = activo;
 	}

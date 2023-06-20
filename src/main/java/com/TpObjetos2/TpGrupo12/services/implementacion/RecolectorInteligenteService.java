@@ -19,7 +19,9 @@ import com.TpObjetos2.TpGrupo12.repositories.IRecolectorInteligenteRepository;
 import com.TpObjetos2.TpGrupo12.repositories.ISensorHumedadRepository;
 import com.TpObjetos2.TpGrupo12.services.IRecolectorInteligenteService;
 import com.TpObjetos2.TpGrupo12.services.ISensorHumedadService;
+import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.Evento;
+import com.TpObjetos2.TpGrupo12.entities.Medicion;
 import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
 import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
 
@@ -42,6 +44,39 @@ public class RecolectorInteligenteService implements IRecolectorInteligenteServi
     	RecolectorInteligente recolector = recolectorRepository.save(modelMapper.map(dispositivoModel, RecolectorInteligente.class));
         return modelMapper.map(recolector, SensorRecolectorModel.class);
 	}
+    
+    @Override
+    public DispositivoModel agregarMedicion(Dispositivo dispositivoModel,LocalDateTime fecha,boolean estaLlenoAhora) {
+        if (dispositivoModel != null) {
+            Dispositivo dispositivoExistente = recolectorRepository.findById(dispositivoModel.getId());
+            if (dispositivoExistente != null) {
+                List<Medicion> mediciones = dispositivoExistente.getMediciones();
+
+                MedicionRecolector medicion = new MedicionRecolector();
+
+                medicion.setEstaLlenoAhora(estaLlenoAhora);
+                medicion.setFechaRegistro(fecha);
+                medicion.setDispositivo(dispositivoExistente);
+
+                mediciones.add(medicion);
+
+                dispositivoExistente.setMediciones(mediciones);
+
+                // lo gurado en la base de datos
+                Dispositivo dispositivoActualizado = recolectorRepository.save((RecolectorInteligente)dispositivoExistente);
+                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
+            }
+        }
+     return null;
+    }
+    
+    @Override
+    public Dispositivo findByid(int id) {
+        Dispositivo dispositivoOptional = recolectorRepository.findById(id);
+        return dispositivoOptional;
+
+    }
+    
 	/*
 	//RECOLECTOR INTELIGENTE
     public MedicionRecolector cambiarEstadoRecolector (MedicionRecolector dispo, boolean nuevoEstado) {

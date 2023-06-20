@@ -30,4 +30,6 @@ public class MedicionRecolector extends Medicion{
 		super(dispositivo, fechaRegistro);
 		this.estaLlenoAhora = estaLlenoAhora;
 	}
+	
+	public MedicionRecolector() {}
 }
