@@ -13,6 +13,14 @@
 </head>
 <!-- generamos la lista de sensosres con sus atributos y el boton para eliminar -->
 <body>
+	</div>
+            <div class="col-auto">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+
 	<div class="container">
 		<div class="row">
 			<div class="col">

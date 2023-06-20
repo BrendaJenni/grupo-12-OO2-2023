@@ -23,4 +23,9 @@ public class RecolectorInteligente extends Dispositivo{
 	public void setUbicacion(String ubicacion) {
 		this.ubicacion = ubicacion;
 	}
+
+	public RecolectorInteligente(String nombre, boolean activo, String ubicacion) {
+		super(nombre, activo);
+		this.ubicacion = ubicacion;
+	}
 }

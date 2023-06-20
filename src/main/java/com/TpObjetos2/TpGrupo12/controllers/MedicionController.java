@@ -40,11 +40,4 @@ public class MedicionController {
 	        medicionService.insertOrUpdate(medicionModel);
 	        return new RedirectView(ViewRouteHelper.MEDICION_ROOT);
 	    }
-
-	 @RequestMapping(value = "/chequear", method = RequestMethod.GET)
-	    public String chequearContenidoRecolector(MedicionRecolector mRecolector) {
-		 	chequearContenidoRecolector(mRecolector);
-
-	        return "/medicion/";
-	    }
 }

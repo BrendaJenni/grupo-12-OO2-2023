@@ -91,42 +91,4 @@ public class DispositivoController {
         return new RedirectView("");
     }*/
     
-    //agrego aca esta funcion porque desde dispositivo puedo ingresar a todos los datos por lo que es importante que pueda quedarme aqui
-    //este mapping manda todos los datos al front ingresado en el return , esos datos pueden ser consumidos desde dispositivos desde el html para mostrar todo lo que queremos
-    //en caso de agregar en otra clase debemos modificar el getmapping y ademas el return para que devuelva la info para la url correspondiente
-    @GetMapping("/baja")
-    public String indexAlumbrado(Model model) {
-        List<Dispositivo> dispositivos = dispositivoService.getAll();
-        List<Dispositivo> dispositivosAlumbrado = new ArrayList<>();
-
-        for (Dispositivo dispositivo : dispositivos) {
-            if (dispositivo instanceof SensorAlumbrado) {
-                List<Medicion> mediciones = dispositivo.getMediciones();
-                List<Medicion> medicionesAlumbrado = new ArrayList<>();
-
-                for (Medicion medicion : mediciones) {
-                    if (medicion instanceof MedicionAlumbrado) {
-                        medicionesAlumbrado.add(medicion);
-                    }
-                }
-
-                dispositivo.setMediciones(medicionesAlumbrado);
-                dispositivosAlumbrado.add(dispositivo);
-            }
-        }
-
-        model.addAttribute("dispositivos", dispositivosAlumbrado);
-
-        return "dispositivo/alumbrado";
-    }
-    
-    @PostMapping("/dispositivo")
-    public String bajaLogica(@RequestParam("id") int id, RedirectAttributes redirectAttributes) {
-        Dispositivo dispositivo = dispositivoService.findByid(id);
-        dispositivo.setActivo(false);
-
-        return "redirect:/alumbrado";
-    }
-     
-    
 }

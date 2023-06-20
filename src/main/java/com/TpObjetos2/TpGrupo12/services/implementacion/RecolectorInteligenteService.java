@@ -71,11 +71,44 @@ public class RecolectorInteligenteService implements IRecolectorInteligenteServi
     }
     
     @Override
+	public DispositivoModel agregarMedicion(MedicionRecolector medicion) {
+		boolean estaLlenoAhora = medicion.isEstaLlenoAhora();
+        LocalDateTime fecha = medicion.getFechaRegistro();
+        Dispositivo dispo = medicion.getDispositivo();
+		return agregarMedicion(dispo,fecha,estaLlenoAhora);
+	}
+    
+    @Override
     public Dispositivo findByid(int id) {
         Dispositivo dispositivoOptional = recolectorRepository.findById(id);
         return dispositivoOptional;
 
     }
+
+    @Override
+    public DispositivoModel agregarEventos(Dispositivo dispositivoModel,Evento evento) {
+        if (dispositivoModel != null) {
+            Dispositivo dispositivoExistente = recolectorRepository.findById(dispositivoModel.getId());
+            if (dispositivoExistente != null) {
+                List<Evento> eventos = dispositivoExistente.getEventos();
+                Evento eventosN = new Evento();
+
+                eventosN.setDescripcion(evento.getDescripcion());
+                eventosN.setFechaRegistro(evento.getFechaRegistro());
+                eventosN.setDispositivo(dispositivoExistente);
+
+
+                eventos.add(eventosN);
+
+                dispositivoExistente.setEventos(eventos);;
+
+                // lo gurado en la base de datos
+                Dispositivo dispositivoActualizado = recolectorRepository.save((RecolectorInteligente)dispositivoExistente);
+                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
+            }
+        }
+     return null;
+       };
     
 	/*
 	//RECOLECTOR INTELIGENTE

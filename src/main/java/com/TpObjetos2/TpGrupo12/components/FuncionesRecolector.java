@@ -31,11 +31,11 @@ public class FuncionesRecolector {
     @Qualifier("dispositivoService")
     private DispositivoService dService;
 	
+	//Trae la ultima medicion 
 	@Transactional
 	public MedicionRecolector traerUnRecoAleatorio() {
 		List<RecolectorInteligente> recolectores = sensorRecolectorService.getAll();
 		int id = (int) (Math.random()*recolectores.size());
-		System.out.println(recolectores.get(id).getId());
 		RecolectorInteligente dispo = recolectores.get(id);
 		List<Medicion> mediciones = dispo.getMediciones();
 		if (mediciones.size() == 0) {
@@ -43,7 +43,12 @@ public class FuncionesRecolector {
 			sensorRecolectorService.agregarMedicion(dispo, LocalDateTime.now(), false);
 			return m;
 		}
-		return (MedicionRecolector) mediciones.get(mediciones.size()-1);
+		if(mediciones.size() == 10) {
+    		//si entra aca ya no debemos agregar mediciones a este dispositivo
+    		return null;
+    	}else {
+    		return (MedicionRecolector) mediciones.get(mediciones.size()-1);
+    	}
 	}
 	
 	@Scheduled(fixedDelay=5000)
@@ -51,35 +56,30 @@ public class FuncionesRecolector {
 		MedicionRecolector reco = traerUnRecoAleatorio();
 		LocalTime ahora = LocalTime.now();
     	LocalDate fecha = LocalDate.now();
-    	LocalTime chequeos = ahora;
     	int boleano;
     	boolean estado;
-    	while (ahora.isAfter(LocalTime.of(7, 0)) && ahora.isBefore(LocalTime.of(21, 0))){
-    		if (ahora.equals(chequeos)) {
-    			if (reco.isEstaLlenoAhora() == true) {
-    				reco.getDispositivo().getEventos().add(new Evento ("El techo esta lleno, se envia una notificacion para vaciar", LocalDateTime.of(fecha, 
-    						ahora), reco.getDispositivo()));
-    				reco = vaciarRecolector(reco,chequeos);
-    				
-    			}
-    			boleano = (int)(Math.random()*2);
-    			if (boleano == 0) {
-    				estado = true;
-    			} else {
-    				estado = false;
-    			}
-    			reco = cambiarEstadoRecolector(reco);
-    			reco.getDispositivo().getMediciones().add(new MedicionRecolector(reco.getDispositivo(),LocalDateTime.of(fecha, ahora),estado));
-    			chequeos = chequeos.plusMinutes(30);
+    	//Se encarga de que este funcionando solo mientras la universidad esta abierta
+    	if (ahora.isAfter(LocalTime.of(7, 0)) && ahora.isBefore(LocalTime.of(21, 0))){
+    		//chequea si el tacho esta lleno y, de estarlo, crea un evento para vaciarlo
+    		if (reco.isEstaLlenoAhora() == true) {
+    			sensorRecolectorService.agregarEventos(reco.getDispositivo(),(new Evento ("El techo esta lleno, se envia una notificacion para vaciar", 
+    					LocalDateTime.of(fecha, ahora), reco.getDispositivo())));
+    			reco = vaciarRecolector(reco,ahora);
+    			
     		}
+    		//genera un booleano al azar
+    		boleano = (int)(Math.random()*2);
+    		if (boleano == 0) {
+    			estado = true;
+    		} else {
+    			estado = false;
+    		}
+    		reco = cambiarEstadoRecolector(reco);
+    		sensorRecolectorService.agregarMedicion(new MedicionRecolector(reco.getDispositivo(),LocalDateTime.of(fecha, ahora),estado));
     	}
     }
 	
-	public MedicionRecolector cambiarEstadoRecolector (MedicionRecolector dispo, boolean nuevoEstado) {
-    	dispo.setEstaLlenoAhora(nuevoEstado);
-    	return dispo;
-    }
-    
+	//Cambia el estado de vacio a lleno o viceversa
     public MedicionRecolector cambiarEstadoRecolector (MedicionRecolector dispo) {
     	if (dispo.isEstaLlenoAhora() == true) {
     		dispo.setEstaLlenoAhora(false);
@@ -89,11 +89,11 @@ public class FuncionesRecolector {
     	return dispo;
     }
     
+    //Se imita un operador ingresando manualmente que respondio al dispositivo pidiendo que se vacie
     public MedicionRecolector vaciarRecolector(MedicionRecolector reco, LocalTime hora) {
-    	reco.getDispositivo().getEventos().add(new Evento("Se vacio el tacho", LocalDateTime.of(reco.getFechaRegistro().toLocalDate(), 
+    	sensorRecolectorService.agregarEventos(reco.getDispositivo(),new Evento("Se vacio el tacho", LocalDateTime.of(reco.getFechaRegistro().toLocalDate(), 
 				hora.plusMinutes((int)(Math.random()*(20-10+1)+10))), reco.getDispositivo()));
-		cambiarEstadoRecolector(reco);
-		return reco;
+		return cambiarEstadoRecolector(reco);
 	}
 
 }
