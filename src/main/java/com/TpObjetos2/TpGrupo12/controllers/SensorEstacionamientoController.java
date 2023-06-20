@@ -41,22 +41,6 @@ public class SensorEstacionamientoController {
 
     @GetMapping("")
     public String indexEstacionamiento(Model model){
-    	/*
-    	List<SensorEstacionamiento> dispositivos = estacionamientoService.getAll();
-		List<SensorEstacionamiento> estacionamientos = new ArrayList<>();
-		for (SensorEstacionamiento dispositivo : dispositivos) {
-			if (dispositivo.isActivo() == true) {
-				estacionamientos.add(dispositivo);
-			}
-		}
-		List<Medicion> mediciones = medicionService.getAll();
-		/*List<Medicion> medicionesEst = new ArrayList<>();
-		for (Medicion medicion : mediciones) {
-			if(medicion instanceof MedicionEstacionamiento) {
-				medicionesEst.add(medicion);
-			}
-		}*/
-	//model.addAttribute("mediciones", mediciones);
     	List<SensorEstacionamiento> estacionamientos = estacionamientoService.traerstacionamientosActivos(); 
        model.addAttribute("estacionamientos", estacionamientos);
     	
@@ -68,18 +52,13 @@ public class SensorEstacionamientoController {
     @GetMapping("/new")
     public ModelAndView agregarEstacionamiento(){
        ModelAndView mAV = new ModelAndView("estacionamiento/agregar");
-       //mAV.addObject("plazas", plazaService.getAll());
-       //SensorEstacionamiento estacionamiento = new SensorEstacionamiento();
-       //List<Boolean> plazas = new ArrayList<Boolean>();
-       //estacionamiento.setPlazas(plazas);
-       //estacionamiento.inicializarPlazas();
        SensorEstacionamiento estacionamiento = estacionamientoService.crearEstacionamientoConPlazas();
        mAV.addObject("boolean", estacionamiento.getPlazas());
        mAV.addObject("estacionamiento", estacionamiento);
-       //mAV.addObject("boolean", new ArrayList<Boolean>());
        return mAV;
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/bajaLogica")
     public String bajaLogica(@RequestParam("id") int id, SensorEstacionamientoModel sensorEstacionamientoModel) {
         Dispositivo dispositivo = estacionamientoService.findByid(id);
@@ -90,21 +69,23 @@ public class SensorEstacionamientoController {
         return "redirect:/dispositivo/estacionamiento";
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/new")
     public RedirectView create(@ModelAttribute("estacionamiento") SensorEstacionamientoModel estacionamientoModel){
     	estacionamientoModel.inicializarPlazas();
         estacionamientoService.insertOrUpdate(estacionamientoModel);
         return new RedirectView("/dispositivo/estacionamiento");
     }
-    /*
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/agregarmedicion")
     public ModelAndView agreaarMediciones() {
     ModelAndView mAV = new ModelAndView("estacionamiento/agregarmedicion");
-    MedicionEstacionamiento medicion = new MedicionEstacionamiento();
-    mAV.addObject("medicion", medicion);
+   mAV.addObject("mediciones", medicionService.getAll());
+    mAV.addObject("medicion", new Medicion());
     return mAV;}
- */
-    
+ 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/agregarmedicion")
 	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
 	                                 @RequestParam("fecha") LocalDateTime fecha,
@@ -114,7 +95,20 @@ public class SensorEstacionamientoController {
 	           estacionamientoService.agregarMedicion(dispositivo,fecha,estadoLibre);
 	       }
 	       
-	       return "redirect:/dispositivo/estacionamiento/";
+	       return "redirect:/dispositivo/estacionamiento";
+	   }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/agregarevento")
+	   public String agregarEvento(@RequestParam("dispositivoId") int dispositivoId,
+	                                 @RequestParam("fecha") LocalDateTime fecha,
+	                                 @RequestParam("estadoLibre") boolean estadoLibre){
+	       Dispositivo dispositivo = estacionamientoService.findByid(dispositivoId); 
+	       if (dispositivo != null) {      
+	           estacionamientoService.agregarMedicion(dispositivo,fecha,estadoLibre);
+	       }
+	       
+	       return "redirect:/dispositivo/estacionamiento";
 	   }
     
 }

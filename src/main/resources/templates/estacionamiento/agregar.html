@@ -14,7 +14,7 @@
             <option value="false">Falso</option>
           </select>
 		</p>
-		<p>Número de plazas: <input type="number" th:field="*{tam}" /></p>
+		<p>Número de plazas: <input type="number" th:field="*{tam}" min="0"/></p>
 		
 		<tr th:each="plaza, itemStat : *{plazas}">
         <td>Plazas: <input type="text" th:field="*{plaza[__${itemStat.index}__]}" /></td>

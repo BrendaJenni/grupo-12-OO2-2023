@@ -7,11 +7,13 @@ import java.util.ArrayList; // import the ArrayList class
 public class SensorEstacionamientoModel extends Dispositivo{
 	List<Boolean> plazas=new ArrayList<Boolean>();
 	private int tam;
+	private int libres;
 
-	public SensorEstacionamientoModel(int id, String nombre, boolean activo, List<Boolean> plazas, int tam) {
+	public SensorEstacionamientoModel(int id, String nombre, boolean activo, List<Boolean> plazas, int tam, int libres) {
 		super(id, nombre, activo);
 		this.plazas = plazas;
 		this.tam=tam;
+		this.libres=libres;
 	}
 	
 	public SensorEstacionamientoModel(int id, String nombre, boolean activo) {
@@ -39,6 +41,14 @@ public class SensorEstacionamientoModel extends Dispositivo{
 		this.tam = tam;
 	}
 	
+	public int getLibres() {
+		return libres;
+	}
+
+	public void setLibres(int libres) {
+		this.libres = libres;
+	}
+
 	public void inicializarPlazas() {
 		for(int i=0;i<tam;i++) {
 			plazas.add(false);

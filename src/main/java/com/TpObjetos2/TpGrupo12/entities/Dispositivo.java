@@ -34,7 +34,7 @@ public class Dispositivo {
     @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Medicion> mediciones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "dispositivo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Evento> eventos= new ArrayList<>();
     
     public int getId() {

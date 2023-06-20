@@ -20,7 +20,7 @@ import com.TpObjetos2.TpGrupo12.models.SensorAlumbradoModel;
 import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
 
 @Controller
-@RequestMapping("/estacionamiento")
+//@RequestMapping("/estacionamiento")
 public class MedicionEstacionamientoController {
 	/*
 	@Autowired

@@ -10,6 +10,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.Medicion;
 import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
@@ -45,12 +46,6 @@ public class SensorAlumbradoService implements ISensorAlumbradoService {
 
 	    sensorAlumbrado = sensorAlumbradoRepository.save(sensorAlumbrado);
 	    return modelMapper.map(sensorAlumbrado, SensorAlumbradoModel.class);
-	}
-
-	@Override
-	public SensorAlumbradoModel insertOrUpdate(DispositivoModel dispositivoModel) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -94,6 +89,31 @@ public class SensorAlumbradoService implements ISensorAlumbradoService {
         }
      return null;
     }
+	
+	@Override
+	public DispositivoModel agregarEventos(Dispositivo dispositivoModel,Evento evento) {
+		if (dispositivoModel != null) {
+            Dispositivo dispositivoExistente = sensorAlumbradoRepository.findById(dispositivoModel.getId());
+            if (dispositivoExistente != null) {
+                List<Evento> eventos = dispositivoExistente.getEventos();
+                Evento eventosN = new Evento();
+                
+                eventosN.setDescripcion(evento.getDescripcion());
+                eventosN.setFechaRegistro(evento.getFechaRegistro());
+                eventosN.setDispositivo(dispositivoExistente);
+               
+                
+                eventos.add(eventosN);
+                
+                dispositivoExistente.setEventos(eventos);;
+               
+                // lo gurado en la base de datos
+                Dispositivo dispositivoActualizado = sensorAlumbradoRepository.save((SensorAlumbrado)dispositivoExistente);
+                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
+            }
+        }
+     return null;
+		};
 
 	@Override
 	public Dispositivo findByid(int id) {

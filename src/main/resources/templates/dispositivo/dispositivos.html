@@ -75,7 +75,7 @@
 		 <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
 		 <p>Activo: <input type="text" th:field="*{activo}" /></p>
 		 <p><input type="submit" value="Enviar" /></p>
-	</form>-->
+	</form>
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
@@ -101,10 +101,13 @@
                 <a th:href="@{/recolectorinteligente/}" class="btn btn-success">DISPOSITIVOS RECOLECTOR</a>
             </div>
             <div class="col-auto">
-                <a th:href="@{dispositivo/estacionamiento/}" class="btn btn-success">DISPOSITIVOS ESTACIONAMIENTO</a>
+                <a th:href="@{dispositivo/estacionamiento/}" class="btn btn-success">DISPOSITIVOS ESTACIONAMIENTsO</a>
             </div>
             <div class="col-auto">
                 <a th:href="@{/dispositivo/humedad}" class="btn btn-success">Dispositivos Humedad</a>
+            </div>
+            <div class="col-auto">
+                <a th:href="@{/dispositivo/new}" class="btn btn-success">Dispositivos génerico</a>
             </div>
         </div>
 
@@ -126,5 +129,5 @@
         </table>
     </div>
 </body>
-</html>
+</html>-->
 

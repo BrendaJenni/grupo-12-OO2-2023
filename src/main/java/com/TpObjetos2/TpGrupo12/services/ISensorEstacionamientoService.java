@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorEstacionamientoModel;
@@ -29,5 +30,7 @@ public interface ISensorEstacionamientoService {
 	public List<SensorEstacionamiento> traerstacionamientosActivos();
 	
 	public SensorEstacionamiento crearEstacionamientoConPlazas();
+
+	DispositivoModel agregarEventos(Dispositivo dispositivoModel, Evento evento);
 
 }

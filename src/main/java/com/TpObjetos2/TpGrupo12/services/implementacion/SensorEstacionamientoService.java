@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 import com.TpObjetos2.TpGrupo12.entities.MedicionEstacionamiento;
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.Medicion;
 import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
@@ -109,6 +110,31 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	        }
 	     return null;
 	    }
+		
+		@Override
+		public DispositivoModel agregarEventos(Dispositivo dispositivoModel,Evento evento) {
+			if (dispositivoModel != null) {
+	            Dispositivo dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
+	            if (dispositivoExistente != null) {
+	                List<Evento> eventos = dispositivoExistente.getEventos();
+	                Evento eventosN = new Evento();
+	                
+	                eventosN.setDescripcion(evento.getDescripcion());
+	                eventosN.setFechaRegistro(evento.getFechaRegistro());
+	                eventosN.setDispositivo(dispositivoExistente);
+	               
+	                
+	                eventos.add(eventosN);
+	                
+	                dispositivoExistente.setEventos(eventos);;
+	               
+	                // lo gurado en la base de datos
+	                Dispositivo dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
+	                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
+	            }
+	        }
+	     return null;
+			};
 
 		@Override
 		public SensorEstacionamiento findByid(int id) {

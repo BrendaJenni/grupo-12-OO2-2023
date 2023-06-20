@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id_medicion")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter
 @Table(name="MedicionAlumbrado")
 public class MedicionAlumbrado extends Medicion{
 	@Column(name="estadoActual")
@@ -36,8 +36,23 @@ public class MedicionAlumbrado extends Medicion{
 	public void setOscuridadActualPor(double oscuridadActualPor) {
 		this.oscuridadActualPor = oscuridadActualPor;
 	}
-	
-	
+
+	public MedicionAlumbrado(int idMedicion, Dispositivo dispositivo, LocalDateTime fechaRegistro, boolean estadoActual,
+			double oscuridadActualPor) {
+		super(idMedicion, dispositivo, fechaRegistro);
+		this.estadoActual = estadoActual;
+		this.oscuridadActualPor = oscuridadActualPor;
+	}
+
+	public MedicionAlumbrado(Dispositivo dispositivo, LocalDateTime fechaRegistro, boolean estadoActual,
+			double oscuridadActualPor) {
+		super(dispositivo, fechaRegistro);
+		this.estadoActual = estadoActual;
+		this.oscuridadActualPor = oscuridadActualPor;
+	}
+
+	public MedicionAlumbrado() {
+	}
 	
 }
 

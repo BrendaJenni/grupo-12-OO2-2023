@@ -2,51 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-<title>Dispositivo</title>
+<title>Agregar Medición</title>
 </head>
 <body>
-	        <div class="row">
-            <div class="col">
-                <h2>Lista de Mediciones de los dispositivos</h2>
-                <table class="table table-stripped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Dispositivo Vinculado</th>  
-                            <th scope="col">Estado actual</th>                
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="estacionamiento: ${estacionamientos}">
-                            <td>
-                                <ul>
-                                    <li th:each="medicion : ${estacionamientos.mediciones}" th:utext="${medicion.idMedicion}"></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li th:each="medicion : ${estacionamientos.mediciones}" th:utext="${medicion.fechaRegistro}"></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.dispositivo.id}"></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoActual}"></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.oscuridadActualPor}"></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2>Agregar Medición</h2>
+                <br>
+                <form th:action="@{/dispositivo/estacionamiento/agregarmedicion}" method="post">
+                    <p>
+                        <label for="dispositivoId">ID del Dispositivo:</label>
+                         <input type="number" id="dispositivoId" name="dispositivoId" required min="0">
+                    </p>
+                    <p>
+                        <label for="fecha">Fecha:</label>
+                         <input type="datetime-local" id="fecha" name="fecha" required>
+                    </p>
+                   <div>
+                        <label for="estadoLibre" class="form-label">Estado: </label>
+                        <select id="estadoLibre" name="estadoLibre" required>
+                            <option value="true">Libre</option>
+                            <option value="false">Ocupado</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Agregar Medición</button>
+                </form>
             </div>
         </div>
 </body>
