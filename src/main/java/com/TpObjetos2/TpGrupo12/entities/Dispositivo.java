@@ -77,6 +77,18 @@ public class Dispositivo {
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
 	}
+
+	public Dispositivo(String nombre, boolean activo) {
+		super();
+		this.nombre = nombre;
+		this.activo = activo;
+	}
+	
+	public Dispositivo() {}
+	
+	
+	
+	
     
 
 }

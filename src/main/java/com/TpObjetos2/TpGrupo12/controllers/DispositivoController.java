@@ -33,13 +33,6 @@ public class DispositivoController {
         this.dispositivoService = dispositivoService;
     }
 
-    /*@GetMapping("/")
-    public ModelAndView index(){
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.DISPOSITIVO_INDEX);
-        mAV.addObject("dispositivo", dispositivoService.getAll());
-        mAV.addObject("dispositivo", new Dispositivo());
-        return mAV;
-    }*/
     @GetMapping("/")
     public String index(Model model){
        model.addAttribute("dispositivos", dispositivoService.getAll());

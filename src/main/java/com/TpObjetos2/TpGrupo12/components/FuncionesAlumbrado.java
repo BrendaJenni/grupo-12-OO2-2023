@@ -49,8 +49,8 @@ public class FuncionesAlumbrado {
         }else {
         	
         	//dejo este campo solo para agregar 10 mediciones en cada dispositivo y que no rompa
-        	
-        	if(mediciones.size() == 10) {
+        	//ademas me fijo que el dispositvio este activo si no esta activo devuelvo null para que no se agregue nada
+        	if(mediciones.size() == 10 || buscar.isActivo() == false) {
         		//si entra aca ya no debemos agregar mediciones a este dispositivo
         		medi = null;
         	}else {
@@ -77,7 +77,10 @@ public class FuncionesAlumbrado {
 			//este if es escencial sirve tanto para agregar la primer medicion como para que se deje de agregar mediciones
 			if(implementar == null) {
 				
-				// si entra aca hay 2 escenarios que no tengamos una medicion inicial o bien que ya no se tenga que ejecutar
+				// si entra aca hay 3 escenarios
+				// 1 - ya no hay que agregar mas dispositivos
+				// 2 - tenemos que agregar el primer dispositivo porque la medicion esta vacia esto se hace en la linea 47
+				// 3- el dispositivo esta desactivado
 				
 			}else {
 
