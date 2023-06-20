@@ -15,6 +15,11 @@ public class DispositivoModel {
         this.nombre = nombre;
         this.activo = activo;
     }
+    
+    public DispositivoModel(String nombre, boolean activo) {
+        this.nombre = nombre;
+        this.activo = activo;
+    }
 
     public DispositivoModel() {}
     
@@ -49,6 +54,8 @@ public class DispositivoModel {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+    
+    
 
     @Override
     public String toString() {

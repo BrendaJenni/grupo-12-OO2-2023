@@ -78,5 +78,6 @@ public class Evento {
 	public void setDispositivo(Dispositivo dispositivo) {
 		this.dispositivo = dispositivo;
 	}
+
 }
 

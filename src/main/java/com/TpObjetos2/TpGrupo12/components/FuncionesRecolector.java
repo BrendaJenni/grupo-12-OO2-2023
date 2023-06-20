@@ -27,10 +27,6 @@ public class FuncionesRecolector {
     @Qualifier("recolectorInteligenteService")
     private IRecolectorInteligenteService sensorRecolectorService;
 	
-	@Autowired
-    @Qualifier("dispositivoService")
-    private DispositivoService dService;
-	
 	//Trae la ultima medicion 
 	@Transactional
 	public MedicionRecolector traerUnRecoAleatorio() {

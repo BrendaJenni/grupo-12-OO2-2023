@@ -60,7 +60,7 @@ public class DispositivoController {
         this.dispositivoService = dispositivoService;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public String index(Model model){
        model.addAttribute("dispositivos", dispositivoService.getAll());
        return "dispositivo/index";

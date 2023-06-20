@@ -13,179 +13,198 @@
     </style>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<h1>Listado de SensoresAlumbrado</h1>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<table class="table table-stripped table-bordered">
-					<thead class="table-dark">
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Activo</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Encendido</th>
-							<th scope="col">Estación</th>
-							<th scope="col">Obscuridad</th>
-							<th scope="col">Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="dispositivo: ${dispositivos}">
-							<td th:text="${dispositivo.id}"></td>
-							<td th:text="${dispositivo.activo}"></td>
-							<td th:text="${dispositivo.nombre}"></td>
-							<td th:text="${dispositivo.encendido}"></td>
-							<td th:text="${dispositivo.estacion}"></td>
-							<td th:text="${dispositivo.obscuridadPor}"></td>
-							<td>
-							<form th:action="@{/bajaLogica}" method="post">
-									<input type="hidden" name="id" th:value="${dispositivo.id}" /> 
-									<button type="submit" class="btn eliminar-btn">Eliminar</button>
-								</form>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				
-				<!-- generamos la lista de mediciones de cada dispositivo -->
-				<h2>Lista de Mediciones de los dispositivos</h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<table class="table table-stripped table-bordered">
-					<thead class="table-dark">
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Fecha</th>
-							<th scope="col">Dispositivo Vinculado</th>	
-							<th scope="col">Estado actual</th>		
-							<th scope="col">ObscuridadPor actual %</th>				
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="dispositivo: ${dispositivos}">
-							<td>
-								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.idMedicion}"></li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.fechaRegistro}"></li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.dispositivo.id}"></li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoActual}"></li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.oscuridadActualPor}"></li>
-								</ul>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<!-- generamos la lista de eventos de cada dispositivo -->
-				<h2>Lista de Eventos de los dispositivos</h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<table class="table table-stripped table-bordered">
-					<thead class="table-dark">
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Descripción</th>
-							<th scope="col">Fecha de Registro</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="dispositivo: ${dispositivos}">
-							<td>
-								<ul>
-									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.idEvento}"></li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.descripcion}"></li>
-								</ul>
-							</td>
-							<td>
-									<ul>
-										<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
-									</ul>
-								</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<!-- formulario para aplicar un dispositivo y que se guarde en la base de datos -->
-				
-				<h2>Agregar DispositivoAlumbrado</h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<form th:action="@{/sensoralumbrado/alumbrado}" method="post">
-					<div class="form-group">
-						<label for="nombre">Nombre:</label>
-						<input type="text" class="form-control" id="nombre" name="nombre" required>
-					</div>
-					<div class="form-group">
-						<label for="activo">Activo:</label>
-						<select class="form-control" id="activo" name="activo" required>
-							<option value="true">true</option>
-							<option value="false">false</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="encendido">Encendido:</label>
-						<select class="form-control" id="encendido" name="encendido" required>
-							<option value="true">true</option>
-							<option value="false">false</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="estacion">Estación:</label>
-						<select class="form-control" id="estacion" name="estacion" required>
-							<option value="Primavera">Primavera</option>
-							<option value="Verano">Verano</option>
-							<option value="Otoño">Otoño</option>
-							<option value="Invierno">Invierno</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="obscuridad">Obscuridad:</label>
-						<input type="number" class="form-control" id="obscuridad" name="obscuridadPor" required>
-					</div>
-					<button type="submit" class="btn btn-primary">Agregar</button>
+	</div>
+			<div class="col-auto">
+				<form th:action="@{/logout}" method="post">
+					<button type="submit" class="btn btn-danger">Logout</button>
 				</form>
 			</div>
 		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Listado de SensoresAlumbrado</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-stripped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Activo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Encendido</th>
+                            <th scope="col">Estación</th>
+                            <th scope="col">Obscuridad</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dispositivo: ${dispositivos}">
+                            <td th:text="${dispositivo.id}"></td>
+                            <td th:text="${dispositivo.activo}"></td>
+                            <td th:text="${dispositivo.nombre}"></td>
+                            <td th:text="${dispositivo.encendido}"></td>
+                            <td th:text="${dispositivo.estacion}"></td>
+                            <td th:text="${dispositivo.obscuridadPor}"></td>
+                            <td>
+                                <form th:action="@{/sensoralumbrado/bajaLogica}" method="post">
+                                    <input type="hidden" name="id" th:value="${dispositivo.id}" /> 
+                                    <button type="submit" class="btn eliminar-btn">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Lista de Mediciones de los dispositivos</h2>
+                <table class="table table-stripped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Dispositivo Vinculado</th>  
+                            <th scope="col">Estado actual</th>      
+                            <th scope="col">ObscuridadPor actual %</th>              
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dispositivo: ${dispositivos}">
+                            <td>
+                                <ul>
+                                    <li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.idMedicion}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.fechaRegistro}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.dispositivo.id}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoActual}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.oscuridadActualPor}"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Lista de Eventos de los dispositivos</h2>
+                <table class="table table-stripped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Fecha de Registro</th>
+                            <th scope="col">Dispositivo Vinculado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dispositivo: ${dispositivos}">
+                            <td>
+                                <ul>
+                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.idEvento}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.descripcion}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.dispositivo.id}"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Agregar DispositivoAlumbrado</h2>
+                <form th:action="@{/sensoralumbrado/dispositivo/alumbrado}" method="post">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="activo">Activo:</label>
+                        <select class="form-control" id="activo" name="activo" required>
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="encendido">Encendido:</label>
+                        <select class="form-control" id="encendido" name="encendido" required>
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="estacion">Estación:</label>
+                        <input type="text" class="form-control" id="estacion" name="estacion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="obscuridadPor">Obscuridad:</label>
+                        <input type="number" class="form-control" id="obscuridadPor" name="obscuridadPor" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Agregar Medición</h2>
+                <form th:action="@{/sensoralumbrado/agregarMedicion}" method="post">
+                    <div class="form-group">
+                        <label for="dispositivoId">ID del Dispositivo:</label>
+                         <input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                         <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+                    </div>
+                   <div class="mb-3">
+                        <label for="estadoActual" class="form-label">Estado Actual</label>
+                        <select class="form-select" id="estadoActual" name="estadoActual" required>
+                            <option value="true">Encendido</option>
+                            <option value="false">Apagado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="obscuridadActualPor">Obscuridad Actual (%):</label>
+                        <input type="number" class="form-control" id="obscuridadActualPor" name="obscuridadActualPor" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar Medición</button>
+                </form>
+            </div>
+        </div>
+    </div>
+>>>>>>> 646f741e58bf5f73f13fbfa688711efd9039df6f
 </body>
 </html>

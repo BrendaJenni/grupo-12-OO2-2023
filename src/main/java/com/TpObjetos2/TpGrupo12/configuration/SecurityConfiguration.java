@@ -37,7 +37,7 @@ public class SecurityConfiguration {
 			.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/loginprocess")
 				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/dispositivo",true).permitAll()
+				.defaultSuccessUrl("/dispositivo/",true).permitAll()
 
 			.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();

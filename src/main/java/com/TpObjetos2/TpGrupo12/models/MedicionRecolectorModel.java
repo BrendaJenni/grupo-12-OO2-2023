@@ -6,10 +6,12 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
 public class MedicionRecolectorModel extends DispositivoModel {
+	boolean estaLlenoAhora;
+	
 	public MedicionRecolectorModel() {}
 	
-	public MedicionRecolectorModel (int id,String nombre,boolean activo) {
+	public MedicionRecolectorModel (int id,String nombre,boolean activo, boolean estaLlenoAhora) {
 		super(id,nombre,activo);
-	
+		this.estaLlenoAhora = estaLlenoAhora;
 	}
 }

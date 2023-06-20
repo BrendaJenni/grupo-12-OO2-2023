@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.Medicion;
-import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
-import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorAlumbradoModel;
 import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
 
@@ -45,8 +42,8 @@ public class SensorAlumbradoController {
 		model.addAttribute("dispositivos", dispositivosAlumbrado);
        return "dispositivo/alumbrado";
     }
-	
-	@PostMapping("/alumbrado")
+
+	@PostMapping("/dispositivo/alumbrado")
     public String createAlum(@ModelAttribute("dispositivo") SensorAlumbradoModel sensorAlumbradoModel) {
         sensorAlumbradoService.insertOrUpdate(sensorAlumbradoModel);
         return "redirect:/sensoralumbrado/alumbrado"; // Redirige al listado de sensoresalumbrado
@@ -55,7 +52,6 @@ public class SensorAlumbradoController {
 	   @PostMapping("/bajaLogica")
 	    public String bajaLogica(@RequestParam("id") int id) {
 	        Dispositivo dispositivo = sensorAlumbradoService.findByid(id);
-	        dispositivo.setActivo(false);  
 	        
 	        sensorAlumbradoService.insertOrUpdatealum(dispositivo);
 

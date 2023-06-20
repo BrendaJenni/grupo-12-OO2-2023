@@ -28,7 +28,7 @@ public class SensorEstacionamiento extends Dispositivo{
 	
 	@Column(name="libres")
 	private int libres;
-
+	
 	public SensorEstacionamiento(int id, String nombre, boolean activo, List<Boolean> plazas,
 			int tam, int libres) {
 		super(id, nombre, activo);
@@ -36,7 +36,7 @@ public class SensorEstacionamiento extends Dispositivo{
 		this.tam = tam;
 		this.libres=libres;
 	}
-
+	
 	public SensorEstacionamiento(String nombre, boolean activo, int libres, int tam, List<Boolean> plazas) {
 		super(nombre, activo);
 		this.libres=libres;

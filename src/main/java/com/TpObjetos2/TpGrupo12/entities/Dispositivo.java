@@ -34,14 +34,10 @@ public class Dispositivo {
     private boolean activo;
     
     @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Medicion> mediciones = new ArrayList<Medicion>();
-    
-    @OneToMany(mappedBy="dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Evento> eventos = new ArrayList<Evento>();
+    private List<Medicion> mediciones = new ArrayList<>();
 
-    protected void setIdDispositivo(int id) {
-        this.id = id;    
-    }
+    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Evento> eventos= new ArrayList<>();
     
     public int getId() {
 		return id;
@@ -83,18 +79,19 @@ public class Dispositivo {
 		this.eventos = eventos;
 	}
 
+	public Dispositivo(String nombre, boolean activo) {
+		super();
+		this.nombre = nombre;
+		this.activo = activo;
+	}
+	
+	public Dispositivo() {}
+
 	public Dispositivo(int id, String nombre, boolean activo) {
 		this.id = id;
 		this.nombre = nombre;
 		this.activo = activo;
 	}
 
-	public Dispositivo(String nombre, boolean activo) {
-		this.nombre = nombre;
-		this.activo = activo;
-	}
-
-	public Dispositivo() {
-	}
 }
 
