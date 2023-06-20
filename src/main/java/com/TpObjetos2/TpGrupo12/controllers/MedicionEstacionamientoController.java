@@ -1,8 +1,8 @@
 package com.TpObjetos2.TpGrupo12.controllers;
 
-
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,21 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.Medicion;
-import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
-import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorAlumbradoModel;
 import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
 
 @Controller
-@RequestMapping("/sensoralumbrado")
-public class SensorAlumbradoController {
-	
+@RequestMapping("/estacionamiento")
+public class MedicionEstacionamientoController {
+	/*
 	@Autowired
-    @Qualifier("sensorAlumbradoService")
+    @Qualifier("estacionamientoService")
     private ISensorAlumbradoService sensorAlumbradoService;
 	
 	@GetMapping("/alumbrado")
@@ -73,7 +69,7 @@ public class SensorAlumbradoController {
 	       }
 	       
 	       return "redirect:/sensoralumbrado/alumbrado";
-	   }
+	   }*/
 	   
 
 	

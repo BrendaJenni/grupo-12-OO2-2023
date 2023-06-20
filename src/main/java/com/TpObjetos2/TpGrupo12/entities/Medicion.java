@@ -40,9 +40,28 @@ public class Medicion {
     //@ManyToOne
     // normalmente nullable es igual a false, en este caso se deja como true porque el ejemplo es simple
     //@JoinColumn(name="idDispositivo", nullable=false)
+	  
+	  
+	  
+	  
 	public int getIdMedicion() {
 		return idMedicion;
 	}
+
+	public Medicion(int idMedicion, Dispositivo dispositivo, LocalDateTime fechaRegistro) {
+		this.idMedicion = idMedicion;
+		this.dispositivo = dispositivo;
+		this.fechaRegistro = fechaRegistro;
+	}
+	
+	
+	public Medicion(Dispositivo dispositivo, LocalDateTime fechaRegistro) {
+		this.dispositivo = dispositivo;
+		this.fechaRegistro = fechaRegistro;
+	}
+	
+
+	public Medicion() {}
 
 	public void setIdMedicion(int idMedicion) {
 		this.idMedicion = idMedicion;

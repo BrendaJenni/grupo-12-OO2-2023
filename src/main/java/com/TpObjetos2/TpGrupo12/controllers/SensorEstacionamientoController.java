@@ -1,6 +1,7 @@
 package com.TpObjetos2.TpGrupo12.controllers;
 
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,21 +12,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
+import com.TpObjetos2.TpGrupo12.entities.MedicionEstacionamiento;
+import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
+import com.TpObjetos2.TpGrupo12.models.SensorAlumbradoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorEstacionamientoModel;
 import com.TpObjetos2.TpGrupo12.repositories.ISensorEstacionamientoRepository;
 import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 
 
 @Controller
-@RequestMapping("/estacionamiento")
+@RequestMapping("dispositivo/estacionamiento")
 public class SensorEstacionamientoController {
-	//@Autowired
-    //@Qualifier("plazaService")
-    //private IPlazaService plazaService;
-	
 	@Autowired
     @Qualifier("estacionamientoService")
     private ISensorEstacionamientoService estacionamientoService;
@@ -33,43 +36,19 @@ public class SensorEstacionamientoController {
 	@Autowired
 	private ISensorEstacionamientoRepository estacionamientoRepository;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String indexEstacionamiento(Model model){
-       model.addAttribute("estacionamientos", estacionamientoService.getAll());
+    	List<SensorEstacionamiento> dispositivos = estacionamientoService.getAll();
+		List<SensorEstacionamiento> estacionamientos = new ArrayList<>();
+		for (SensorEstacionamiento dispositivo : dispositivos) {
+			if (dispositivo.isActivo() == true) {
+				estacionamientos.add(dispositivo);
+			}
+		}
+       model.addAttribute("estacionamientos", estacionamientos);
        return "estacionamiento/estacionamiento";
     }
-    
-    @GetMapping("/plazas")
-    public String indexPlazas(Model model){
-       //model.addAttribute("estacionamiento", estacionamientoService.getAll());
-       model.addAttribute("estacionamiento.plazas", estacionamientoService.getPlazas());
-       return "estacionamiento/plazas";
-    }
-    /*
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/plazas/new")
-    public ModelAndView agregarEstacionamientoPlazas(){
-       ModelAndView mAV = new ModelAndView("estacionamiento/agregarplazas");
-       //mAV.addObject("plazas", plazaService.getAll());
-       mAV.addObject("plaza", new Plaza());
-       return mAV;
-    }
-    
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/plazas/new")
-    public String agregarPlazas(Model model) {
-    	List<SensorEstacionamiento> estacionamientos=estacionamientoRepository.findAll();
-    	model.addAttribute("plaza", new Plaza());
-    	model.addAttribute("estacionamientos", estacionamientos);
-    	return("estacionamiento/agregarplazas");
-    }
-    
-    @GetMapping("/plazas")
-    public String indexPlazas(Model model){
-       model.addAttribute("plazas", plazaService.getAll());
-       return "estacionamiento/plazas";
-    }*/
-    
+   
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/new")
     public ModelAndView agregarEstacionamiento(){
@@ -85,37 +64,41 @@ public class SensorEstacionamientoController {
        return mAV;
     }
     
+    @PostMapping("/bajaLogica")
+    public String bajaLogica(@RequestParam("id") int id, SensorEstacionamientoModel sensorEstacionamientoModel) {
+        Dispositivo dispositivo = estacionamientoService.findByid(id);
+        dispositivo.setActivo(false);  
+        
+        estacionamientoService.insertOrUpdateEst(dispositivo);
+
+        return "redirect:/dispositivo/estacionamiento";
+    }
     
     @PostMapping("/new")
     public RedirectView create(@ModelAttribute("estacionamiento") SensorEstacionamientoModel estacionamientoModel){
     	estacionamientoModel.inicializarPlazas();
         estacionamientoService.insertOrUpdate(estacionamientoModel);
-        return new RedirectView("/estacionamiento/");
+        return new RedirectView("/dispositivo/estacionamiento");
     }
     /*
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/plazas/new")
-    public ModelAndView agregarPlazas(){
-       ModelAndView mAV = new ModelAndView("estacionamiento/agregarplazas");
-       //mAV.addObject("plazas", plazaService.getAll());
-       SensorEstacionamiento estacionamiento = estacionamientoService.findByid(0);
-       List<Boolean> plazas = new ArrayList<Boolean>();
-       mAV.addObject("estacionamiento", new SensorEstacionamiento());
-       mAV.addObject("boolean", estacionamiento.getPlazas());
-       return mAV;
-    }*/
+    @GetMapping("/agregarmedicion")
+    public ModelAndView agreaarMediciones() {
+    ModelAndView mAV = new ModelAndView("estacionamiento/agregarmedicion");
+    MedicionEstacionamiento medicion = new MedicionEstacionamiento();
+    mAV.addObject("medicion", medicion);
+    return mAV;}
+ */
     
-    @PostMapping("/plazas/new")
-    public RedirectView createPlazas(@ModelAttribute("estacionamiento") SensorEstacionamientoModel estacionamientoModel){
-        estacionamientoService.insertOrUpdate(estacionamientoModel);
-        return new RedirectView("/dispositivo/");
-    }
-    
-    /*
-    @PostMapping("/plazas/new")
-    public RedirectView create(@ModelAttribute("plaza") PlazaModel plazaModel){
-        plazaService.insertOrUpdate(plazaModel);
-        return new RedirectView("/dispositivo/");
-    }*/
+    @PostMapping("/agregarmedicion")
+	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
+	                                 @RequestParam("fecha") LocalDateTime fecha,
+	                                 @RequestParam("estadoLibre") boolean estadoLibre){
+	       Dispositivo dispositivo = estacionamientoService.findByid(dispositivoId); 
+	       if (dispositivo != null) {      
+	           estacionamientoService.agregarMedicion(dispositivo,fecha,estadoLibre);
+	       }
+	       
+	       return "redirect:/dispositivo/estacionamiento/";
+	   }
     
 }

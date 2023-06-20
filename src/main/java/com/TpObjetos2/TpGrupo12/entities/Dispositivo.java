@@ -14,7 +14,6 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -32,6 +31,7 @@ public class Dispositivo {
     @Column(name="activo")
     private boolean activo;
     
+
     @OneToMany(mappedBy = "dispositivo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Medicion> mediciones;
 
