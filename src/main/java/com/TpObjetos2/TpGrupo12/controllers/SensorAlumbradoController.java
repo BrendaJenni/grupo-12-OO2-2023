@@ -53,7 +53,6 @@ public class SensorAlumbradoController {
 	   @PostMapping("/bajaLogica")
 	    public String bajaLogica(@RequestParam("id") int id) {
 	        Dispositivo dispositivo = sensorAlumbradoService.findByid(id);
-	        dispositivo.setActivo(false);  
 	        
 	        sensorAlumbradoService.insertOrUpdatealum(dispositivo);
 

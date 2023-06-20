@@ -68,6 +68,16 @@ public class Evento {
 	public void setDispositivo(Dispositivo dispositivo) {
 		this.dispositivo = dispositivo;
 	}
+
+	public Evento(String descripcion, LocalDateTime fechaRegistro, Dispositivo dispositivo) {
+		super();
+		this.descripcion = descripcion;
+		this.fechaRegistro = fechaRegistro;
+		this.dispositivo = dispositivo;
+	}
+	
+	public Evento() {};
+	
 	
 
 }

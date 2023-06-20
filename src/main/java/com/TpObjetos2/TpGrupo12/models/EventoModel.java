@@ -14,9 +14,8 @@ public class EventoModel {
 	
 	public EventoModel() {}
 	
-	public EventoModel(int idEvento, String descripcion, LocalDateTime fechaRegistro, Dispositivo dispositivo) {
+	public EventoModel(String descripcion, LocalDateTime fechaRegistro, Dispositivo dispositivo) {
 		super();
-		this.idEvento = idEvento;
 		this.descripcion = descripcion;
 		this.fechaRegistro = fechaRegistro;
 		this.dispositivo = dispositivo;
