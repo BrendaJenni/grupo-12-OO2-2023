@@ -66,13 +66,13 @@ public class FuncionesAlumbrado {
     }
 
 	
-	@Scheduled(fixedDelay=5000)
+	@Scheduled(fixedDelay=1000)
 		public void mostarHola() {
 
 			MedicionAlumbrado implementar = this.traerUltimaMediacion();
 			//LocalDate fecha = 
-			LocalTime horaInicio = LocalTime.of(23, 0);
-			LocalTime horaFin = LocalTime.of(07, 0);
+			LocalTime horaInicio = LocalTime.of(23, 00);
+			LocalTime horaFin = LocalTime.of(7, 00);
 			
 			//este if es escencial sirve tanto para agregar la primer medicion como para que se deje de agregar mediciones
 			if(implementar == null) {
@@ -83,66 +83,77 @@ public class FuncionesAlumbrado {
 				// 3- el dispositivo esta desactivado
 				
 			}else {
-
-				LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
-				// registro el horario en que debería estar prendida la luz
-				//agregar or para que verifique el la obcuridadPor
-				if((horaMedAhora.isAfter(horaInicio) && horaMedAhora.isBefore(horaFin)) || (implementar.getOscuridadActualPor() > 70) ) 
-				{
-					//verifico si la luz esta apagada , si esta apagada la prendo y genero un evento
-					if(implementar.isEstadoActual() == false) {
-							
-						implementar.setEstadoActual(true);
+				
+						LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
+						// registro el horario en que debería estar prendida la luz
+						//agregar or para que verifique el la obcuridadPor
+						if((horaMedAhora.isAfter(LocalTime.of(23, 0)) || horaMedAhora.isBefore(LocalTime.of(7, 0))))
+						{
+							//verifico si la luz esta apagada , si esta apagada la prendo y genero un evento
+								
+							if(implementar.isEstadoActual() == false) {
+								
+								implementar.setEstadoActual(true);
+								//envio el envento al dispositivo para que se agregue correctamente
+								Dispositivo dispo = implementar.getDispositivo();
+								Evento agregar = new Evento("Encender Luz", implementar.getFechaRegistro(),dispo);
+								sensorAlumbradoService.agregarEventos(dispo, agregar);
+								 System.out.println("\n AGREWGAMOS EVENTO");
+							}
+								 
+						}
+								 
+								 
 						
+						else if(implementar.getOscuridadActualPor() > 70) {
+								
+							if(implementar.isEstadoActual() == false) {	
+						implementar.setEstadoActual(true);
 						//envio el envento al dispositivo para que se agregue correctamente
 						Dispositivo dispo = implementar.getDispositivo();
 						Evento agregar = new Evento("Encender Luz", implementar.getFechaRegistro(),dispo);
 						sensorAlumbradoService.agregarEventos(dispo, agregar);
 						 System.out.println("\n AGREWGAMOS EVENTO");
-						
-					}
-							
+							}
+								
 						}
-				else {
-					
-					
-					if(implementar.isEstadoActual() == true) {
+							
+						else if(implementar.isEstadoActual() == true) {
+								
+								implementar.setEstadoActual(false);
+								System.out.println("\n\n PASO POR ACA");
+								//envio el envento al dispositivo para que se agregue correctamente
+								Dispositivo dispo = implementar.getDispositivo();
+								Evento agregar =new Evento("Apagar Luz", implementar.getFechaRegistro(),dispo);
+								sensorAlumbradoService.agregarEventos(dispo,agregar);
+								System.out.println("\n AGREWGAMOS EVENTO");
+								 
+						}
+							
+							
+				List<SensorAlumbrado> dispositivos = sensorAlumbradoService.getAll();
+				
+				boolean check = this.medicionesCompletas(dispositivos);
+				
+				//llamo a la funcion para entender si las mediciones estan completas si es asi no agregamos nuevas
+				if(check ==false) {
+				LocalDateTime fechanueva = implementar.getFechaRegistro();
+				
+				fechanueva = fechanueva.plusHours(1);
+				
+				//generamos un double random de 1 a 100 para poner en la obscuridad de la hora siguiente
+				double nuevaObscuridad = Math.random()*100+1;
+				
+				sensorAlumbradoService.agregarMedicion(implementar.getDispositivo(), fechanueva, implementar.isEstadoActual(), nuevaObscuridad);
+				 System.out.println("\n AGREWGAMOS Medicion");
 						
-						implementar.setEstadoActual(false);
-						//envio el envento al dispositivo para que se agregue correctamente
-						Dispositivo dispo = implementar.getDispositivo();
-						Evento agregar =new Evento("Apagar Luz", implementar.getFechaRegistro(),dispo);
-						 sensorAlumbradoService.agregarEventos(dispo,agregar);
-						 System.out.println("\n AGREWGAMOS EVENTO");
-						
-					}
-				}
-					
-					List<SensorAlumbrado> dispositivos = sensorAlumbradoService.getAll();
-					
-					boolean check = this.medicionesCompletas(dispositivos);
-					
-					//llamo a la funcion para entender si las mediciones estan completas si es asi no agregamos nuevas
-					if(check ==false) {
-					LocalDateTime fechanueva = implementar.getFechaRegistro();
-					
-					fechanueva = fechanueva.plusHours(1);
-					
-					//generamos un double random de 1 a 100 para poner en la obscuridad de la hora siguiente
-					double nuevaObscuridad = Math.random()*100+1;
-					
-					sensorAlumbradoService.agregarMedicion(implementar.getDispositivo(), fechanueva, implementar.isEstadoActual(), nuevaObscuridad);
-					 System.out.println("\n AGREWGAMOS Medicion");
-					}
 					
 				
-			}
-			
-			
-			
+		}
+	}
 				
-			};
-			
+};
+					
 			
 			public boolean medicionesCompletas(List<SensorAlumbrado> dispo) {
 				
