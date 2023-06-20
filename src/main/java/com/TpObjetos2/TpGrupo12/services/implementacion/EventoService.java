@@ -1,5 +1,6 @@
 package com.TpObjetos2.TpGrupo12.services.implementacion;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,9 +32,9 @@ public class EventoService implements IEventoService {
     }
 
     @Override
-    public EventoModel insertOrUpdate(EventoModel eventoModel) {
-        Evento evento = eventoRepository.save(modelMapper.map(eventoModel, Evento.class));
-        return modelMapper.map(evento, EventoModel.class);
+    public EventoModel insertOrUpdate(Evento evento) {
+        Evento event = eventoRepository.save(evento);
+        return modelMapper.map(event, EventoModel.class);
     }
     
 
@@ -51,6 +52,21 @@ public class EventoService implements IEventoService {
     @Override
 	public Evento findById(int id) {
 		return eventoRepository.findByidEvento(id);
+	}
+
+	@Override
+	public List<Evento> getByFecha(LocalDateTime fecha) {
+		return eventoRepository.findByFechaRegistro(fecha);
+	}
+
+	@Override
+	public List<Evento> getByEstado(boolean estado) {
+		return eventoRepository.findByEstado(estado);
+	}
+
+	@Override
+	public List<Evento> getByIdDispositivo(int id) {
+		return eventoRepository.findByIdDispositivo(id);
 	}
 	
 }

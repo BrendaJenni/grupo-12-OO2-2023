@@ -3,7 +3,6 @@ package com.TpObjetos2.TpGrupo12.services;
 import java.util.List;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 
 public interface IDispositivoService {
@@ -15,6 +14,7 @@ public interface IDispositivoService {
     
     public Dispositivo findByid(int id);
 
-	DispositivoModel bajaLogica(DispositivoModel dispositivoModel);
+	Dispositivo getById(int id);
+
     
 }

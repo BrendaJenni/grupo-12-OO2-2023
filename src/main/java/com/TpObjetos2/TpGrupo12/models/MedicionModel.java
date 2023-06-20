@@ -21,6 +21,7 @@ public class MedicionModel {
 		this.dispositivo = dispositivo;
 	}
 
+	public MedicionModel() {}
 	public int getIdMedicion() {
 		return idMedicion;
 	}

@@ -63,8 +63,8 @@
 							<th scope="col">Id</th>
 							<th scope="col">Fecha</th>
 							<th scope="col">Dispositivo Vinculado</th>	
-							<th scope="col">Estado actual</th>		
-							<th scope="col">ObscuridadPor actual %</th>				
+							<th scope="col">Humedad</th>		
+							<th scope="col">Estado Cesped</th>				
 						</tr>
 					</thead>
 					<tbody>
@@ -86,12 +86,12 @@
 							</td>
 							<td>
 								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoActual}"></li>
+									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.humedad}"></li>
 								</ul>
 							</td>
 							<td>
 								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.oscuridadActualPor}"></li>
+									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoCesped}"></li>
 								</ul>
 							</td>
 						</tr>
@@ -103,45 +103,53 @@
 			<div class="col">
 				<!-- generamos la lista de eventos de cada dispositivo -->
 				<h2>Lista de Eventos de los dispositivos</h2>
+				
+		<a th:href="@{/evento/}" class="btn btn-success mb-3"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Agregar Evento</a>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
 				<table class="table table-stripped table-bordered">
-					<thead class="table-dark">
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Descripción</th>
-							<th scope="col">Fecha de Registro</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="dispositivo: ${dispositivos}">
-							<td>
-								<ul>
-									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.idEvento}"></li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.descripcion}"></li>
-								</ul>
-							</td>
-							<td>
-									<ul>
-										<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
-									</ul>
-								</td>
-						</tr>
-					</tbody>
-				</table>
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Fecha de Registro</th>
+                            <th scope="col">Dispositivo Vinculado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dispositivo: ${dispositivos}">
+                            <td>
+                                <ul>
+                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.idEvento}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.descripcion}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.dispositivo.id}"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
 				<!-- formulario para aplicar un dispositivo y que se guarde en la base de datos-->
 				
-				<h2>Agregar DispositivoAlumbrado</h2>
+				<h2>Agregar DispositivoHumedad</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -158,7 +166,7 @@
 							<option value="false">false</option>
 						</select>
 					</div>
-					<div class="form-group">
+					<div class="form-group mb-3">
 						<label for="encendido">Encendido:</label>
 						<select class="form-control" id="encendido" name="encendido" required>
 							<option value="true">true</option>
@@ -170,6 +178,34 @@
 				</form>
 			</div>
 		</div>
+		<div class="row agregar">
+            <div class="col agrego">
+                <h2>Agregar Medición</h2>
+                <form th:action="@{/sensorhumedad/agregarmedicion}" method="post">
+                    <div class="form-group">
+                        <label for="dispositivoId">ID del Dispositivo:</label>
+                         <input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                         <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="humedad">Humedad: %</label>
+                        <input type="number" class="form-control" id="humedad" name="humedad" required>
+                    </div>
+                   <div class="form.group mb-3">
+                        <label for="estadoCesped" class="form-label">Estado Cesped</label>
+                        <select class="form-select" id="estadoCesped" name="estadoCesped" required>
+                            <option value="true">Mojado</option>
+                            <option value="false">Seco</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Agregar Medición</button>
+                </form>
+            </div>
+       
 	</div>
 </body>
 </html>

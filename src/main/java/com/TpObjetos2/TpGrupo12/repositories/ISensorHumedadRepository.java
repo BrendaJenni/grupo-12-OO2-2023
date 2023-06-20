@@ -16,4 +16,5 @@ public interface ISensorHumedadRepository extends JpaRepository<SensorHumedad, S
     public abstract SensorHumedad findByNombre(String nombre);
     //@Query("SELECT sh FROM Sensor_Humedad sh")
     public abstract List<SensorHumedad> findAll();
+    
 }

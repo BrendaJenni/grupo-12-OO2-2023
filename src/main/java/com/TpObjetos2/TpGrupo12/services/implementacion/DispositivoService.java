@@ -33,14 +33,12 @@ public class DispositivoService implements IDispositivoService{
         Dispositivo dispositivo = dispositivoRepository.save(modelMapper.map(dispositivoModel, Dispositivo.class));
         return modelMapper.map(dispositivo, DispositivoModel.class);
     }
-    
-    @Override
-    public DispositivoModel bajaLogica(DispositivoModel dispositivoModel) {
-        dispositivoModel.setActivo(false); // Establecer el campo de dispositivo como false
-        Dispositivo dispositivo = dispositivoRepository.save(modelMapper.map(dispositivoModel, Dispositivo.class));
-        return modelMapper.map(dispositivo, DispositivoModel.class);
-    }
 
+    @Override
+    public Dispositivo getById(int id) {
+        Dispositivo dispositivoOptional = dispositivoRepository.findById(id);
+        return dispositivoOptional;
+    }
     @Override
     public boolean remove(int id) {
         try{
