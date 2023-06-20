@@ -4,19 +4,26 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.TpObjetos2.TpGrupo12.TpGrupo12Application;
 import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
 
 @Component
 public class FuncionesRecolector {
+	public static void main(String[] args) {
+		SpringApplication.run(FuncionesRecolector.class, args);
+		
+	}
 
 	//RECOLECTOR INTELIGENTE
-	@Scheduled(fixedDelay=30000)
+	@Scheduled(fixedDelay=5000)
 	 public void chequearContenidoRecolector (MedicionRecolector reco) {
-    	LocalTime ahora = reco.getFechaRegistro().toLocalTime();
+		System.out.println("Hola mundo!");
+    	/*LocalTime ahora = reco.getFechaRegistro().toLocalTime();
     	LocalDate fecha = reco.getFechaRegistro().toLocalDate();
     	LocalTime chequeos = ahora;
     	int boleano;
@@ -39,7 +46,7 @@ public class FuncionesRecolector {
     			reco.getDispositivo().getMediciones().add(new MedicionRecolector(reco.getDispositivo(),LocalDateTime.of(fecha, ahora),estado));
     			chequeos = chequeos.plusMinutes(30);
     		}
-    	}
+    	}*/
     }
 	
 	public MedicionRecolector cambiarEstadoRecolector (MedicionRecolector dispo, boolean nuevoEstado) {
