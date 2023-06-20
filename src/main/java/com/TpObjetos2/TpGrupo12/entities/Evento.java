@@ -69,7 +69,6 @@ public class Evento {
 		this.dispositivo = dispositivo;
 	}
 	
-	
 
 }
 

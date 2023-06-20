@@ -1,6 +1,6 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
-import java.util.List;
+import java.util.*;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -32,11 +32,11 @@ public class Dispositivo {
     @Column(name="activo")
     private boolean activo;
     
-    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Medicion> mediciones;
+    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Medicion> mediciones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "dispositivo", fetch = FetchType.LAZY)
-    private List<Evento> eventos;
+    @OneToMany(mappedBy = "dispositivo", fetch = FetchType.EAGER)
+    private List<Evento> eventos= new ArrayList<>();
     
     public int getId() {
 		return id;

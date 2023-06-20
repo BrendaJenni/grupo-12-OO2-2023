@@ -22,5 +22,6 @@ public interface ISensorAlumbradoService {
 
 	public DispositivoModel agregarMedicion(Dispositivo dispositivoModel, LocalDateTime fecha, boolean estadoActual,
 			double obscuridadActualPor);
+	
 
 }

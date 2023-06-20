@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.Medicion;
-import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
-import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorAlumbradoModel;
 import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
 
@@ -45,6 +42,7 @@ public class SensorAlumbradoController {
 		model.addAttribute("dispositivos", dispositivosAlumbrado);
        return "dispositivo/alumbrado";
     }
+	
 	
 	@PostMapping("/dispositivo/alumbrado")
     public String createAlum(@ModelAttribute("dispositivo") SensorAlumbradoModel sensorAlumbradoModel) {

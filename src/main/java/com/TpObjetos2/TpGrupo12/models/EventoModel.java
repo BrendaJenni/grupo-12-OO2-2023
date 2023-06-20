@@ -12,6 +12,8 @@ public class EventoModel {
 	private Dispositivo dispositivo;
 	
 	
+	public EventoModel() {}
+	
 	public EventoModel(int idEvento, String descripcion, LocalDateTime fechaRegistro, Dispositivo dispositivo) {
 		super();
 		this.idEvento = idEvento;
