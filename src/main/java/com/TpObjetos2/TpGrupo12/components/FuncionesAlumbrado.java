@@ -50,11 +50,12 @@ public class FuncionesAlumbrado {
         	
         	//dejo este campo solo para agregar 10 mediciones en cada dispositivo y que no rompa
         	//ademas me fijo que el dispositvio este activo si no esta activo devuelvo null para que no se agregue nada
-        	if(mediciones.size() == 10 || buscar.isActivo() == false) {
+        	if(mediciones.size() >= 10 || buscar.isActivo() == false) {
         		//si entra aca ya no debemos agregar mediciones a este dispositivo
         		medi = null;
         	}else {
         
+        	
         	//en caso de que ya tenga mediciones se va a devolver la ultima generada
         	 medi = (MedicionAlumbrado) mediciones.get(mediciones.size()-1);
         	}
@@ -87,7 +88,7 @@ public class FuncionesAlumbrado {
 						LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
 						// registro el horario en que debería estar prendida la luz
 						//agregar or para que verifique el la obcuridadPor
-						if((horaMedAhora.isAfter(LocalTime.of(23, 0)) || horaMedAhora.isBefore(LocalTime.of(7, 0))))
+						if((horaMedAhora.isAfter(horaInicio) || horaMedAhora.isBefore(horaFin)))
 						{
 							//verifico si la luz esta apagada , si esta apagada la prendo y genero un evento
 								
@@ -147,14 +148,12 @@ public class FuncionesAlumbrado {
 				sensorAlumbradoService.agregarMedicion(implementar.getDispositivo(), fechanueva, implementar.isEstadoActual(), nuevaObscuridad);
 				 System.out.println("\n AGREWGAMOS Medicion");
 						
-					
-				
 		}
 	}
 				
 };
 					
-			
+
 			public boolean medicionesCompletas(List<SensorAlumbrado> dispo) {
 				
 				boolean devolver =  false;
