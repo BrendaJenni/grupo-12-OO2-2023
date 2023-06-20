@@ -17,12 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.Medicion;
 import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
 import com.TpObjetos2.TpGrupo12.entities.MedicionEstacionamiento;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.models.SensorAlumbradoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorEstacionamientoModel;
 import com.TpObjetos2.TpGrupo12.repositories.ISensorEstacionamientoRepository;
+import com.TpObjetos2.TpGrupo12.services.IMedicionService;
 import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 
 
@@ -34,10 +36,12 @@ public class SensorEstacionamientoController {
     private ISensorEstacionamientoService estacionamientoService;
 	
 	@Autowired
-	private ISensorEstacionamientoRepository estacionamientoRepository;
+    @Qualifier("medicionService")
+	private IMedicionService medicionService;
 
     @GetMapping("")
     public String indexEstacionamiento(Model model){
+    	/*
     	List<SensorEstacionamiento> dispositivos = estacionamientoService.getAll();
 		List<SensorEstacionamiento> estacionamientos = new ArrayList<>();
 		for (SensorEstacionamiento dispositivo : dispositivos) {
@@ -45,19 +49,31 @@ public class SensorEstacionamientoController {
 				estacionamientos.add(dispositivo);
 			}
 		}
+		List<Medicion> mediciones = medicionService.getAll();
+		/*List<Medicion> medicionesEst = new ArrayList<>();
+		for (Medicion medicion : mediciones) {
+			if(medicion instanceof MedicionEstacionamiento) {
+				medicionesEst.add(medicion);
+			}
+		}*/
+	//model.addAttribute("mediciones", mediciones);
+    	List<SensorEstacionamiento> estacionamientos = estacionamientoService.traerstacionamientosActivos(); 
        model.addAttribute("estacionamientos", estacionamientos);
+    	
        return "estacionamiento/estacionamiento";
     }
+    
    
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/new")
     public ModelAndView agregarEstacionamiento(){
        ModelAndView mAV = new ModelAndView("estacionamiento/agregar");
        //mAV.addObject("plazas", plazaService.getAll());
-       SensorEstacionamiento estacionamiento = new SensorEstacionamiento();
-       List<Boolean> plazas = new ArrayList<Boolean>();
-       estacionamiento.setPlazas(plazas);
-       estacionamiento.inicializarPlazas();
+       //SensorEstacionamiento estacionamiento = new SensorEstacionamiento();
+       //List<Boolean> plazas = new ArrayList<Boolean>();
+       //estacionamiento.setPlazas(plazas);
+       //estacionamiento.inicializarPlazas();
+       SensorEstacionamiento estacionamiento = estacionamientoService.crearEstacionamientoConPlazas();
        mAV.addObject("boolean", estacionamiento.getPlazas());
        mAV.addObject("estacionamiento", estacionamiento);
        //mAV.addObject("boolean", new ArrayList<Boolean>());

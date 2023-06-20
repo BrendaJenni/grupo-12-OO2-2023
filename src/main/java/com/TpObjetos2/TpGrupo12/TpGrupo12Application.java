@@ -10,6 +10,10 @@ import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
 import com.TpObjetos2.TpGrupo12.repositories.ISensorEstacionamientoRepository;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+
+//@EnableScheduling
 @SpringBootApplication
 public class TpGrupo12Application implements CommandLineRunner{
 

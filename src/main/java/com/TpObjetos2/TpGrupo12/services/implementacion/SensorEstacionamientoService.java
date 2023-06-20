@@ -1,13 +1,15 @@
 package com.TpObjetos2.TpGrupo12.services.implementacion;
 
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import com.TpObjetos2.TpGrupo12.entities.MedicionEstacionamiento;
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.Medicion;
@@ -52,6 +54,26 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	        }
 	     return null;
 	    }
+		
+		public List<SensorEstacionamiento> traerstacionamientosActivos() {
+			List<SensorEstacionamiento> dispositivos = estacionamientoRepository.findAll();
+			List<SensorEstacionamiento> estacionamientos = new ArrayList<>();
+			for (SensorEstacionamiento dispositivo : dispositivos) {
+				if (dispositivo.isActivo() == true) {
+					estacionamientos.add(dispositivo);
+				}
+			}
+			return estacionamientos;
+		}
+		
+		public SensorEstacionamiento crearEstacionamientoConPlazas() {
+			SensorEstacionamiento estacionamiento = new SensorEstacionamiento();
+		       List<Boolean> plazas = new ArrayList<Boolean>();
+		       estacionamiento.setPlazas(plazas);
+		       estacionamiento.inicializarPlazas();
+		       
+		       return estacionamiento;
+		}
 
 		@Override
 		public boolean remove(int id) {

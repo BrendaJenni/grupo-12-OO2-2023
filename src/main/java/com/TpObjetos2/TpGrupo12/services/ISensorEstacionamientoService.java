@@ -25,5 +25,9 @@ public interface ISensorEstacionamientoService {
 	DispositivoModel agregarMedicion(Dispositivo dispositivoModel, LocalDateTime fecha, boolean estadoLibre);
 
 	DispositivoModel insertOrUpdateEst(Dispositivo dispositivoModel);
+	
+	public List<SensorEstacionamiento> traerstacionamientosActivos();
+	
+	public SensorEstacionamiento crearEstacionamientoConPlazas();
 
 }
