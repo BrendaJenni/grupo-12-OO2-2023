@@ -1,11 +1,10 @@
 package com.TpObjetos2.TpGrupo12.components;
 
-import java.time.LocalDate;
 import java.time.*;
 import java.time.LocalTime;
 import java.util.List;
 
-import org.hibernate.Hibernate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -49,10 +48,20 @@ public class FuncionesAlumbrado {
         	
         }else {
         	
+        	//dejo este campo solo para agregar 10 mediciones en cada dispositivo y que no rompa
+        	
+        	if(mediciones.size() == 10) {
+        		//si entra aca ya no debemos agregar mediciones a este dispositivo
+        		medi = null;
+        	}else {
+        
         	//en caso de que ya tenga mediciones se va a devolver la ultima generada
         	 medi = (MedicionAlumbrado) mediciones.get(mediciones.size()-1);
+        	}
+        
         	 
         }
+        
         return medi;
     }
 
@@ -65,59 +74,98 @@ public class FuncionesAlumbrado {
 			LocalTime horaInicio = LocalTime.of(23, 0);
 			LocalTime horaFin = LocalTime.of(07, 0);
 			
-			LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
-			
-			
+			//este if es escencial sirve tanto para agregar la primer medicion como para que se deje de agregar mediciones
 			if(implementar == null) {
 				
-				System.out.println("\n No tiene mediciones , agregamos la primera :D ");
+				// si entra aca hay 2 escenarios que no tengamos una medicion inicial o bien que ya no se tenga que ejecutar
+				
+			}else {
+
+				LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
+				// registro el horario en que debería estar prendida la luz
+				//agregar or para que verifique el la obcuridadPor
+				if((horaMedAhora.isAfter(horaInicio) && horaMedAhora.isBefore(horaFin)) || (implementar.getOscuridadActualPor() > 70) ) 
+				{
+					//verifico si la luz esta apagada , si esta apagada la prendo y genero un evento
+					if(implementar.isEstadoActual() == false) {
+							
+						implementar.setEstadoActual(true);
+						
+						//envio el envento al dispositivo para que se agregue correctamente
+						Dispositivo dispo = implementar.getDispositivo();
+						Evento agregar = new Evento("Encender Luz", implementar.getFechaRegistro(),dispo);
+						sensorAlumbradoService.agregarEventos(dispo, agregar);
+						 System.out.println("\n AGREWGAMOS EVENTO");
+						
+					}
+							
+						}
+				else {
+					
+					
+					if(implementar.isEstadoActual() == true) {
+						
+						implementar.setEstadoActual(false);
+						//envio el envento al dispositivo para que se agregue correctamente
+						Dispositivo dispo = implementar.getDispositivo();
+						Evento agregar =new Evento("Apagar Luz", implementar.getFechaRegistro(),dispo);
+						 sensorAlumbradoService.agregarEventos(dispo,agregar);
+						 System.out.println("\n AGREWGAMOS EVENTO");
+						
+					}
+				}
+					
+					List<SensorAlumbrado> dispositivos = sensorAlumbradoService.getAll();
+					
+					boolean check = this.medicionesCompletas(dispositivos);
+					
+					//llamo a la funcion para entender si las mediciones estan completas si es asi no agregamos nuevas
+					if(check ==false) {
+					LocalDateTime fechanueva = implementar.getFechaRegistro();
+					
+					fechanueva = fechanueva.plusHours(1);
+					
+					//generamos un double random de 1 a 100 para poner en la obscuridad de la hora siguiente
+					double nuevaObscuridad = Math.random()*100+1;
+					
+					sensorAlumbradoService.agregarMedicion(implementar.getDispositivo(), fechanueva, implementar.isEstadoActual(), nuevaObscuridad);
+					 System.out.println("\n AGREWGAMOS Medicion");
+					}
+					
 				
 			}
 			
-			// registro el horario en que debería estar prendida la luz
-			//agregar or para que verifique el la obcuridadPor
-			if((horaMedAhora.isAfter(horaInicio) && horaMedAhora.isBefore(horaFin)) || (implementar.getOscuridadActualPor() > 70) ) 
-			{
-				//verifico si la luz esta apagada , si esta apagada la prendo y genero un evento
-				if(implementar.isEstadoActual() == false) {
-					
-					implementar.setEstadoActual(true);
-					
-					//generar evento futuro
-					Dispositivo dispo = implementar.getDispositivo();
-					Evento agregar = new Evento("Encender Luz", implementar.getFechaRegistro(),dispo);
-					sensorAlumbradoService.agregarEventos(dispo, agregar);
-					 System.out.println("\n AGREWGAMOS EVENTO");
-					
-				}
-						
-					}
-			else {
+			
+			
 				
+			};
+			
+			
+			public boolean medicionesCompletas(List<SensorAlumbrado> dispo) {
 				
-				if(implementar.isEstadoActual() == true) {
-					
-					implementar.setEstadoActual(false);
-					
-					Dispositivo dispo = implementar.getDispositivo();
-					Evento agregar =new Evento("Apagar Luz", implementar.getFechaRegistro(),dispo);
-					 sensorAlumbradoService.agregarEventos(dispo,agregar);
-					 System.out.println("\n AGREWGAMOS EVENTO");
-					
-				}
-			}
+				boolean devolver =  false;
+				List<SensorAlumbrado> dispositivos = sensorAlumbradoService.getAll();
 				
-				
-				
-				LocalDateTime fechanueva = implementar.getFechaRegistro();
-				
-				fechanueva = fechanueva.plusHours(1);
-				
-				//generamos un double random de 1 a 100 para poner en la obscuridad de la hora siguiente
-				double nuevaObscuridad = Math.random()*100+1;
-				
-				sensorAlumbradoService.agregarMedicion(implementar.getDispositivo(), fechanueva, implementar.isEstadoActual(), nuevaObscuridad);
-				 System.out.println("\n AGREWGAMOS Medicion");
+				//reviso todas las mediciones para ver si estan completas
+			    int cantCompletos = 0;
+		        for (int i = 0 ; i < dispositivos.size() ; i++) {
+		        	
+		        	if(dispositivos.get(i).getMediciones().size() == 10) {
+		        		
+		        		cantCompletos = cantCompletos + 1;
+		        		
+		        	}
+		        	
+		        }
+		        
+		        //si las mediciones etan completas devuelvo true y no se van a generar mediciones nuevas
+		        if(cantCompletos == dispositivos.size()) {
+		        	
+		        	devolver = true;
+		        	
+		        	
+		        }
+		        return devolver;
 				
 				
 			};

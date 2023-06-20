@@ -89,6 +89,7 @@ public class SensorAlumbradoService implements ISensorAlumbradoService {
      return null;
     }
 	
+	
 	@Override
 	public DispositivoModel agregarEventos(Dispositivo dispositivoModel,Evento evento) {
 		if (dispositivoModel != null) {
@@ -114,6 +115,7 @@ public class SensorAlumbradoService implements ISensorAlumbradoService {
      return null;
 		};
 
+		
 	@Override
 	public Dispositivo findByid(int id) {
 		Dispositivo dispositivoOptional = sensorAlumbradoRepository.findById(id);
