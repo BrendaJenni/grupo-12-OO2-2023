@@ -28,4 +28,6 @@ public class RecolectorInteligente extends Dispositivo{
 		super(nombre, activo);
 		this.ubicacion = ubicacion;
 	}
+	
+	public RecolectorInteligente() {}
 }

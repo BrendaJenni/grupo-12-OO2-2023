@@ -71,8 +71,7 @@
 							<th scope="col">Id</th>
 							<th scope="col">Fecha</th>
 							<th scope="col">Dispositivo Vinculado</th>	
-							<th scope="col">Estado actual</th>		
-							<th scope="col">Ubicacion</th>				
+							<th scope="col">Estado actual</th>			
 						</tr>
 					</thead>
 					<tbody>
@@ -116,6 +115,7 @@
 							<th scope="col">Id</th>
 							<th scope="col">Descripción</th>
 							<th scope="col">Fecha de Registro</th>
+							<th scope="col">ID Dispositivo Vinculado</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -131,10 +131,15 @@
 								</ul>
 							</td>
 							<td>
-									<ul>
-										<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
-									</ul>
-								</td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.dispositivo.id}"></li>
+								</ul>
+							</td>
 						</tr>
 					</tbody>
 				</table>
