@@ -29,6 +29,7 @@ public class FuncionesHumedad {
 		LocalTime horaFin = LocalTime.of(22, 0);
 		Random random = new Random();
 		
+
 		if(implementar == null) {
 			//Se detiene el component
 		}else {
@@ -37,34 +38,24 @@ public class FuncionesHumedad {
 			if((horaMedAhora.isAfter(horaInicio) && horaMedAhora.isBefore(horaFin))) {
 						
 				if(implementar.getHumedad() < 60 && !implementar.isEstadoCesped()) { //si no esta mojado
-							
-					SensorHumedad sensorHumedad = (SensorHumedad)implementar.getDispositivo();
-					sensorHumedad.setEncendido(true);
-					implementar.setDispositivo(sensorHumedad);
+					
 					Evento agregar = new Evento("Regar cesped", implementar.getFechaRegistro(),implementar.getDispositivo());
-					sensorHumedadService.insertOrUpdate((SensorHumedad)implementar.getDispositivo());
 					sensorHumedadService.agregarEventos(implementar.getDispositivo(), agregar);
-					implementar.setEstadoCesped(true);
 						
 				}else if(implementar.getHumedad() < 60 && implementar.isEstadoCesped()) { //si esta mojado
-					SensorHumedad sensorHumedad = (SensorHumedad)implementar.getDispositivo();
-					sensorHumedad.setEncendido(false);
-					implementar.setDispositivo(sensorHumedad);
+					
 					Evento agregar = new Evento("Apagar riego", implementar.getFechaRegistro(),implementar.getDispositivo());
-					sensorHumedadService.insertOrUpdate((SensorHumedad)implementar.getDispositivo());
 					sensorHumedadService.agregarEventos(implementar.getDispositivo(), agregar);
-					implementar.setEstadoCesped(false);
 				}else { //si la humedad es mayo que 60 apaga el riego
 					
 					Evento agregar = new Evento("Apagar riego", implementar.getFechaRegistro(),implementar.getDispositivo());
 					sensorHumedadService.agregarEventos(implementar.getDispositivo(), agregar);
-					implementar.setEstadoCesped(true);
 				}
 					
 			}else { //fuera de horario no riega
+				
 				Evento agregar = new Evento("Apagar riego", implementar.getFechaRegistro(),implementar.getDispositivo());
 				sensorHumedadService.agregarEventos(implementar.getDispositivo(), agregar);
-				implementar.setEstadoCesped(false);
 			}
 			List<SensorHumedad> dispositivos = sensorHumedadService.getAll();
 			
@@ -75,6 +66,13 @@ public class FuncionesHumedad {
 			LocalDateTime fechanueva = implementar.getFechaRegistro();
 			fechanueva = fechanueva.plusHours(1);
 			int humedadActual = random.nextInt(100) + 1;
+			int estado = (int)(Math.random()*2);
+			
+			if (estado == 1) {
+			    implementar.setEstadoCesped(true);
+			 } else {
+			    implementar.setEstadoCesped(false);
+			 }
 			sensorHumedadService.agregarMedicion(implementar.getDispositivo(), fechanueva, humedadActual, implementar.isEstadoCesped());
 		}
 	}

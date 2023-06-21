@@ -95,6 +95,8 @@ public class SensorAlumbradoService implements ISensorAlumbradoService {
 	public DispositivoModel agregarEventos(Dispositivo dispositivoModel,Evento evento) {
 		if (dispositivoModel != null) {
             Dispositivo dispositivoExistente = sensorAlumbradoRepository.findById(dispositivoModel.getId());
+            
+            
             if (dispositivoExistente != null) {
                 List<Evento> eventos = dispositivoExistente.getEventos();
                 Evento eventosN = new Evento();
@@ -108,8 +110,20 @@ public class SensorAlumbradoService implements ISensorAlumbradoService {
                 
                 dispositivoExistente.setEventos(eventos);;
                
+                //genero este cambio para poder variasen el encendido del primer mostra y que se vea mejor en el front
+                SensorAlumbrado setActivo = (SensorAlumbrado)dispositivoExistente;
+
+                if(evento.getDescripcion().equals("Encender Luz")) {
+                	
+                	setActivo.setEncendido(true);;
+                	
+                }else {
+                	
+                	setActivo.setEncendido(false);;
+                	
+                }
                 // lo gurado en la base de datos
-                Dispositivo dispositivoActualizado = sensorAlumbradoRepository.save((SensorAlumbrado)dispositivoExistente);
+                Dispositivo dispositivoActualizado = sensorAlumbradoRepository.save(setActivo);
                 return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
             }
         }
