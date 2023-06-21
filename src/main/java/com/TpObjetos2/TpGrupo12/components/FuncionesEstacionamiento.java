@@ -1,8 +1,6 @@
 package com.TpObjetos2.TpGrupo12.components;
 
-import java.time.LocalDate;
 import java.time.*;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
@@ -23,6 +21,8 @@ import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
 import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
 import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 import com.TpObjetos2.TpGrupo12.models.*;
+import com.TpObjetos2.TpGrupo12.repositories.ISensorEstacionamientoRepository;
+
 
 @Component
 public class FuncionesEstacionamiento {
@@ -35,76 +35,160 @@ public class FuncionesEstacionamiento {
 	@Qualifier("dispositivoService")
 	private IDispositivoService dispositivoService;
 	
-	
-	//Alumbrado funcion que se va a ejecutar para buscar un dispositivo random y devolver su ultima medicion dependiendo de esta medicion se va a ejecutar un evento
-		/*public MedicionEstacionamiento traerUltimaMediacion() {
+	//private ISensorEstacionamientoRepository repository;
+	/*
+		public MedicionEstacionamiento traerUltimaMedicion() {
        
-		MedicionEstacionamiento medi; 
+			MedicionEstacionamiento medicion; 
 			
-		List<SensorEstacionamiento> dispositivos = estacionamientoService.getAll();
-        int id = (int) (Math.random()*dispositivos.size());
+			List<SensorEstacionamiento> estacionamientos = estacionamientoService.getAll();
+	        int id = (int) (Math.random()*estacionamientos.size());
+	        Dispositivo buscar = estacionamientoService.findByid(estacionamientos.get(id).getId());
+	        List<Medicion> mediciones = buscar.getMediciones();
+	        if(mediciones.size() == 0)  
+	        {
+	        	medicion = null;
+	        	estacionamientoService.agregarMedicion(buscar, LocalDateTime.now(), false);
+	        }else {
+	        	 medicion = (MedicionEstacionamiento) mediciones.get(mediciones.size()-1);
+	        }
+	        return medicion;
+        /*
+        SensorEstacionamientoModel model = new SensorEstacionamientoModel();
         
-        //asigno el dispositivo a una variable dispositivo para poder consumir las mediciones
-        Dispositivo buscar = estacionamientoService.findByid(dispositivos.get(id).getId());
-        while(buscar==null) {
-        	id = (int) (Math.random()*dispositivos.size());
-        	buscar = estacionamientoService.findByid(dispositivos.get(id).getId());
-        }
-        List<Medicion> mediciones = buscar.getMediciones();
+        System.out.println("Cambio de estados");
+        estacionamiento.setPlazas(estacionamientoService.actualizarPlazas(model));
+        model.setPlazas(estacionamiento.getPlazas());
+        model.setNombre("Est");
+        estacionamientoService.insertOrUpdate(model);
         
-        // si las mediciones estan vacias creamos la primera y devolvemos null lo usamos como flag para cuando llamemos a la funcion
-        if(mediciones.size() == 0)  
-        {
-        	
-        	medi = null;
-        	// lo mandamos a generar la primera medicion del dispositivo con la luz apagada en la proxima variable cuando se vea nuevamente la hora y el porcentaje de luz se decidira si prenderla
-        	estacionamientoService.agregarMedicion(buscar, LocalDateTime.now(), false);
-        	
-        }else {
-        	
-        	//en caso de que ya tenga mediciones se va a devolver la ultima generada
-        	 medi = (MedicionEstacionamiento) mediciones.get(mediciones.size()-1);
-        	 
-        }
-        return medi;
-    }*/
+        Evento evento = new Evento("cambio en estados de plazas", this.traerUltimaMediacion().getFechaRegistro(), model);
+        estacionamientoService.agregarEventos(model, evento);
+		System.out.println("\n AGREGAMOS EVENTO ESTACIONAMIENTO");
+        */
+        
+    
 
 	
 	@Scheduled(fixedDelay=5000)
+	
 		public void runJob() {
-		System.out.println("hoia");
-		//estacionamientoService.actualizarPlazas();
+		MedicionEstacionamiento implementar = estacionamientoService.traerUltimaMedicion();
 		
+		LocalTime horaInicio = LocalTime.of(6, 0);
+		LocalTime horaFin = LocalTime.of(22, 0);
+		Random random = new Random();
 		
-        
-        
-        
-		//System.out.println("Est:" + estacionamiento.toString());
-		/*
-		for(int i=0;i<dispositivos.size();i++) {
-			if(dispositivos.get(i) instanceof SensorEstacionamiento) {
-				estacionamientos.add(dispositivos.get(i));
+		if(implementar == null) {
+		}else {
+			LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
+			if((horaMedAhora.isAfter(horaInicio) && horaMedAhora.isBefore(horaFin))) {
+						
+				if(implementar.isEstadoLibre()) {
+							
+					SensorEstacionamiento estacionamiento = (SensorEstacionamiento)implementar.getDispositivo();
+					estacionamiento.setActivo(true);
+					implementar.setDispositivo(estacionamiento);
+					Evento agregar = new Evento("Abrir estacionamiento", implementar.getFechaRegistro(),implementar.getDispositivo());
+					estacionamientoService.insertOrUpdate(estacionamiento);
+					estacionamientoService.agregarEventos(estacionamiento, agregar);
+						
+				}else if(!implementar.isEstadoLibre()) {
+					SensorEstacionamiento estacionamiento = (SensorEstacionamiento)implementar.getDispositivo();
+					estacionamiento.setActivo(true);
+					//List<Boolean> plazas = estacionamiento.getPlazas();
+					//estacionamiento.setActivo(false);
+					estacionamiento.inicializarPlazas();
+					implementar.setDispositivo(estacionamiento);
+					Evento agregar = new Evento("Cerrar estacionamiento", implementar.getFechaRegistro(),implementar.getDispositivo());
+					estacionamientoService.insertOrUpdate(estacionamiento);
+					estacionamientoService.agregarEventos(estacionamiento, agregar);
+				}else {
+					
+					implementar.setEstadoLibre(false);
+					Evento agregar = new Evento("Cerrar estacionamiento", implementar.getFechaRegistro(),implementar.getDispositivo());
+					estacionamientoService.agregarEventos(implementar.getDispositivo(), agregar);
+				}
+					
+			}else {
+				implementar.setEstadoLibre(false);
+				Evento agregar = new Evento("Cerrar estacionamiento", implementar.getFechaRegistro(),implementar.getDispositivo());
+				estacionamientoService.agregarEventos(implementar.getDispositivo(), agregar);
 			}
+			List<SensorEstacionamiento> dispositivos = estacionamientoService.getAll();
+			
+			boolean check = this.medicionesCompletas(dispositivos);
+			
+			if(check ==false) {
+			LocalDateTime fechanueva = implementar.getFechaRegistro();
+			fechanueva = fechanueva.plusHours(1);
+			//estacionamientoService.agregarMedicion(implementar.getDispositivo(), fechanueva, implementar.isEstadoLibre());
 		}
+	}
+}
+	public boolean medicionesCompletas(List<SensorEstacionamiento> dispo) {
+		
+		boolean devolver =  false;
+		List<SensorEstacionamiento> dispositivos = estacionamientoService.getAll();
+		
+	    int cantCompletos = 0;
+        for (int i = 0 ; i < dispositivos.size() ; i++) {
+        	if(dispositivos.get(i).getMediciones().size() == 10) {
+        		cantCompletos = cantCompletos + 1;
+        	}
+        }
+        if(cantCompletos == dispositivos.size()) {
+        	devolver = true;
+        }
+        return devolver;
+		
+	}
+		/*
+		System.out.println("hoia");
+		
+		List<SensorEstacionamiento> estacionamientos = estacionamientoService.getAll();
+		List<Integer> listaIds = new ArrayList<>();
+		
+		
+		System.out.println("Tam lista=" + estacionamientos.size());
+		//List<Dispositivo> estacionamientos = new ArrayList<>();
 		
 		for(int i=0;i<estacionamientos.size();i++) {
 			System.out.println(estacionamientos.get(i).toString());
 		}
+        
+        for(int i=0;i<estacionamientos.size();i++) {
+        	listaIds.add(estacionamientos.get(i).getId());
+        }
+        
+        Random random = new Random();
+
+        // Generar un número aleatorio entre 0 y 9
+        int numeroAleatorio = random.nextInt(estacionamientos.size());
+        System.out.println("Número aleatorio: " + numeroAleatorio);
+        
+        int posicion = listaIds.get(numeroAleatorio);
+        
+        SensorEstacionamiento estacionamiento = estacionamientoService.findByid(posicion);
+        
+        System.out.println("Estacionamiento: " + estacionamiento.toString());
+        
+        estacionamientoService.agregarEventoAutomatico(estacionamiento);
+		//estacionamientoService.actualizarPlazas();
+		/*MedicionEstacionamiento implementar = this.traerUltimaMediacion();
+		//LocalDate fecha = 
+		LocalTime horaInicio = LocalTime.of(23, 0);
+		LocalTime horaFin = LocalTime.of(07, 0);
+		
+		LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
 		
 		
-			//MedicionEstacionamiento implementar = this.traerUltimaMediacion();
-		/*	LocalTime horaInicio = LocalTime.of(23, 0);
-			LocalTime horaFin = LocalTime.of(07, 0);
+		if(implementar == null) {
 			
-			LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
+			System.out.println("\n No tiene mediciones , agregamos la primera :D ");
 			
-			
-			if(implementar == null) {
-				
-				System.out.println("\n No tiene mediciones , agregamos la primera :D ");
-				
-			}
-			
+		}
+		
 			if((horaMedAhora.isAfter(horaInicio) && horaMedAhora.isBefore(horaFin))) 
 			{
 				if(implementar.isEstadoLibre() == false) {
@@ -112,22 +196,21 @@ public class FuncionesEstacionamiento {
 					implementar.setEstadoLibre(true);
 					
 					Dispositivo dispo = implementar.getDispositivo();
-					Evento agregar = new Evento("Abre estacionamiento", implementar.getFechaRegistro(),dispo);
+					Evento agregar = new Evento("Cambio de estado", implementar.getFechaRegistro(),dispo);
 					estacionamientoService.agregarEventos(dispo, agregar);
-					 System.out.println("\n AGREGAMOS EVENTO ESTACIONAMIENTO");
+					System.out.println("\n AGREGAMOS EVENTO ESTACIONAMIENTO");
 					
 				}
 						
 					}
 			else {
 				
-				
 				if(implementar.isEstadoLibre() == true) {
 					
 					implementar.setEstadoLibre(false);
 					
 					Dispositivo dispo = implementar.getDispositivo();
-					Evento agregar =new Evento("Cierra Estacionamiento", implementar.getFechaRegistro(),dispo);
+					Evento agregar =new Evento("Cambio de estado", implementar.getFechaRegistro(),dispo);
 					 estacionamientoService.agregarEventos(dispo,agregar);
 					 System.out.println("\n AGREGAMOS EVENTO ESTACIONAMIENTO");
 					
@@ -142,10 +225,10 @@ public class FuncionesEstacionamiento {
 				
 				estacionamientoService.agregarMedicion(implementar.getDispositivo(), fechanueva, implementar.isEstadoLibre());
 				 System.out.println("\n AGREGAMOS Medicion ESTACIONAMIENTO");
-				
 				*/
+				
 		
-		}
+		
 			};
 			
 			

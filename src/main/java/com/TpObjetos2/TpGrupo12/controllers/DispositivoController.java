@@ -45,19 +45,7 @@ public class DispositivoController {
     @Autowired
     @Qualifier("dispositivoService")
     private IDispositivoService dispositivoService;
-    
-    /*
-    public DispositivoController(IDispositivoService dispositivoService) {
-        this.dispositivoService = dispositivoService;
-    }*/
-    /*@GetMapping("/")
-    public ModelAndView index(){
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.DISPOSITIVO_INDEX);
-        mAV.addObject("dispositivo", dispositivoService.getAll());
-        mAV.addObject("dispositivo", new Dispositivo());
-        return mAV;
-    }*/
-    
+
 
     @GetMapping("/")
     public String index(Model model){
@@ -75,93 +63,13 @@ public class DispositivoController {
        mAV.addObject("dispositivo", new Dispositivo());
        return mAV;
     }
-    /*
-=======
-
-    @GetMapping("new")
-    public ModelAndView index(){
-       ModelAndView mAV = new ModelAndView("dispositivo/new");
-       mAV.addObject("dispositivos", dispositivoService.getAll());
-       mAV.addObject("dispositivo", new DispositivoModel());
-       return mAV;
-    }
-
->>>>>>> 60094ead58bc59703db050c1f32faf506333258e
-    @PostMapping("new")
-    public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
-    	sensorHumedadService.insertOrUpdate(dispositivoModel);
-    	return new RedirectView("");
-    }
     
-<<<<<<< HEAD
-    
-    /*
-    @Autowired
-    private IDispositivoRepository dispositivoRepository;
-    
-    @PostMapping("/submit")
-    public String submitForm(@RequestParam("tipoDispositivo") String tipoDispositivo, 
-                             @ModelAttribute("dispositivo") Dispositivo dispositivo, HttpServletRequest request) {
-    	String nombre = request.getParameter("nombre");
-    	Boolean activo = request.getParameter("activo") != null;
-        // Obtener los parámetros específicos del tipo de dispositivo según el tipoDispositivo
-        if (tipoDispositivo.equals("recolectorInteligente")) {
-            String ubicacion = request.getParameter("ubicacion");
-            RecolectorInteligente recolector = new RecolectorInteligente(nombre, activo, ubicacion);
-            dispositivoRepository.save(recolector);
-            // Realizar acciones específicas para Recolector Inteligente
-        } else if (tipoDispositivo.equals("sensorHumedad")) {
-            boolean encendido = request.getParameter("encendido") != null;
-            SensorHumedad sensorHumedad = new SensorHumedad(nombre, activo, encendido);
-            dispositivoRepository.save(sensorHumedad);
-            // Realizar acciones específicas para Sensor de Humedad
-        } else if (tipoDispositivo.equals("sensorAlumbrado")) {
-            String estacion = request.getParameter("estacion");
-            boolean encendido = request.getParameter("encendido") != null;
-            double obcuridadPor = (double) Integer.parseInt(request.getParameter("plazas"));
-        	SensorAlumbrado sensorAlumbrado = new SensorAlumbrado(nombre, activo, estacion, encendido, obcuridadPor);
-        	dispositivoRepository.save(sensorAlumbrado);
-            // Realizar acciones específicas para Sensor de Alumbrado
-        } else if (tipoDispositivo.equals("sensorEstacionamiento")) {
-            int plazas = Integer.parseInt(request.getParameter("plazas"));
-        	SensorEstacionamiento sensorEstacionamiento = new SensorEstacionamiento(nombre, activo, plazas);
-        	dispositivoRepository.save(sensorEstacionamiento);
-            // Realizar acciones específicas para Sensor de Estacionamiento
-        }
-        
-        return "redirect:/"; // Redirige a la página principal después de guardar
-    }
-    /*
-    @GetMapping({"/dispositivos/", "/"})
-    public String dispositivos(Model model) {
-    	model.addAttribute("dispositivos", dispositivoService.getAll());
-    	return "dispositivo/new";
-    }*/
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/new")
     public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
         dispositivoService.insertOrUpdate(dispositivoModel);
         return new RedirectView("/dispositivo/");
 
     }
-    //Dispositivo dispositivo = new Dispositivo();
-    /*
-    @GetMapping("/")
-    public String index2(Model model) {
-    	ModelAndView mv = new ModelAndView("dispositivo/dispositivos");
-    	mv.addObject("dispositivo", dispositivo);
-    	return mv;
-    }*/
-    /*@SuppressWarnings("unused")
-	@PostMapping("new")
-    public RedirectView create(@ModelAttribute("dispositivo") DispositivoModel dispositivoModel){
-    	if(new SensorHumedad(dispositivoModel.getId(),dispositivoModel.getNombre(),dispositivoModel.isActivo(),dispositivoModel.isEncendido()) != null) {
-    		sensorHumedadService.insertOrUpdate(new SensorHumedadModel(dispositivoModel.getId(),dispositivoModel.getNombre(),dispositivoModel.isActivo(),dispositivoModel.isEncendido()));
-    	}else {
-    		dispositivoService.insertOrUpdate(dispositivoModel);
-    	}
-        
-        return new RedirectView("");
-    }*/
     
 }

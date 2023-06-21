@@ -39,7 +39,7 @@ public class SensorEstacionamiento extends Dispositivo{
 
 	public SensorEstacionamiento(String nombre, boolean activo, int libres, int tam, List<Boolean> plazas) {
 		super(nombre, activo);
-		this.libres=libres;
+		setLibres(libres);
 		this.tam=tam;
 		this.plazas=plazas;
 	}
@@ -74,7 +74,13 @@ public class SensorEstacionamiento extends Dispositivo{
 	}
 
 	public void setLibres(int libres) {
-		this.libres = libres;
+		int cont = 0;
+		for(int i=0;i<plazas.size();i++) {
+			if(plazas.get(i)) {
+				cont = cont+1;
+			}
+		}
+		this.libres = cont;
 	}
 
 	@Override

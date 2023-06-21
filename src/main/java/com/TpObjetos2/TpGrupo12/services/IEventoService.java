@@ -16,5 +16,7 @@ public interface IEventoService {
 
 		Evento findById(int id);
 
+		List<Evento> getEventosEstacionamiento();
+
 	
 }

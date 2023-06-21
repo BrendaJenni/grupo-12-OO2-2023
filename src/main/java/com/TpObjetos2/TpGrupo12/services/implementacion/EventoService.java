@@ -1,6 +1,7 @@
 package com.TpObjetos2.TpGrupo12.services.implementacion;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.Evento;
+import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.EventoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
@@ -29,6 +31,18 @@ public class EventoService implements IEventoService {
     public List<Evento> getAll() {
         return eventoRepository.findAll();
     }
+    
+    @Override
+    public List<Evento> getEventosEstacionamiento() {
+        List<Evento> eventos = eventoRepository.findAll();
+        List<Evento> eventosEst = new ArrayList<>();
+        for(int i=0;i<eventos.size();i++) {
+        	if(eventos.get(i).getDispositivo() instanceof SensorEstacionamiento) {
+        		eventosEst.add(eventos.get(i));
+        	}
+        }
+        return eventosEst;
+    }
 
     @Override
     public EventoModel insertOrUpdate(EventoModel eventoModel) {
@@ -47,7 +61,6 @@ public class EventoService implements IEventoService {
         }
     }
     
-    // esto sirve pa buscar cosas podemos agragerlo a lo que querramos
     @Override
 	public Evento findById(int id) {
 		return eventoRepository.findByidEvento(id);

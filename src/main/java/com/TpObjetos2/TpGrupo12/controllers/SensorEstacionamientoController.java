@@ -1,5 +1,5 @@
 package com.TpObjetos2.TpGrupo12.controllers;
-
+import com.TpObjetos2.TpGrupo12.models.*;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class SensorEstacionamientoController {
     public String indexEstacionamiento(Model model){
     	List<SensorEstacionamiento> estacionamientos = estacionamientoService.traerstacionamientosActivos();
     	List<MedicionEstacionamiento> mediciones = medicionService.traer();
-    	List<Evento> eventos = eventoService.getAll();
+    	List<Evento> eventos = eventoService.getEventosEstacionamiento();
     	
        model.addAttribute("estacionamientos", estacionamientos);
        model.addAttribute("mediciones", mediciones);
@@ -91,31 +91,16 @@ public class SensorEstacionamientoController {
         estacionamientoService.insertOrUpdate(estacionamientoModel);
         return new RedirectView("/dispositivo/estacionamiento");
     }
-    /*
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/agregarmedicion")
-    public ModelAndView agreaarMediciones() {
-    ModelAndView mAV = new ModelAndView("estacionamiento/agregarmedicion");
-   mAV.addObject("mediciones", medicionService.traer());
-    mAV.addObject("medicion", new MedicionEstacionamiento());
-    return mAV;}*/
-    
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/agregarmedicion")
     public ModelAndView agregarMedicion(){
-       ModelAndView mAV = new ModelAndView("estacionamiento/agregarmedicion");
-       MedicionEstacionamiento estacionamiento = new MedicionEstacionamiento();
-       
-       mAV.addObject("medicion", estacionamiento);
-       return mAV;
-    }
-    
-    /*@PostMapping("/agregarmedicion")
-    public RedirectView create(@ModelAttribute("medicion") MedicionEstacionamientoModel estacionamientoModel){
-        medicionService.insertOrUpdate(estacionamientoModel);
-        return new RedirectView("/dispositivo/estacionamiento");
-    }*/
+        ModelAndView mAV = new ModelAndView("estacionamiento/agregarmedicion");
+        MedicionEstacionamiento estacionamiento = new MedicionEstacionamiento();
+        
+        mAV.addObject("medicion", estacionamiento);
+        return mAV;
+     }
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/agregarmedicion")

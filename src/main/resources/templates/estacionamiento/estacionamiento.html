@@ -26,6 +26,7 @@
                     <th scope="col">Estacionamiento</th>
                     <th scope="col">Cantidad de plazas</th>
                     <th scope="col">Activo</th>
+                    <th scope="col">Libres</th>
                     <th scope="col">Estados de plazas</th>
                     <th scope="col">Acciones</th>
                 </tr>
@@ -36,6 +37,7 @@
                     <td th:text="${estacionamiento.nombre}"></td>
                     <td th:text="${estacionamiento.tam}"></td>
                     <td th:text="${estacionamiento.activo}"></td>
+                    <td th:text="${estacionamiento.libres}"></td>
                     <td th:text="${#lists.toList(estacionamiento.plazas)}"></td>
                     <td>
                         <form th:action="@{/dispositivo/estacionamiento/bajaLogica}" method="post">
@@ -76,8 +78,8 @@
                         <li th:each="medicion : ${estacionamiento.mediciones}" th:utext="${medicion.dispositivo.id}"></li>
                     </td>
                      <td>
-						<li th:each="medicion : ${estacionamiento.mediciones}" th:utext="${medicion.estadoLibre}"></li>
-                      <!--<p>Estado libre: <span th:text="${medicion.dispositivo.estadoLibre}"></span></p>-->
+					<!--<li th:each=" medicion : ${estacionamiento.mediciones}" th:utext="${medicion.estadoLibre}"></li>-->
+                     
                     </td>
                     
                 </tr>
