@@ -28,6 +28,7 @@ public class FuncionesHumedad {
 		LocalTime horaFin = LocalTime.of(22, 0);
 		Random random = new Random();
 		
+
 		if(implementar == null) {
 			//Se detiene el component
 		}else {
@@ -37,24 +38,21 @@ public class FuncionesHumedad {
 						
 				if(implementar.getHumedad() < 60 && !implementar.isEstadoCesped()) { //si no esta mojado
 					
-					implementar.setEstadoCesped(true);
 					Evento agregar = new Evento("Regar cesped", implementar.getFechaRegistro(),implementar.getDispositivo());
 					sensorHumedadService.agregarEventos(implementar.getDispositivo(), agregar);
 						
 				}else if(implementar.getHumedad() < 60 && implementar.isEstadoCesped()) { //si esta mojado
 					
-					implementar.setEstadoCesped(false);
 					Evento agregar = new Evento("Apagar riego", implementar.getFechaRegistro(),implementar.getDispositivo());
 					sensorHumedadService.agregarEventos(implementar.getDispositivo(), agregar);
 				}else { //si la humedad es mayo que 60 apaga el riego
 					
-					implementar.setEstadoCesped(true);
 					Evento agregar = new Evento("Apagar riego", implementar.getFechaRegistro(),implementar.getDispositivo());
 					sensorHumedadService.agregarEventos(implementar.getDispositivo(), agregar);
 				}
 					
 			}else { //fuera de horario no riega
-				implementar.setEstadoCesped(false);
+				
 				Evento agregar = new Evento("Apagar riego", implementar.getFechaRegistro(),implementar.getDispositivo());
 				sensorHumedadService.agregarEventos(implementar.getDispositivo(), agregar);
 			}
@@ -67,6 +65,13 @@ public class FuncionesHumedad {
 			LocalDateTime fechanueva = implementar.getFechaRegistro();
 			fechanueva = fechanueva.plusHours(1);
 			int humedadActual = random.nextInt(100) + 1;
+			int estado = (int)(Math.random()*2);
+			
+			if (estado == 1) {
+			    implementar.setEstadoCesped(true);
+			 } else {
+			    implementar.setEstadoCesped(false);
+			 }
 			sensorHumedadService.agregarMedicion(implementar.getDispositivo(), fechanueva, humedadActual, implementar.isEstadoCesped());
 		}
 	}
