@@ -62,7 +62,7 @@ public class SensorEstacionamientoController {
     }
     
    
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/new")
     public ModelAndView agregarEstacionamiento(){
        ModelAndView mAV = new ModelAndView("estacionamiento/agregar");
@@ -72,7 +72,7 @@ public class SensorEstacionamientoController {
        return mAV;
     }
     
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/bajaLogica")
     public String bajaLogica(@RequestParam("id") int id, SensorEstacionamientoModel sensorEstacionamientoModel) {
         Dispositivo dispositivo = estacionamientoService.findByid(id);
@@ -83,10 +83,11 @@ public class SensorEstacionamientoController {
         return "redirect:/dispositivo/estacionamiento";
     }
     
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/new")
     public RedirectView create(@ModelAttribute("estacionamiento") SensorEstacionamientoModel estacionamientoModel){
     	estacionamientoModel.inicializarPlazas();
+    	estacionamientoModel.setPlazas(estacionamientoService.actualizarPlazas(estacionamientoModel));
         estacionamientoService.insertOrUpdate(estacionamientoModel);
         return new RedirectView("/dispositivo/estacionamiento");
     }
@@ -100,7 +101,7 @@ public class SensorEstacionamientoController {
     return mAV;}*/
     
     
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/agregarmedicion")
     public ModelAndView agregarMedicion(){
        ModelAndView mAV = new ModelAndView("estacionamiento/agregarmedicion");
@@ -116,7 +117,7 @@ public class SensorEstacionamientoController {
         return new RedirectView("/dispositivo/estacionamiento");
     }*/
     
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/agregarmedicion")
 	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
 	                                 @RequestParam("fecha") LocalDateTime fecha,
@@ -132,7 +133,7 @@ public class SensorEstacionamientoController {
 	   }
     
     
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/agregarevento")
     public ModelAndView agregarEvento(){
        ModelAndView mAV = new ModelAndView("estacionamiento/agregarevento");
@@ -143,7 +144,7 @@ public class SensorEstacionamientoController {
     }
     
     
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/agregarevento")
 	   public String agregarEvento(@RequestParam("dispositivoId") int dispositivoId,
 	                                 @RequestParam("fecha") LocalDateTime fecha,

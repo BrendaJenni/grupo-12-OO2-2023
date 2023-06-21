@@ -75,8 +75,8 @@
                     <td>
                         <li th:each="medicion : ${estacionamiento.mediciones}" th:utext="${medicion.dispositivo.id}"></li>
                     </td>
-                    <td>
-						<li th:each="medicion : ${estacionamiento.mediciones}" th:utext="${medicion.dispositivo.id}"></li>
+                     <td>
+						<li th:each="medicion : ${estacionamiento.mediciones}" th:utext="${medicion.estadoLibre}"></li>
                       <!--<p>Estado libre: <span th:text="${medicion.dispositivo.estadoLibre}"></span></p>-->
                     </td>
                     

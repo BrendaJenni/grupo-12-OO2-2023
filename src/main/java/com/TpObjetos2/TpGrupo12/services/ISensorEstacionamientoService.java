@@ -16,16 +16,18 @@ public interface ISensorEstacionamientoService {
 
     public SensorEstacionamientoModel insertOrUpdate(SensorEstacionamientoModel estacionamientoModel);
     
+    public SensorEstacionamiento insertOrUpdate(SensorEstacionamiento estacionamientoModel);
+    
     public boolean remove(int id);
     
-    public Dispositivo findByid(int id);
+    public SensorEstacionamiento findByid(int id);
     
     @Query("SELECT p.estadoLibre FROM Plazas p")
     public List<Boolean> getPlazas();
 
 	DispositivoModel agregarMedicion(Dispositivo dispositivoModel, LocalDateTime fecha, boolean estadoLibre);
 
-	DispositivoModel insertOrUpdateEst(Dispositivo dispositivoModel);
+	DispositivoModel insertOrUpdateEst(Dispositivo dispositivoModel, List<Boolean> plazas);
 	
 	public List<SensorEstacionamiento> traerstacionamientosActivos();
 	
@@ -36,5 +38,12 @@ public interface ISensorEstacionamientoService {
 	public DispositivoModel agregarEventos(Dispositivo dispositivoModel,String descripcion, LocalDateTime fecha);
 
 	DispositivoModel agregarMedicion(SensorEstacionamiento dispositivoModel, LocalDateTime fecha, boolean estadoLibre);
+
+	DispositivoModel insertOrUpdateEst(Dispositivo dispositivoModel);
+
+	SensorEstacionamientoModel insertOrUpdateEst(SensorEstacionamientoModel dispositivoModel, List<Boolean> plazas);
+	
+	public List<Boolean> actualizarPlazas(SensorEstacionamientoModel estacionamiento);
+
 
 }

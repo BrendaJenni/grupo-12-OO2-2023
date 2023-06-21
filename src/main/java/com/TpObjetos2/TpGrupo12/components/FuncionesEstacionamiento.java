@@ -22,6 +22,7 @@ import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
 import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
 import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
 import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
+import com.TpObjetos2.TpGrupo12.models.*;
 
 @Component
 public class FuncionesEstacionamiento {
@@ -72,22 +73,23 @@ public class FuncionesEstacionamiento {
 	@Scheduled(fixedDelay=5000)
 		public void runJob() {
 		System.out.println("hoia");
-		List<Dispositivo> dispositivos = dispositivoService.getAll();
-		List<SensorEstacionamiento> estacionamientos = new ArrayList<>();
+		//estacionamientoService.actualizarPlazas();
 		
+		
+        
+        
+        
+		//System.out.println("Est:" + estacionamiento.toString());
+		/*
 		for(int i=0;i<dispositivos.size();i++) {
-			System.out.println(dispositivos.get(i).toString());
+			if(dispositivos.get(i) instanceof SensorEstacionamiento) {
+				estacionamientos.add(dispositivos.get(i));
+			}
 		}
 		
-		Random random = new Random();
-
-        // Generar un número aleatorio entre 0 y 9
-        int numeroAleatorio = random.nextInt(dispositivos.size());
-        System.out.println("Número aleatorio: " + numeroAleatorio);
-        
-        Dispositivo estacionamiento = estacionamientoService.findByid(numeroAleatorio);
-		
-		System.out.println("Est:" + estacionamiento.toString());
+		for(int i=0;i<estacionamientos.size();i++) {
+			System.out.println(estacionamientos.get(i).toString());
+		}
 		
 		
 			//MedicionEstacionamiento implementar = this.traerUltimaMediacion();

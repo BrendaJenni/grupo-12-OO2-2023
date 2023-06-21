@@ -16,7 +16,7 @@ import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
 import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 
 
-@EnableScheduling
+//@EnableScheduling
 @SpringBootApplication
 public class TpGrupo12Application{
 
