@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,12 +44,14 @@ public class RecolectorInteligenteController {
 	   return "dispositivo/recolector";
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("createSensorRecolector") //inserta
 	public RedirectView create(@ModelAttribute("dispositivo") SensorRecolectorModel sensorRecolectorModel){
 		sensorRecolectorService.insertOrUpdate(sensorRecolectorModel);
 	    return new RedirectView("/recolectorinteligente/");
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/bajaLogica")
 	public String eliminarSensor(@ModelAttribute("dispositivo") SensorRecolectorModel sensorRecolectorModel) {
 	   sensorRecolectorModel.setActivo(false);
@@ -56,6 +59,7 @@ public class RecolectorInteligenteController {
 	   return "redirect:/recolectorinteligente/";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/agregarmedicion")
 	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
 	                                 @RequestParam("fecha") LocalDateTime fecha,
@@ -68,6 +72,7 @@ public class RecolectorInteligenteController {
 	       return "redirect:/recolectorinteligente/";
 	   }
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/agregarevento") 
     public String buscar(@RequestParam("fecha")LocalDateTime fecha,
     						@RequestParam("descripcion")String descripcion,

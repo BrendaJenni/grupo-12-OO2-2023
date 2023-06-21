@@ -7,6 +7,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,11 +50,14 @@ public class SensorHumedadController {
        return "dispositivo/humedad";
     }
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("crearsensor")
     public String create(@ModelAttribute("dispositivo") SensorHumedadModel sensorHumedadModel) {
 		sensorHumedadService.insertOrUpdate(modelMapper.map(sensorHumedadModel, SensorHumedad.class));
         return "redirect:";
     }
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/bajaLogica")
     public String bajaLogica(@RequestParam("id") int id) {
 		Dispositivo dispositivo = sensorHumedadService.findByid(id);
@@ -62,6 +66,8 @@ public class SensorHumedadController {
 
         return "redirect:";
     }
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/agregarmedicion")
 	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
 	                                 @RequestParam("fecha") LocalDateTime fecha,
@@ -75,6 +81,7 @@ public class SensorHumedadController {
 	       return "redirect:/sensorhumedad/";
 	   }
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/agregarevento") 
     public String buscar(@RequestParam("fecha")LocalDateTime fecha,
     						@RequestParam("descripcion")String descripcion,

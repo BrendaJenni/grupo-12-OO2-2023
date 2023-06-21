@@ -6,6 +6,7 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,12 +45,14 @@ public class SensorAlumbradoController {
        return "dispositivo/alumbrado";
     }
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/dispositivo/alumbrado")
     public String createAlum(@ModelAttribute("dispositivo") SensorAlumbradoModel sensorAlumbradoModel) {
         sensorAlumbradoService.insertOrUpdate(sensorAlumbradoModel);
         return "redirect:/sensoralumbrado/alumbrado"; // Redirige al listado de sensoresalumbrado
     }	
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	   @PostMapping("/bajaLogica")
 	    public String bajaLogica(@RequestParam("id") int id) {
 	        Dispositivo dispositivo = sensorAlumbradoService.findByid(id);
@@ -59,6 +62,7 @@ public class SensorAlumbradoController {
 	        return "redirect:/sensoralumbrado/alumbrado";
 	    }
 	  
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	   @PostMapping("/agregarMedicion")
 	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
 	                                 @RequestParam("fecha") LocalDateTime fecha,
@@ -73,6 +77,7 @@ public class SensorAlumbradoController {
 	   }
 	   
 	   
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 		@PostMapping("/agregarevento") 
 	    public String buscar(@RequestParam("fecha")LocalDateTime fecha,
 	    						@RequestParam("descripcion")String descripcion,

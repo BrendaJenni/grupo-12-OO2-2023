@@ -44,7 +44,7 @@ public class UserController {
         if (authentication != null && authentication.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"))) {
             modelAndView.setViewName("redirect:/dispositivo/"); // esto sucede si es admin
         } else {
-            modelAndView.setViewName("redirect:/dispositivo/alumbrado"); // Redirige a la URL deseada cuando no es admin
+            modelAndView.setViewName("redirect:/dispositivo/"); // Redirige a la URL deseada cuando no es admin
         }
         return modelAndView;
     }
