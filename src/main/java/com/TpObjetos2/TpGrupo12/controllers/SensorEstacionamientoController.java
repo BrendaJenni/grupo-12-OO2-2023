@@ -112,6 +112,8 @@ public class SensorEstacionamientoController {
 	           //estacionamientoService.agregarMedicion(dispositivo,fecha,estadoLibre);
 	    	   MedicionEstacionamientoModel medicion = new MedicionEstacionamientoModel(dispositivo, fecha, estadoLibre);
 	    	   medicionService.insertOrUpdate(medicion);
+	    	   EventoModel evento = new EventoModel("Cambio de estado libre a " + estadoLibre, LocalDateTime.now(), dispositivo);
+	    	   eventoService.insertOrUpdate(evento);
 	       }
 	       
 	       return "redirect:/dispositivo/estacionamiento";
