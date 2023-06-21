@@ -74,6 +74,7 @@ public class SensorHumedadController {
 	       
 	       return "redirect:/sensorhumedad/";
 	   }
+	
 	@PostMapping("/agregarevento") 
     public String buscar(@RequestParam("fecha")LocalDateTime fecha,
     						@RequestParam("descripcion")String descripcion,

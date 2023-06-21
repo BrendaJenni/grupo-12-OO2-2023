@@ -56,6 +56,18 @@ public class RecolectorInteligenteController {
 	   return "redirect:/recolectorinteligente/";
 	}
 	
+	@PostMapping("/agregarmedicion")
+	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
+	                                 @RequestParam("fecha") LocalDateTime fecha,
+	                                 @RequestParam("estaLlenoAhora") boolean estaLlenoAhora) {
+	       Dispositivo dispositivo = sensorRecolectorService.findByid(dispositivoId); 
+	       if (dispositivo != null) {      
+	    	   sensorRecolectorService.agregarMedicion(dispositivo,fecha, estaLlenoAhora);
+	       }
+	       
+	       return "redirect:/recolectorinteligente/";
+	   }
+	
 	@PostMapping("/agregarevento") 
     public String buscar(@RequestParam("fecha")LocalDateTime fecha,
     						@RequestParam("descripcion")String descripcion,
@@ -68,7 +80,7 @@ public class RecolectorInteligenteController {
        if (dispositivo != null) {      
     	   sensorRecolectorService.agregarEventos(dispositivo,evento);
        }
-       return "redirect:/evento/";
+       return "redirect:/recolectorinteligente/";
     }
 	
 }

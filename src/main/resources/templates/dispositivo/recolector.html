@@ -175,6 +175,29 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	<div class="row agregar">
+            <div class="col agrego">
+                <h2>Agregar Medición</h2>
+                <form th:action="@{/recolectorinteligente/agregarmedicion}" method="post">
+                    <div class="form-group">
+                        <label for="dispositivoId">ID del Dispositivo:</label>
+                         <input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                         <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+                    </div>
+                   <div class="form.group mb-3">
+                        <label for="estaLlenoAhora" class="form-label">Esta Lleno</label>
+                        <select class="form-select" id="estaLlenoAhora" name="estaLlenoAhora" required>
+                            <option value="true">Verdadero</option>
+                            <option value="false">Falso</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Agregar Medición</button>
+                </form>
+            </div>
+       </div>
 </body>
 </html>
