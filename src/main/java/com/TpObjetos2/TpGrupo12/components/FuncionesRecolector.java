@@ -54,24 +54,28 @@ public class FuncionesRecolector {
     	LocalDate fecha = LocalDate.now();
     	int boleano;
     	boolean estado;
-    	//Se encarga de que este funcionando solo mientras la universidad esta abierta
-    	if (ahora.isAfter(LocalTime.of(7, 0)) && ahora.isBefore(LocalTime.of(21, 0))){
-    		//chequea si el tacho esta lleno y, de estarlo, crea un evento para vaciarlo
-    		if (reco.isEstaLlenoAhora() == true) {
-    			sensorRecolectorService.agregarEventos(reco.getDispositivo(),(new Evento ("El techo esta lleno, se envia una notificacion para vaciar", 
-    					LocalDateTime.of(fecha, ahora), reco.getDispositivo())));
-    			reco = vaciarRecolector(reco,ahora);
-    			
-    		}
-    		//genera un booleano al azar
-    		boleano = (int)(Math.random()*2);
-    		if (boleano == 0) {
-    			estado = true;
-    		} else {
-    			estado = false;
-    		}
-    		reco = cambiarEstadoRecolector(reco);
-    		sensorRecolectorService.agregarMedicion(new MedicionRecolector(reco.getDispositivo(),LocalDateTime.of(fecha, ahora),estado));
+    	if (reco != null) {
+    		//Se encarga de que este funcionando solo mientras la universidad esta abierta
+        	if (ahora.isAfter(LocalTime.of(7, 0)) && ahora.isBefore(LocalTime.of(21, 0))){
+        		//chequea si el tacho esta lleno y, de estarlo, crea un evento para vaciarlo
+        		if (reco.isEstaLlenoAhora() == true) {
+        			sensorRecolectorService.agregarEventos(reco.getDispositivo(),(new Evento ("El techo esta lleno, se envia una notificacion para vaciar", 
+        					LocalDateTime.of(fecha, ahora), reco.getDispositivo())));
+        			System.out.println("\n SE AGREGO UN EVENTO RECOLECTOR");
+        			reco = vaciarRecolector(reco,ahora);
+        			
+        		}
+        		//genera un booleano al azar
+        		boleano = (int)(Math.random()*2);
+        		if (boleano == 0) {
+        			estado = true;
+        		} else {
+        			estado = false;
+        		}
+        		reco = cambiarEstadoRecolector(reco);
+        		sensorRecolectorService.agregarMedicion(new MedicionRecolector(reco.getDispositivo(),LocalDateTime.of(fecha, ahora),estado));
+        		System.out.println("\n SE AGREGO UNA MEDICION RECOLECTOR");
+        	}
     	}
     }
 	
@@ -89,6 +93,7 @@ public class FuncionesRecolector {
     public MedicionRecolector vaciarRecolector(MedicionRecolector reco, LocalTime hora) {
     	sensorRecolectorService.agregarEventos(reco.getDispositivo(),new Evento("Se vacio el tacho", LocalDateTime.of(reco.getFechaRegistro().toLocalDate(), 
 				hora.plusMinutes((int)(Math.random()*(20-10+1)+10))), reco.getDispositivo()));
+    	System.out.println("\n SE AGREGO UN EVENTO RECOLECTOR");
 		return cambiarEstadoRecolector(reco);
 	}
 
