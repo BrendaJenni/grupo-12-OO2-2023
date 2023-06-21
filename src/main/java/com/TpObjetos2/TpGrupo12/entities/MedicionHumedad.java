@@ -14,16 +14,16 @@ import lombok.Setter;
 @Table(name="MedicionHumedad")
 public class MedicionHumedad extends Medicion{
 	@Column(name="humedad")
-	private double humedad;
+	private int humedad;
 	
 	@Column(name="estadoCesped")
 	private boolean estadoCesped;
 	
-	public double getHumedad() {
+	public int getHumedad() {
 		return humedad;
 	}
 
-	public void setHumedad(double humedad) {
+	public void setHumedad(int humedad) {
 		this.humedad = humedad;
 	}
 
