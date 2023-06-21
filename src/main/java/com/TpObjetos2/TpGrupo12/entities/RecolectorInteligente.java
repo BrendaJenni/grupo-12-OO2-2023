@@ -13,7 +13,6 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Table(name="RecolectorInteligente")
 public class RecolectorInteligente extends Dispositivo{
-	
 	@Column(name="ubicacion")
 	private String ubicacion;
 
@@ -24,5 +23,11 @@ public class RecolectorInteligente extends Dispositivo{
 	public void setUbicacion(String ubicacion) {
 		this.ubicacion = ubicacion;
 	}
+
+	public RecolectorInteligente(String nombre, boolean activo, String ubicacion) {
+		super(nombre, activo);
+		this.ubicacion = ubicacion;
+	}
 	
+	public RecolectorInteligente() {}
 }

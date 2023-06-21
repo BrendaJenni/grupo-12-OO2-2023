@@ -39,17 +39,13 @@ public class UserController {
 	
 	//funciona login si es un role admin se dirige a una pagina , si es otro rol se dirije a otra url
 	@GetMapping("/loginsuccess")
-	public ModelAndView loginCheck(Authentication authentication) {
-	    ModelAndView modelAndView = new ModelAndView();
-	    if (authentication != null && authentication.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"))) {
-	        modelAndView.setViewName("redirect:/dispositivo/"); // esto sucede si es admin
-	    } else {
-	        modelAndView.setViewName("redirect:/dispositivo/alumbrado"); // Redirige a la URL deseada cuando no es admin
-	    }
-	    return modelAndView;
-	}
-	
-	
-		
-
+    public ModelAndView loginCheck(Authentication authentication) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (authentication != null && authentication.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"))) {
+            modelAndView.setViewName("redirect:/dispositivo/"); // esto sucede si es admin
+        } else {
+            modelAndView.setViewName("redirect:/dispositivo/alumbrado"); // Redirige a la URL deseada cuando no es admin
+        }
+        return modelAndView;
+    }
 }

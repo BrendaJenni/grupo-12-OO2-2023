@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="/css/dispositivo.css" rel="stylesheet" />
+	<title>Dispositivo</title>
+	<style>
+		.eliminar-btn {
+			color: white;
+			background-color: red;
+		}
+	</style>
+</head>
+<!-- generamos la lista de sensosres con sus atributos y el boton para eliminar -->
+<body>
+	</div>
+            <div class="col-auto">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Listado de Sensores Recolector</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<table class="table table-stripped table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Activo</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Ubicacion</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="dispositivo: ${dispositivos}">
+							<td th:text="${dispositivo.id}"></td>
+							<td th:text="${dispositivo.activo}"></td>
+							<td th:text="${dispositivo.nombre}"></td>
+							<td th:text="${dispositivo.ubicacion}"></td>
+							<td>
+							<form th:action="@{/recolectorinteligente/bajaLogica}" method="post">
+									<input type="hidden" name="id" th:value="${dispositivo.id}" /> 
+									<button type="submit" class="btn eliminar-btn">Eliminar</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				
+				<!-- generamos la lista de mediciones de cada dispositivo -->
+				<h2>Lista de Mediciones de los dispositivos</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<table class="table table-stripped table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Dispositivo Vinculado</th>	
+							<th scope="col">Estado actual</th>			
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="dispositivo: ${dispositivos}">
+							<td>
+								<ul>
+									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.idMedicion}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.fechaRegistro}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.dispositivo.id}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estaLlenoAhora}"></li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<!-- generamos la lista de eventos de cada dispositivo -->
+				<h2>Lista de Eventos de los dispositivos</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<table class="table table-stripped table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Descripción</th>
+							<th scope="col">Fecha de Registro</th>
+							<th scope="col">ID Dispositivo Vinculado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="dispositivo: ${dispositivos}">
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.idEvento}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.descripcion}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.dispositivo.id}"></li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<!-- formulario para aplicar un dispositivo y que se guarde en la base de datos -->
+				
+				<h2>Agregar Dispositivo Recolector</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<form th:action="@{/recolectorinteligente/createSensorRecolector}" method="post">
+					<div class="form-group">
+						<label for="nombre">Nombre:</label>
+						<input type="text" class="form-control" id="nombre" name="nombre" required>
+					</div>
+					<div class="form-group">
+						<label for="activo">Activo:</label>
+						<select class="form-control" id="activo" name="activo" required>
+							<option value="true">true</option>
+							<option value="false">false</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="ubicacion">Ubicacion:</label>
+						<input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Agregar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

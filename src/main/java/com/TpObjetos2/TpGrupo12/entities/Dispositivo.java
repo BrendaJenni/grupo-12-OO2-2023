@@ -1,6 +1,7 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,14 +25,12 @@ import lombok.Setter;
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-
     private int id;  
 
     @Column(name="nombre")
     private String nombre;
 
     @Column(name="activo")
-
     private boolean activo;
     
     @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -95,12 +94,6 @@ public class Dispositivo {
 		this.eventos = eventos;
 	}
 
-	
-	
-	
-	
-	
-    
 
 }
 

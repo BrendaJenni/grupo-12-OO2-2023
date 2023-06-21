@@ -42,8 +42,7 @@ public class SensorAlumbradoController {
 		model.addAttribute("dispositivos", dispositivosAlumbrado);
        return "dispositivo/alumbrado";
     }
-	
-	
+
 	@PostMapping("/dispositivo/alumbrado")
     public String createAlum(@ModelAttribute("dispositivo") SensorAlumbradoModel sensorAlumbradoModel) {
         sensorAlumbradoService.insertOrUpdate(sensorAlumbradoModel);
@@ -72,6 +71,4 @@ public class SensorAlumbradoController {
 	       return "redirect:/sensoralumbrado/alumbrado";
 	   }
 	   
-
-	
 }

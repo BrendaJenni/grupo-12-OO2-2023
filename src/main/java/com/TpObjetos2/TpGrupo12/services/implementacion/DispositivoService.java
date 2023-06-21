@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
+import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
+import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
+import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
@@ -28,12 +32,14 @@ public class DispositivoService implements IDispositivoService{
         return dispositivoRepository.findAll();
     }
 
-    @Override
+   @Override
     public DispositivoModel insertOrUpdate(DispositivoModel dispositivoModel) {
         Dispositivo dispositivo = dispositivoRepository.save(modelMapper.map(dispositivoModel, Dispositivo.class));
         return modelMapper.map(dispositivo, DispositivoModel.class);
     }
-
+        
+   // Si no se encontró el dispositivo existente o no se proporcionó un ID válido,
+        // puedes implementar el código para manejar ese caso según tus necesidades.
     @Override
     public Dispositivo getById(int id) {
         Dispositivo dispositivoOptional = dispositivoRepository.findById(id);
@@ -53,18 +59,5 @@ public class DispositivoService implements IDispositivoService{
 		return dispositivoRepository.findById(id);
 	}
     
-    
-   
-
 }
-/*
-	@Override
-	public Dispositivo findById(int id) {
-		return dispositivoRepository.findById(id);
-	}
-
-	@Override
-	public Dispositivo findByName(String name) {
-		return modelMapper.map(dispositivoRepository.findByName(name), Dispositivo.class);
-	}*/
 

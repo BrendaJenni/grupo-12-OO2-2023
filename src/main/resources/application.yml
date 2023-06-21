@@ -3,6 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/bd-grupo12
     username: johann
     password: popoyo123456
+
   jpa:
     show-sql: true
     hibernate:

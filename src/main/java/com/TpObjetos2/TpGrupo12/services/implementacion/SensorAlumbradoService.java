@@ -22,8 +22,8 @@ import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
 @Service("sensorAlumbradoService")
 public class SensorAlumbradoService implements ISensorAlumbradoService {
 
-	
-	@Autowired
+
+    @Autowired
     @Qualifier("sensorAlumbradoRepository")
     private ISensorAlumbradoRepository sensorAlumbradoRepository;
 	
@@ -34,18 +34,19 @@ public class SensorAlumbradoService implements ISensorAlumbradoService {
 		return sensorAlumbradoRepository.findAll();
 	}
 	
-	@Override
-	public SensorAlumbradoModel insertOrUpdate(SensorAlumbradoModel sensorAlumbradoModel) {
-	    SensorAlumbrado sensorAlumbrado = new SensorAlumbrado();
-	    sensorAlumbrado.setNombre(sensorAlumbradoModel.getNombre());
-	    sensorAlumbrado.setActivo(sensorAlumbradoModel.isActivo());
-	    sensorAlumbrado.setEstacion(sensorAlumbradoModel.getEstacion());
-	    sensorAlumbrado.setEncendido(sensorAlumbradoModel.isEncendido());
-	    sensorAlumbrado.setObscuridadPor(sensorAlumbradoModel.getObscuridadPor());
+    @Override
+    public SensorAlumbradoModel insertOrUpdate(SensorAlumbradoModel sensorAlumbradoModel) {
+        SensorAlumbrado sensorAlumbrado = new SensorAlumbrado();
+        sensorAlumbrado.setId(sensorAlumbradoModel.getId());
+        sensorAlumbrado.setNombre(sensorAlumbradoModel.getNombre());
+        sensorAlumbrado.setActivo(sensorAlumbradoModel.isActivo());
+        sensorAlumbrado.setEstacion(sensorAlumbradoModel.getEstacion());
+        sensorAlumbrado.setEncendido(sensorAlumbradoModel.isEncendido());
+        sensorAlumbrado.setObscuridadPor(sensorAlumbradoModel.getObscuridadPor());
 
-	    sensorAlumbrado = sensorAlumbradoRepository.save(sensorAlumbrado);
-	    return modelMapper.map(sensorAlumbrado, SensorAlumbradoModel.class);
-	}
+        sensorAlumbrado = sensorAlumbradoRepository.save(sensorAlumbrado);
+        return modelMapper.map(sensorAlumbrado, SensorAlumbradoModel.class);
+    }
 
 	@Override
     public DispositivoModel insertOrUpdatealum(Dispositivo dispositivoModel) {
@@ -124,3 +125,4 @@ public class SensorAlumbradoService implements ISensorAlumbradoService {
 	}
 	
 }
+

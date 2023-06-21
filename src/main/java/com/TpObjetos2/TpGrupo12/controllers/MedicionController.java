@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.TpObjetos2.TpGrupo12.entities.Evento;
+import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
 import com.TpObjetos2.TpGrupo12.helpers.ViewRouteHelper;
 import com.TpObjetos2.TpGrupo12.models.EventoModel;
 import com.TpObjetos2.TpGrupo12.models.MedicionModel;
@@ -38,5 +40,4 @@ public class MedicionController {
 	        medicionService.insertOrUpdate(medicionModel);
 	        return new RedirectView(ViewRouteHelper.MEDICION_ROOT);
 	    }
-
 }

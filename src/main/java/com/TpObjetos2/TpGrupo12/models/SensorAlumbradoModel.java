@@ -10,7 +10,7 @@ public class SensorAlumbradoModel extends DispositivoModel {
 	double obscuridadPor;
 	
 	public SensorAlumbradoModel() {}
-	public SensorAlumbradoModel (int id,String nombre,boolean activo,String estacion ,boolean encendido,double obscuridadPor) {
+	public SensorAlumbradoModel (int id,String nombre, boolean activo, String estacion, boolean encendido,double obscuridadPor) {
 		super(id,nombre,activo);
 		
 		this.estacion = estacion;
@@ -35,9 +35,5 @@ public class SensorAlumbradoModel extends DispositivoModel {
 	public void setObscuridadPor(double obscuridadPor) {
 		this.obscuridadPor = obscuridadPor;
 	}
-	
-	
-	
-	
-	
+
 }
