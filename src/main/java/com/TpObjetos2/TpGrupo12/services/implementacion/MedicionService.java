@@ -1,25 +1,18 @@
 package com.TpObjetos2.TpGrupo12.services.implementacion;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.Medicion;
-import com.TpObjetos2.TpGrupo12.entities.RecolectorInteligente;
-import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
-import com.TpObjetos2.TpGrupo12.models.EventoModel;
+import com.TpObjetos2.TpGrupo12.entities.MedicionEstacionamiento;
+import com.TpObjetos2.TpGrupo12.models.MedicionEstacionamientoModel;
 import com.TpObjetos2.TpGrupo12.models.MedicionModel;
-import com.TpObjetos2.TpGrupo12.repositories.IEventoRepository;
 import com.TpObjetos2.TpGrupo12.repositories.IMedicionRepository;
-import com.TpObjetos2.TpGrupo12.services.IEventoService;
 import com.TpObjetos2.TpGrupo12.services.IMedicionService;
 
 //ESTO ES EL ABM :D
@@ -42,6 +35,12 @@ public class MedicionService implements IMedicionService {
         Medicion medicion = medicionRepository.save(modelMapper.map(medicionModel, Medicion.class));
         return modelMapper.map(medicion, MedicionModel.class);
     }
+    
+    @Override
+    public MedicionEstacionamientoModel insertOrUpdate(MedicionEstacionamientoModel medicionModel) {
+        MedicionEstacionamiento medicion = medicionRepository.save(modelMapper.map(medicionModel, MedicionEstacionamiento.class));
+        return modelMapper.map(medicion, MedicionEstacionamientoModel.class);
+    }
 
     @Override
     public boolean remove(int id) {
@@ -58,6 +57,15 @@ public class MedicionService implements IMedicionService {
 	public Medicion findById(int id) {
 		return medicionRepository.findByidMedicion(id);
 	}
-    
-    
+
+	public List<MedicionEstacionamiento> traer() {
+    	List<Medicion> mediciones = medicionRepository.findAll();
+    	List<MedicionEstacionamiento> estacionamientos = new ArrayList<>();
+    	for(int i=0;i<mediciones.size();i++) {
+    		if(mediciones.get(i) instanceof MedicionEstacionamiento) {
+    			estacionamientos.add((MedicionEstacionamiento) mediciones.get(i));
+    		}
+    	}
+    	return estacionamientos;
+    }
 }

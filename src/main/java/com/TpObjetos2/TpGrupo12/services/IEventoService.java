@@ -13,11 +13,12 @@ public interface IEventoService {
 		public List<Evento> getByFecha(LocalDateTime fecha);
 		public List<Evento> getByEstado(boolean estado);
 		public List<Evento> getByIdDispositivo(int id);
+		public List<Evento> getEventosEstacionamiento();
 		
 	    public EventoModel insertOrUpdate(Evento evento);
+	    public EventoModel insertOrUpdate(EventoModel evento);
 	    
 	    public boolean remove(int idEvento);
 
 		Evento findById(int id);
-
 }

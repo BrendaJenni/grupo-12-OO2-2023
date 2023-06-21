@@ -17,7 +17,6 @@ import lombok.Setter;
 @PrimaryKeyJoinColumn(name = "id")
 @Table(name="estacionamiento")
 public class SensorEstacionamiento extends Dispositivo{
-
 	@ElementCollection(targetClass = Boolean.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "plazas", joinColumns = @JoinColumn(name = "dispositivo_id"))
 	@Column(name = "booleano")
@@ -28,7 +27,7 @@ public class SensorEstacionamiento extends Dispositivo{
 	
 	@Column(name="libres")
 	private int libres;
-	
+
 	public SensorEstacionamiento(int id, String nombre, boolean activo, List<Boolean> plazas,
 			int tam, int libres) {
 		super(id, nombre, activo);
@@ -67,7 +66,7 @@ public class SensorEstacionamiento extends Dispositivo{
 		for(int i=0;i<this.tam;i++) {
 			this.plazas.add(false);
 		}
-		return this.plazas;
+		return plazas;
 	}
 
 	public int getLibres() {
@@ -82,6 +81,17 @@ public class SensorEstacionamiento extends Dispositivo{
 			}
 		}
 		this.libres=cont;
+		for(int i=0;i<plazas.size();i++) {
+			if(plazas.get(i)) {
+				cont = cont+1;
+			}
+		}
+		this.libres = cont;
+	}
+
+	@Override
+	public String toString() {
+		return "SensorEstacionamiento [plazas=" + plazas + ", tam=" + tam + ", libres=" + libres + "]";
 	}
 	
 }

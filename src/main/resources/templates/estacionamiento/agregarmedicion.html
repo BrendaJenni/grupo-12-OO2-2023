@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<title>Agregar Medición</title>
+</head>
+<body>
+	<div class="row">
+	    <div class="col text-end">
+	        <form th:action="@{/logout}" method="post">
+	            <button type="submit" class="btn btn-danger">Logout</button>
+	        </form>
+	    </div>
+	</div>
+                <h2>Agregar Medición</h2>
+                <br>
+                <form th:action="@{/dispositivo/estacionamiento/agregarmedicion}" method="post">
+                    <p>
+                        <label for="dispositivoId">ID del Dispositivo:</label>
+                         <input type="number" id="dispositivoId" name="dispositivoId" required min="0">
+                    </p>
+                    <p>
+                        <label for="fecha">Fecha:</label>
+                         <input type="datetime-local" id="fecha" name="fecha" required>
+                    </p>
+                   <div>
+                        <label for="estadoLibre" class="form-label">Estado: </label>
+                        <select id="estadoLibre" name="estadoLibre" required>
+                            <option value="true">Libre</option>
+                            <option value="false">Ocupado</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Agregar Medición</button>
+                </form>
+            </div>
+        </div>
+        
+        <script>
+			    document.getElementById("backForm").action = document.referrer;
+			</script>
+</body>
+</html>

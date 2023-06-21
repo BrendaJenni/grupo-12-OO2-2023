@@ -13,6 +13,18 @@
 </head>
 <!-- generamos la lista de sensosres con sus atributos y el boton para eliminar -->
 <body>
+	<div class="row">
+	    <div class="col text-start">
+	        <form th:action="@{/dispositivo/}" method="post">
+	            <button type="submit" class="btn btn-danger">VOLVER</button>
+	        </form>
+	    </div>
+	    <div class="col text-end">
+	        <form th:action="@{/logout}" method="post">
+	            <button type="submit" class="btn btn-danger">Logout</button>
+	        </form>
+	    </div>
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col">
@@ -64,8 +76,7 @@
 							<th scope="col">Fecha</th>
 							<th scope="col">Dispositivo Vinculado</th>	
 							<th scope="col">Humedad</th>		
-							<th scope="col">Cesped Mojado</th>		
-							<th scope="col">Encendido</th>		
+							<th scope="col">Cesped Mojado</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -93,11 +104,6 @@
 							<td>
 								<ul>
 									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoCesped}"></li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.dispositivo.encendido}"></li>
 								</ul>
 							</td>
 						</tr>

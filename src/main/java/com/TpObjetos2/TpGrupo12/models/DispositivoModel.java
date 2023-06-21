@@ -10,7 +10,6 @@ public class DispositivoModel {
     protected boolean activo;
     protected boolean encendido;
 
-
     public DispositivoModel(int id, String nombre, boolean activo) {
         this.id = id;
         this.nombre = nombre;
@@ -21,7 +20,7 @@ public class DispositivoModel {
         this.nombre = nombre;
         this.activo = activo;
     }
-
+    
     public DispositivoModel() {}
 
     public boolean isEncendido() {
@@ -55,12 +54,9 @@ public class DispositivoModel {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
-    
 
     @Override
     public String toString() {
         return "DispositivoModel [id=" + id + ", nombre=" + nombre + ", activo=" + activo + "]";
     }
-
 }

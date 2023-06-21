@@ -36,6 +36,4 @@ public class MedicionEstacionamiento extends Medicion{
     public void setEstadoLibre(boolean estadoLibre) {
         this.estadoLibre = estadoLibre;
     }
-
-
 }

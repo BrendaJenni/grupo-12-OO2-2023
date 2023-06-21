@@ -15,11 +15,11 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+
+@Getter @Setter
 @Table(name = "Dispositivo")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Dispositivo {
@@ -33,10 +33,10 @@ public class Dispositivo {
     @Column(name="activo")
     private boolean activo;
     
-    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "dispositivo",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Medicion> mediciones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "dispositivo",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Evento> eventos= new ArrayList<>();
 
 
@@ -93,7 +93,5 @@ public class Dispositivo {
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
 	}
-
-
 }
 

@@ -2,6 +2,7 @@ package com.TpObjetos2.TpGrupo12.services.implementacion;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.Evento;
+import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.EventoModel;
 import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
@@ -30,13 +32,31 @@ public class EventoService implements IEventoService {
     public List<Evento> getAll() {
         return eventoRepository.findAll();
     }
+    
+    
+    @Override
+    public List<Evento> getEventosEstacionamiento() {
+        List<Evento> eventos = eventoRepository.findAll();
+        List<Evento> eventosEst = new ArrayList<>();
+        for(int i=0;i<eventos.size();i++) {
+        	if(eventos.get(i).getDispositivo() instanceof SensorEstacionamiento) {
+        		eventosEst.add(eventos.get(i));
+        	}
+        }
+        return eventosEst;
+    }
+
+    @Override
+    public EventoModel insertOrUpdate(EventoModel eventoModel) {
+        Evento evento = eventoRepository.save(modelMapper.map(eventoModel, Evento.class));
+        return modelMapper.map(evento, EventoModel.class);
+    }
 
     @Override
     public EventoModel insertOrUpdate(Evento evento) {
         Evento event = eventoRepository.save(evento);
         return modelMapper.map(event, EventoModel.class);
     }
-    
 
     @Override
     public boolean remove(int id) {
@@ -47,7 +67,7 @@ public class EventoService implements IEventoService {
             return false;
         }
     }
-    
+
     // esto sirve pa buscar cosas podemos agragerlo a lo que querramos
     @Override
 	public Evento findById(int id) {
@@ -68,5 +88,6 @@ public class EventoService implements IEventoService {
 	public List<Evento> getByIdDispositivo(int id) {
 		return eventoRepository.findByIdDispositivo(id);
 	}
+   
 	
 }
