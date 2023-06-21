@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.TpObjetos2.TpGrupo12.entities.Medicion;
 
+//ESTO ES EL DAO :D
 @Repository("medicionRepository")
 public interface IMedicionRepository extends JpaRepository<Medicion, Serializable> {
 

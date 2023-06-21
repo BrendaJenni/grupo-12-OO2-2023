@@ -2,7 +2,6 @@ package com.TpObjetos2.TpGrupo12.entities;
 
 import java.time.LocalDateTime;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,7 +40,7 @@ public class Medicion {
 		return idMedicion;
 	}
 
-	public void setIdMedicion(int idMedicion) {
+	protected void setIdMedicion(int idMedicion) {
 		this.idMedicion = idMedicion;
 	}
 
@@ -61,8 +59,14 @@ public class Medicion {
 	public void setFechaRegistro(LocalDateTime fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
-	  
-	  
 
+	public Medicion() {
+	}
+
+	public Medicion(Dispositivo dispositivo, LocalDateTime fechaRegistro) {
+		super();
+		this.dispositivo = dispositivo;
+		this.fechaRegistro = fechaRegistro;
+	}
+    
 }
-

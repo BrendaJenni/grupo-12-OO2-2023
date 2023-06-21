@@ -1,6 +1,7 @@
 package com.TpObjetos2.TpGrupo12.entities;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,30 +25,35 @@ import lombok.Setter;
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-
     private int id;  
 
     @Column(name="nombre")
     private String nombre;
 
     @Column(name="activo")
-
     private boolean activo;
+    
+    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Medicion> mediciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Evento> eventos= new ArrayList<>();
+
 
     public Dispositivo (int id,String nombre, boolean activo) {
     	this.id=id;
     	this.nombre = nombre;
     	this.activo = activo;
     }
+    
+	public Dispositivo(String nombre, boolean activo) {
+		super();
+		this.nombre = nombre;
+		this.activo = activo;
+	}
+	
     public Dispositivo() {}
 
-
-    @OneToMany(mappedBy = "dispositivo",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Medicion> mediciones;
-
-    @OneToMany(mappedBy = "dispositivo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Evento> eventos;
-    
     public int getId() {
 		return id;
 	}
@@ -87,7 +93,7 @@ public class Dispositivo {
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
 	}
-    
+
 
 }
 

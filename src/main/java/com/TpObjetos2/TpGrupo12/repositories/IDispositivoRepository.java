@@ -7,18 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 
-import java.io.Serializable;
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import java.io.Serializable;
+import java.util.List; 
 
 //ESTO ES EL DAO :D
 @Repository("dispositivoRepository")

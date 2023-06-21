@@ -3,17 +3,18 @@ package com.TpObjetos2.TpGrupo12.components;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Random;
+import java.util.Random; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import com.TpObjetos2.TpGrupo12.entities.Evento;
+
 import com.TpObjetos2.TpGrupo12.entities.MedicionHumedad;
-import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import com.TpObjetos2.TpGrupo12.services.ISensorHumedadService;
-	
+import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
+import com.TpObjetos2.TpGrupo12.entities.Evento;
+
 @Component
 public class FuncionesHumedad {
 	@Autowired

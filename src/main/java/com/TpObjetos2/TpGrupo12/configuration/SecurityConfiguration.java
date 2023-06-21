@@ -37,15 +37,10 @@ public class SecurityConfiguration {
 			.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/loginprocess")
 				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/dispositivo",true).permitAll()
+				.defaultSuccessUrl("/loginsuccess",true).permitAll()
 			.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
 		return http.build();
 	}
 
-	/* No usado en este ejemplo
-	@Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/webjars/**");
-    }*/
 }

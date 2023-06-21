@@ -6,9 +6,6 @@
     <title>Dispositivo</title>
 </head>
 <body>
-
-
-
 	<div class="container">
 		<div class="row">
 			<div class="col">
@@ -17,34 +14,32 @@
 				<h2>Lista de Eventos de todos los dispositivos</h2>
 				<div class="row agrego">
 					<h3>Filtros</h3>
-				<form th:action="@{/sensorhumedad/evento/busquedafecha}" class="mb-3">
-					<div class="form-group filtro">
-						<label for:"fecha">Fecha </label>
-						<input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="">
-					</div>
-					<button type="search" class="btn btn-primary">Filtrar</button>
-					</form>
-					<form th:action="@{/sensorhumedad/evento/busquedaid}" class="mb-3">
+					<form th:action="@{/evento/busquedafecha}" class="mb-3">
 						<div class="form-group filtro">
-						<label for:"id">Id Dispositivo </label>
-						<input type="number" class="form-control" id="id" name="id" placeholder="">
-					</div>
-					<button type="search" class="btn btn-primary">Filtrar</button>
+							<label for:"fecha">Fecha </label>
+							<input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="">
+						</div>
+						<button type="search" class="btn btn-primary">Filtrar</button>
 					</form>
-					<form th:action="@{/sensorhumedad/evento/busquedaestado}" class="mb-3">
-					<div class="form-group filtro">
-						<label for:"estado">Estado Dispositivo </label>
-						<select class="form-control" id="estado" name="estado" placeholder="">
-							<option value="true">true</option>
-							<option value="false">false</option>
-							<option value=""></option>
-						</select>
-					</div>
-					<button type="search" class="btn btn-primary">Filtrar</button>
-					</form>		
-				
+					<form th:action="@{/evento/busquedaid}" class="mb-3">
+						<div class="form-group filtro">
+							<label for:"id">Id Dispositivo </label>
+							<input type="number" class="form-control" id="id" name="id" placeholder="">
+						</div>
+						<button type="search" class="btn btn-primary">Filtrar</button>
+					</form>
+					<form th:action="@{/evento/busquedaestado}" class="mb-3">
+						<div class="form-group filtro">
+							<label for:"estado">Estado Dispositivo </label>
+							<select class="form-control" id="estado" name="estado" placeholder="">
+								<option value="true">true</option>
+								<option value="false">false</option>
+								<option value=""></option>
+							</select>
+						</div>
+						<button type="search" class="btn btn-primary">Filtrar</button>
+					</form>
 				</div>
-				
 			</div>
 		</div>
 		<div class="row">
@@ -71,7 +66,7 @@
 									<li th:utext="${evento.descripcion}"></li>
 								</ul>
 							</td>
-							<td>
+								<td>
 									<ul>
 										<li th:utext="${evento.fechaRegistro}"></li>
 									</ul>
@@ -92,26 +87,72 @@
 			</div>
 		</div>
 		<div class="row">
-            <div class="col">
-                <h2>Agregar Evento para Sensor Humedad</h2>
-                <form th:action="@{/sensorhumedad/agregarevento}" method="post">
-                    <div class="form-group">
-                        <label for="dispositivoId">ID del Dispositivo:</label>
-                         <input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha">Fecha:</label>
-                         <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="descripcion">Descripcion: </label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary mb-3">Agregar Evento</button>
-                </form>
-            </div>
-         </div>
-        </div>
-  </body>
+			<div class="col">
+				<h2>Agregar Eventos</h2>
+				<div class="d-flex">
+					<form th:action="@{/sensorhumedad/agregarevento}" method="post" class="me-2">
+						<div class="form-group">
+							<label for="dispositivoId">ID del Dispositivo de Humedad:</label>
+							<input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
+						</div>
+						<div class="form-group">
+							<label for="fecha">Fecha:</label>
+							<input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+						</div>
+						<div class="form-group mb-3">
+							<label for="descripcion">Descripcion: </label>
+							<input type="text" class="form-control" id="descripcion" name="descripcion" required>
+						</div>
+						<button type="submit" class="btn btn-primary mb-3">Agregar Evento Humedad</button>
+					</form>
+					<form th:action="@{/sensoralumbrado/agregarevento}" method="post" class="me-2">
+						<div class="form-group">
+							<label for="dispositivoId">ID del Dispositivo Alumbrado:</label>
+							<input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
+						</div>
+						<div class="form-group">
+							<label for="fecha">Fecha:</label>
+							<input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+						</div>
+						<div class="form-group mb-3">
+							<label for="descripcion">Descripcion: </label>
+							<input type="text" class="form-control" id="descripcion" name="descripcion" required>
+						</div>
+						<button type="submit" class="btn btn-primary mb-3">Agregar Evento Alumbrado</button>
+					</form>
+					<form th:action="@{/recolectorinteligente/agregarevento}" method="post" class="me-2">
+						<div class="form-group">
+							<label for="dispositivoId">ID del Dispositivo Recolector:</label>
+							<input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
+						</div>
+						<div class="form-group">
+							<label for="fecha">Fecha:</label>
+							<input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+						</div>
+						<div class="form-group mb-3">
+							<label for="descripcion">Descripcion: </label>
+							<input type="text" class="form-control" id="descripcion" name="descripcion" required>
+						</div>
+						<button type="submit" class="btn btn-primary mb-3">Agregar Evento Recolector</button>
+					</form>
+					<form th:action="@{/sensorhumedad/agregarevento}" method="post">
+						<div class="form-group">
+							<label for="dispositivoId">ID del Dispositivo Estacionamiento:</label>
+							<input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
+						</div>
+						<div class="form-group">
+							<label for="fecha">Fecha:</label>
+							<input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+						</div>
+						<div class="form-group mb-3">
+							<label for="descripcion">Descripcion: </label>
+							<input type="text" class="form-control" id="descripcion" name="descripcion" required>
+						</div>
+						<button type="submit" class="btn btn-primary mb-3">Agregar Evento Estacionamiento</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

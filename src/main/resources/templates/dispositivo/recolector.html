@@ -13,10 +13,18 @@
 </head>
 <!-- generamos la lista de sensosres con sus atributos y el boton para eliminar -->
 <body>
+	</div>
+            <div class="col-auto">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h1>Listado de SensoresHumedad</h1>
+				<h1>Listado de Sensores Recolector</h1>
 			</div>
 		</div>
 		<div class="row">
@@ -27,7 +35,7 @@
 							<th scope="col">Id</th>
 							<th scope="col">Activo</th>
 							<th scope="col">Nombre</th>
-							<th scope="col">Encendido</th>
+							<th scope="col">Ubicacion</th>
 							<th scope="col">Acciones</th>
 						</tr>
 					</thead>
@@ -36,9 +44,9 @@
 							<td th:text="${dispositivo.id}"></td>
 							<td th:text="${dispositivo.activo}"></td>
 							<td th:text="${dispositivo.nombre}"></td>
-							<td th:text="${dispositivo.encendido}"></td>
+							<td th:text="${dispositivo.ubicacion}"></td>
 							<td>
-							<form th:action="@{bajaLogica}" method="post">
+							<form th:action="@{/recolectorinteligente/bajaLogica}" method="post">
 									<input type="hidden" name="id" th:value="${dispositivo.id}" /> 
 									<button type="submit" class="btn eliminar-btn">Eliminar</button>
 								</form>
@@ -63,8 +71,7 @@
 							<th scope="col">Id</th>
 							<th scope="col">Fecha</th>
 							<th scope="col">Dispositivo Vinculado</th>	
-							<th scope="col">Humedad</th>		
-							<th scope="col">Cesped Mojado</th>			
+							<th scope="col">Estado actual</th>			
 						</tr>
 					</thead>
 					<tbody>
@@ -86,12 +93,7 @@
 							</td>
 							<td>
 								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.humedad}"></li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoCesped}"></li>
+									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estaLlenoAhora}"></li>
 								</ul>
 							</td>
 						</tr>
@@ -103,58 +105,57 @@
 			<div class="col">
 				<!-- generamos la lista de eventos de cada dispositivo -->
 				<h2>Lista de Eventos de los dispositivos</h2>
-				
-		<a th:href="@{/evento/}" class="btn btn-success mb-3"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Agregar Evento</a>
+				 <a th:href="@{/evento/}" class="btn btn-success mb-3"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Agregar Evento</a>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
 				<table class="table table-stripped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Fecha de Registro</th>
-                            <th scope="col">Dispositivo Vinculado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="dispositivo: ${dispositivos}">
-                            <td>
-                                <ul>
-                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.idEvento}"></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.descripcion}"></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.dispositivo.id}"></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+					<thead class="table-dark">
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Descripción</th>
+							<th scope="col">Fecha de Registro</th>
+							<th scope="col">ID Dispositivo Vinculado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="dispositivo: ${dispositivos}">
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.idEvento}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.descripcion}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.fechaRegistro}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="evento : ${dispositivo.eventos}" th:utext="${evento.dispositivo.id}"></li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
-				<!-- formulario para aplicar un dispositivo y que se guarde en la base de datos-->
+				<!-- formulario para aplicar un dispositivo y que se guarde en la base de datos -->
 				
-				<h2>Agregar DispositivoHumedad</h2>
+				<h2>Agregar Dispositivo Recolector</h2>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
-				<form th:action="@{/sensorhumedad/crearsensor}" method="post" th:object="${dispositivo}">
+				<form th:action="@{/recolectorinteligente/createSensorRecolector}" method="post">
 					<div class="form-group">
 						<label for="nombre">Nombre:</label>
 						<input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -166,22 +167,18 @@
 							<option value="false">false</option>
 						</select>
 					</div>
-					<div class="form-group mb-3">
-						<label for="encendido">Encendido:</label>
-						<select class="form-control" id="encendido" name="encendido" required>
-							<option value="true">true</option>
-							<option value="false">false</option>
-						</select>
+					<div class="form-group">
+						<label for="ubicacion">Ubicacion:</label>
+						<input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
 					</div>
-					
 					<button type="submit" class="btn btn-primary">Agregar</button>
 				</form>
 			</div>
 		</div>
-		<div class="row agregar">
+	<div class="row agregar">
             <div class="col agrego">
                 <h2>Agregar Medición</h2>
-                <form th:action="@{/sensorhumedad/agregarmedicion}" method="post">
+                <form th:action="@{/recolectorinteligente/agregarmedicion}" method="post">
                     <div class="form-group">
                         <label for="dispositivoId">ID del Dispositivo:</label>
                          <input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
@@ -190,22 +187,17 @@
                         <label for="fecha">Fecha:</label>
                          <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
                     </div>
-                    <div class="form-group">
-                        <label for="humedad">Humedad: %</label>
-                        <input type="number" class="form-control" id="humedad" name="humedad" required>
-                    </div>
                    <div class="form.group mb-3">
-                        <label for="estadoCesped" class="form-label">Estado Cesped</label>
-                        <select class="form-select" id="estadoCesped" name="estadoCesped" required>
-                            <option value="true">Mojado</option>
-                            <option value="false">Seco</option>
+                        <label for="estaLlenoAhora" class="form-label">Esta Lleno</label>
+                        <select class="form-select" id="estaLlenoAhora" name="estaLlenoAhora" required>
+                            <option value="true">Verdadero</option>
+                            <option value="false">Falso</option>
                         </select>
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Agregar Medición</button>
                 </form>
             </div>
-       
-	</div>
+       </div>
 </body>
 </html>
