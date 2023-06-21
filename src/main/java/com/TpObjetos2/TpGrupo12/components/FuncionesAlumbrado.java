@@ -66,7 +66,7 @@ public class FuncionesAlumbrado {
 	}
 
 	
-		@Scheduled(fixedDelay=1000)
+		@Scheduled(fixedDelay=5000)
 			public void mostarHola() {
 		
 		MedicionAlumbrado implementar = this.traerUltimaMediacion();
