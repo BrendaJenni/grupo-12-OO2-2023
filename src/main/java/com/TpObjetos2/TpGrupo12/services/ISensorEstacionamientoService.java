@@ -18,7 +18,7 @@ public interface ISensorEstacionamientoService {
     
     public boolean remove(int id);
     
-    public SensorEstacionamiento findByid(int id);
+    public Dispositivo findByid(int id);
     
     @Query("SELECT p.estadoLibre FROM Plazas p")
     public List<Boolean> getPlazas();
@@ -32,5 +32,9 @@ public interface ISensorEstacionamientoService {
 	public SensorEstacionamiento crearEstacionamientoConPlazas();
 
 	DispositivoModel agregarEventos(Dispositivo dispositivoModel, Evento evento);
+	
+	public DispositivoModel agregarEventos(Dispositivo dispositivoModel,String descripcion, LocalDateTime fecha);
+
+	DispositivoModel agregarMedicion(SensorEstacionamiento dispositivoModel, LocalDateTime fecha, boolean estadoLibre);
 
 }

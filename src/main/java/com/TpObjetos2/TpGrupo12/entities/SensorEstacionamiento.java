@@ -76,6 +76,10 @@ public class SensorEstacionamiento extends Dispositivo{
 	public void setLibres(int libres) {
 		this.libres = libres;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "SensorEstacionamiento [plazas=" + plazas + ", tam=" + tam + ", libres=" + libres + "]";
+	}
+	
 }

@@ -1,34 +1,29 @@
 package com.TpObjetos2.TpGrupo12;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import com.TpObjetos2.TpGrupo12.entities.*;
-import org.springframework.boot.CommandLineRunner;
 import java.util.List;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
-import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
-import com.TpObjetos2.TpGrupo12.repositories.IDispositivoRepository;
-import com.TpObjetos2.TpGrupo12.repositories.IEventoRepository;
-import com.TpObjetos2.TpGrupo12.repositories.IMedicionRepository;
-import com.TpObjetos2.TpGrupo12.repositories.ISensorAlumbradoRepository;
-import com.TpObjetos2.TpGrupo12.repositories.ISensorEstacionamientoRepository;
-import com.TpObjetos2.TpGrupo12.repositories.IUserRepository;
 
 import org.springframework.scheduling.annotation.EnableScheduling;
+
+import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
+import com.TpObjetos2.TpGrupo12.services.IDispositivoService;
+import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 
 
 @EnableScheduling
 @SpringBootApplication
-public class TpGrupo12Application implements CommandLineRunner{
+public class TpGrupo12Application{
 
 	public static void main(String[] args) {
 		SpringApplication.run(TpGrupo12Application.class, args);
-		
 	}
-	
+	/*
 	@Autowired
 	private IDispositivoRepository repository;
 	
@@ -57,10 +52,10 @@ public class TpGrupo12Application implements CommandLineRunner{
 		Dispositivo dispositivo2 = new Dispositivo("alumbrado", false);
 		repository.save(dispositivo2);
 		
-		List<Boolean> plazas = null;
-		SensorEstacionamiento estacionamiento = new SensorEstacionamiento("Estacionamiento común", true, 8, 8, plazas);
-		estacionamiento.inicializarPlazas();
-		estacionamientoRepository.save(estacionamiento);
+		//List<Boolean> plazas = null;
+		//SensorEstacionamiento estacionamiento = new SensorEstacionamiento("Estacionamiento común", true, 8, 8, plazas);
+		//estacionamiento.inicializarPlazas();
+		//estacionamientoRepository.save(estacionamiento);
 		
 		//SAVE SENSORALUMBRADO
 		SensorAlumbrado alumbrado = new SensorAlumbrado("Alumbrado Hernandez", true, "invierno", true, 50);
@@ -79,6 +74,6 @@ public class TpGrupo12Application implements CommandLineRunner{
 		medicionRepository.save(medicionAlumbrado);
 		
 		
-	}
+	}*/
 
 }

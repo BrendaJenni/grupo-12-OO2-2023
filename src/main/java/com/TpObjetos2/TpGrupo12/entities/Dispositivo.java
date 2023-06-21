@@ -31,10 +31,10 @@ public class Dispositivo {
     @Column(name="activo")
     private boolean activo;
     
-    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "dispositivo",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Medicion> mediciones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "dispositivo",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Evento> eventos= new ArrayList<>();
     
     public int getId() {

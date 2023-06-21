@@ -65,7 +65,7 @@ public class SensorAlumbradoController {
 	                                 @RequestParam("estadoActual") boolean estadoActual,
 	                                 @RequestParam("obscuridadActualPor") double obscuridadActualPor) {
 	       Dispositivo dispositivo = sensorAlumbradoService.findByid(dispositivoId); 
-	       if (dispositivo != null) {      
+	       if (dispositivo != null) {
 	           sensorAlumbradoService.agregarMedicion(dispositivo,fecha,estadoActual,obscuridadActualPor);
 	       }
 	       

@@ -87,9 +87,9 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 		    }
 		
 		@Override
-	    public DispositivoModel agregarMedicion(Dispositivo dispositivoModel,LocalDateTime fecha,boolean estadoLibre) {
+	    public DispositivoModel agregarMedicion(SensorEstacionamiento dispositivoModel,LocalDateTime fecha,boolean estadoLibre) {
 	        if (dispositivoModel != null) {
-	            Dispositivo dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
+	            SensorEstacionamiento dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
 	            if (dispositivoExistente != null) {
 	                List<Medicion> mediciones = dispositivoExistente.getMediciones();
 	                
@@ -111,7 +111,12 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	     return null;
 	    }
 		
-		@Override
+		public MedicionEstacionamiento crearMedicions() {
+			MedicionEstacionamiento estacionamiento = new MedicionEstacionamiento();
+		       
+		       return estacionamiento;
+		}
+		
 		public DispositivoModel agregarEventos(Dispositivo dispositivoModel,Evento evento) {
 			if (dispositivoModel != null) {
 	            Dispositivo dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
@@ -126,7 +131,7 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	                
 	                eventos.add(eventosN);
 	                
-	                dispositivoExistente.setEventos(eventos);;
+	                dispositivoExistente.setEventos(eventos);
 	               
 	                // lo gurado en la base de datos
 	                Dispositivo dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
@@ -135,10 +140,35 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	        }
 	     return null;
 			};
+			
+			
+			public DispositivoModel agregarEventos(Dispositivo dispositivoModel,String descripcion, LocalDateTime fecha) {
+				if (dispositivoModel != null) {
+		            Dispositivo dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
+		            if (dispositivoExistente != null) {
+		                List<Evento> eventos = dispositivoExistente.getEventos();
+		                Evento eventosN = new Evento();
+		                
+		                eventosN.setDescripcion(descripcion);
+		                eventosN.setFechaRegistro(fecha);
+		                eventosN.setDispositivo(dispositivoExistente);
+		               
+		                
+		                eventos.add(eventosN);
+		                
+		                dispositivoExistente.setEventos(eventos);;
+		               
+		                // lo gurado en la base de datos
+		                Dispositivo dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
+		                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
+		            }
+		        }
+		     return null;
+				};
 
 		@Override
-		public SensorEstacionamiento findByid(int id) {
-			SensorEstacionamiento dispositivoOptional = estacionamientoRepository.findById(id);
+		public Dispositivo findByid(int id) {
+			Dispositivo dispositivoOptional = estacionamientoRepository.findById(id);
 	        return dispositivoOptional;
 		}
 
@@ -147,6 +177,13 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 			List<Boolean> plazas = estacionamientoRepository.findByPlazas(false);
 			System.out.println(plazas);
 			return plazas;
+		}
+
+		@Override
+		public DispositivoModel agregarMedicion(Dispositivo dispositivoModel, LocalDateTime fecha,
+				boolean estadoLibre) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 	}
