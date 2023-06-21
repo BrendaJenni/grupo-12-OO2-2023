@@ -46,4 +46,8 @@ public class EventoController {
         }
         return "evento/evento";
      }
+	
+	//mando info de eventos de alumbrado:
+	
+
 }

@@ -1,5 +1,6 @@
 package com.TpObjetos2.TpGrupo12.controllers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.Medicion;
 import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.MedicionRecolector;
@@ -53,4 +55,20 @@ public class RecolectorInteligenteController {
 	   sensorRecolectorService.insertOrUpdate(sensorRecolectorModel);
 	   return "redirect:/recolectorinteligente/";
 	}
+	
+	@PostMapping("/agregarevento") 
+    public String buscar(@RequestParam("fecha")LocalDateTime fecha,
+    						@RequestParam("descripcion")String descripcion,
+    						@RequestParam("dispositivoId")int dispositivoId){
+       Dispositivo dispositivo = sensorRecolectorService.findByid(dispositivoId);
+       Evento evento = new Evento();
+       evento.setFechaRegistro(fecha);
+       evento.setDescripcion(descripcion);
+       evento.setDispositivo(dispositivo);
+       if (dispositivo != null) {      
+    	   sensorRecolectorService.agregarEventos(dispositivo,evento);
+       }
+       return "redirect:/evento/";
+    }
+	
 }

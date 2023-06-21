@@ -88,7 +88,7 @@ public class FuncionesAlumbrado {
 						LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
 						// registro el horario en que debería estar prendida la luz
 						//agregar or para que verifique el la obcuridadPor
-						if((horaMedAhora.isAfter(horaInicio) || horaMedAhora.isBefore(horaFin)))
+						if((horaMedAhora.isAfter(horaInicio) || horaMedAhora.isBefore(horaFin)) || horaMedAhora.equals(horaInicio))
 						{
 							//verifico si la luz esta apagada , si esta apagada la prendo y genero un evento
 								

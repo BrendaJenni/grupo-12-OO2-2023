@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
+import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.models.SensorAlumbradoModel;
 import com.TpObjetos2.TpGrupo12.services.ISensorAlumbradoService;
@@ -70,5 +71,21 @@ public class SensorAlumbradoController {
 	       
 	       return "redirect:/sensoralumbrado/alumbrado";
 	   }
+	   
+	   
+		@PostMapping("/agregarevento") 
+	    public String buscar(@RequestParam("fecha")LocalDateTime fecha,
+	    						@RequestParam("descripcion")String descripcion,
+	    						@RequestParam("dispositivoId")int dispositivoId){
+	       Dispositivo dispositivo = sensorAlumbradoService.findByid(dispositivoId);
+	       Evento evento = new Evento();
+	       evento.setFechaRegistro(fecha);
+	       evento.setDescripcion(descripcion);
+	       evento.setDispositivo(dispositivo);
+	       if (dispositivo != null) {      
+	    	   sensorAlumbradoService.agregarEventos(dispositivo,evento);
+	       }
+	       return "redirect:/evento/";
+	    }
 	   
 }
