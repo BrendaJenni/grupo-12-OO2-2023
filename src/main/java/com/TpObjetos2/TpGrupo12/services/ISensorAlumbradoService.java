@@ -24,5 +24,4 @@ public interface ISensorAlumbradoService {
 
 	public DispositivoModel agregarEventos(Dispositivo dispositivoModel, Evento evento);
 	
-
 }

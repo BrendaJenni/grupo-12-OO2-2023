@@ -18,4 +18,21 @@ public class MedicionHumedad extends Medicion{
 	
 	@Column(name="estadoCesped")
 	private boolean estadoCesped;
+	
+	public double getHumedad() {
+		return humedad;
+	}
+
+	public void setHumedad(double humedad) {
+		this.humedad = humedad;
+	}
+
+	public boolean isEstadoCesped() {
+		return estadoCesped;
+	}
+
+	public void setEstadoCesped(boolean estadoCesped) {
+		this.estadoCesped = estadoCesped;
+	}
+	
 }

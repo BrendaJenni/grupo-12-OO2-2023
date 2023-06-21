@@ -1,3 +1,17 @@
 .botones{
 	width:100%;
 }
+.filtro {
+	display:inline-block;
+	flex-wrap: wrap;
+}
+.agrego {
+	display:inline-block;
+	flex-wrap: wrap;
+}
+.agregar{
+	padding-bottom: 30px;
+}
+.container {
+	width:80%;
+}

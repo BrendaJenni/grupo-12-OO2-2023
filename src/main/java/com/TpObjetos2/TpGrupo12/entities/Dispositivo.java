@@ -24,12 +24,14 @@ import lombok.Setter;
 public class Dispositivo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+
     private int id;  
 
     @Column(name="nombre")
     private String nombre;
 
     @Column(name="activo")
+
     private boolean activo;
     
     @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -37,7 +39,22 @@ public class Dispositivo {
 
     @OneToMany(mappedBy = "dispositivo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Evento> eventos= new ArrayList<>();
+
+
+    public Dispositivo (int id,String nombre, boolean activo) {
+    	this.id=id;
+    	this.nombre = nombre;
+    	this.activo = activo;
+    }
     
+	public Dispositivo(String nombre, boolean activo) {
+		super();
+		this.nombre = nombre;
+		this.activo = activo;
+	}
+	
+    public Dispositivo() {}
+
     public int getId() {
 		return id;
 	}
@@ -78,13 +95,7 @@ public class Dispositivo {
 		this.eventos = eventos;
 	}
 
-	public Dispositivo(String nombre, boolean activo) {
-		super();
-		this.nombre = nombre;
-		this.activo = activo;
-	}
 	
-	public Dispositivo() {}
 	
 	
 	
@@ -92,3 +103,4 @@ public class Dispositivo {
     
 
 }
+

@@ -11,13 +11,13 @@ import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
 @Getter @Setter
 @PrimaryKeyJoinColumn(name = "id")
 @Table(name="estacionamiento")
 public class SensorEstacionamiento extends Dispositivo{
+
 	@ElementCollection(targetClass = Boolean.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "plazas", joinColumns = @JoinColumn(name = "dispositivo_id"))
 	@Column(name = "booleano")
@@ -78,3 +78,4 @@ public class SensorEstacionamiento extends Dispositivo{
 	
 
 }
+

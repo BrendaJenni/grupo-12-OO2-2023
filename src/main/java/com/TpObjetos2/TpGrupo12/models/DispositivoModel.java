@@ -8,6 +8,7 @@ public class DispositivoModel {
     protected int id;
     protected String nombre;
     protected boolean activo;
+    protected boolean encendido;
 
     public DispositivoModel(int id_dispositivo, String nombre, boolean activo) {
         this.id = id_dispositivo;
@@ -16,15 +17,16 @@ public class DispositivoModel {
     }
 
     public DispositivoModel() {}
-    
 
-    public int getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
 	public String getNombre() {
         return nombre;
@@ -44,6 +46,9 @@ public class DispositivoModel {
     
     
 
+    @Override
+    public String toString() {
+        return "DispositivoModel [id=" + id + ", nombre=" + nombre + ", activo=" + activo + "]";
+    }
 
-    
 }

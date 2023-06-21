@@ -1,1 +1,117 @@
-<h1> EVENTO </h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="/css/dispositivo.css" rel="stylesheet" />
+    <title>Dispositivo</title>
+</head>
+<body>
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1> EVENTO </h1>
+				<!-- generamos la lista de eventos de cada dispositivo -->
+				<h2>Lista de Eventos de todos los dispositivos</h2>
+				<div class="row agrego">
+					<h3>Filtros</h3>
+				<form th:action="@{/sensorhumedad/evento/busquedafecha}" class="mb-3">
+					<div class="form-group filtro">
+						<label for:"fecha">Fecha </label>
+						<input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="">
+					</div>
+					<button type="search" class="btn btn-primary">Filtrar</button>
+					</form>
+					<form th:action="@{/sensorhumedad/evento/busquedaid}" class="mb-3">
+						<div class="form-group filtro">
+						<label for:"id">Id Dispositivo </label>
+						<input type="number" class="form-control" id="id" name="id" placeholder="">
+					</div>
+					<button type="search" class="btn btn-primary">Filtrar</button>
+					</form>
+					<form th:action="@{/sensorhumedad/evento/busquedaestado}" class="mb-3">
+					<div class="form-group filtro">
+						<label for:"estado">Estado Dispositivo </label>
+						<select class="form-control" id="estado" name="estado" placeholder="">
+							<option value="true">true</option>
+							<option value="false">false</option>
+							<option value=""></option>
+						</select>
+					</div>
+					<button type="search" class="btn btn-primary">Filtrar</button>
+					</form>		
+				
+				</div>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<table class="table table-stripped table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Descripción</th>
+							<th scope="col">Fecha de Registro</th>
+							<th scope="col">Dispositivo id</th>
+							<th scope="col">Estado dispositivo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="evento: ${eventos}">
+							<td>
+								<ul>
+									<li th:utext="${evento.idEvento}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:utext="${evento.descripcion}"></li>
+								</ul>
+							</td>
+							<td>
+									<ul>
+										<li th:utext="${evento.fechaRegistro}"></li>
+									</ul>
+								</td>
+								<td>
+								<ul>
+									<li th:utext="${evento.dispositivo.id}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:utext="${evento.dispositivo.activo}"></li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+            <div class="col">
+                <h2>Agregar Evento para Sensor Humedad</h2>
+                <form th:action="@{/sensorhumedad/agregarevento}" method="post">
+                    <div class="form-group">
+                        <label for="dispositivoId">ID del Dispositivo:</label>
+                         <input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                         <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="descripcion">Descripcion: </label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary mb-3">Agregar Evento</button>
+                </form>
+            </div>
+         </div>
+        </div>
+  </body>
+</html>

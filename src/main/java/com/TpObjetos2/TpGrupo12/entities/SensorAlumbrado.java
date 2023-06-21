@@ -46,7 +46,5 @@ public class SensorAlumbrado extends Dispositivo{
 	public void setObscuridadPor(double obscuridadPor) {
 		this.obscuridadPor = obscuridadPor;
 	}
-	
-	
 }
 
