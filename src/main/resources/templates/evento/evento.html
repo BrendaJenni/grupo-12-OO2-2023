@@ -17,21 +17,21 @@
 				<h2>Lista de Eventos de todos los dispositivos</h2>
 				<div class="row agrego">
 					<h3>Filtros</h3>
-				<form th:action="@{/sensorhumedad/evento/busquedafecha}" class="mb-3">
+				<form th:action="@{/evento/busquedafecha}" class="mb-3">
 					<div class="form-group filtro">
 						<label for:"fecha">Fecha </label>
 						<input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="">
 					</div>
 					<button type="search" class="btn btn-primary">Filtrar</button>
 					</form>
-					<form th:action="@{/sensorhumedad/evento/busquedaid}" class="mb-3">
+					<form th:action="@{/evento/busquedaid}" class="mb-3">
 						<div class="form-group filtro">
 						<label for:"id">Id Dispositivo </label>
 						<input type="number" class="form-control" id="id" name="id" placeholder="">
 					</div>
 					<button type="search" class="btn btn-primary">Filtrar</button>
 					</form>
-					<form th:action="@{/sensorhumedad/evento/busquedaestado}" class="mb-3">
+					<form th:action="@{/evento/busquedaestado}" class="mb-3">
 					<div class="form-group filtro">
 						<label for:"estado">Estado Dispositivo </label>
 						<select class="form-control" id="estado" name="estado" placeholder="">
