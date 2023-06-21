@@ -64,7 +64,8 @@
 							<th scope="col">Fecha</th>
 							<th scope="col">Dispositivo Vinculado</th>	
 							<th scope="col">Humedad</th>		
-							<th scope="col">Estado Cesped</th>				
+							<th scope="col">Cesped Mojado</th>		
+							<th scope="col">Encendido</th>		
 						</tr>
 					</thead>
 					<tbody>
@@ -92,6 +93,11 @@
 							<td>
 								<ul>
 									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.estadoCesped}"></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li th:each="medicion : ${dispositivo.mediciones}" th:utext="${medicion.dispositivo.encendido}"></li>
 								</ul>
 							</td>
 						</tr>

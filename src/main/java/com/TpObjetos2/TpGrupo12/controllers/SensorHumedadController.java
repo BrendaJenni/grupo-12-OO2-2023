@@ -65,7 +65,7 @@ public class SensorHumedadController {
 	@PostMapping("/agregarmedicion")
 	   public String agregarMedicion(@RequestParam("dispositivoId") int dispositivoId,
 	                                 @RequestParam("fecha") LocalDateTime fecha,
-	                                 @RequestParam("humedad") double humedad,
+	                                 @RequestParam("humedad") int humedad,
 	                                 @RequestParam("estadoCesped") boolean estadoCesped) {
 	       Dispositivo dispositivo = sensorHumedadService.findByid(dispositivoId); 
 	       if (dispositivo != null) {      

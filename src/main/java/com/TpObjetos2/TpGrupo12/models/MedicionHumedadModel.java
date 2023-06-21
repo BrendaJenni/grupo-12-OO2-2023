@@ -7,22 +7,22 @@ import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 
 public class MedicionHumedadModel extends MedicionModel{
 
-	private double humedad;
+	private int humedad;
 	private boolean estadoCesped;
 	
 	public MedicionHumedadModel() {}
 
-	public MedicionHumedadModel(int idMedicion, LocalDateTime fechaRegistro, Dispositivo dispositivo,double humedad, boolean estadoCesped) {
+	public MedicionHumedadModel(int idMedicion, LocalDateTime fechaRegistro, Dispositivo dispositivo,int humedad, boolean estadoCesped) {
 		super( idMedicion, fechaRegistro, dispositivo);
 		this.humedad = humedad;
 		this.estadoCesped = estadoCesped;
 	}
 
-	public double getHumedad() {
+	public int getHumedad() {
 		return humedad;
 	}
 
-	public void setHumedad(double humedad) {
+	public void setHumedad(int humedad) {
 		this.humedad = humedad;
 	}
 

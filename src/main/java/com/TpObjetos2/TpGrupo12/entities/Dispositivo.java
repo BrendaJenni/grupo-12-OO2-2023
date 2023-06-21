@@ -45,7 +45,7 @@ public class Dispositivo {
     @OneToMany(mappedBy = "dispositivo",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Medicion> mediciones;
 
-    @OneToMany(mappedBy = "dispositivo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "dispositivo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Evento> eventos;
     
     public int getId() {

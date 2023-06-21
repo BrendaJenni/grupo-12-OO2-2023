@@ -7,12 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.Medicion;
 import com.TpObjetos2.TpGrupo12.entities.MedicionHumedad;
-import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorHumedadModel;
@@ -62,7 +60,7 @@ public class SensorHumedadService implements ISensorHumedadService{
     }
 
 	@Override
-    public DispositivoModel agregarMedicion(Dispositivo dispositivo,LocalDateTime fecha,double humedad, boolean estadoCesped) {
+    public DispositivoModel agregarMedicion(Dispositivo dispositivo,LocalDateTime fecha,int humedad, boolean estadoCesped) {
         if (dispositivo != null) {
             Dispositivo dispositivoExistente = sensorHumedadRepository.findById(dispositivo.getId());
             if (dispositivoExistente != null) {
@@ -103,33 +101,56 @@ public class SensorHumedadService implements ISensorHumedadService{
                 eventos.add(eventosN);
 
                 dispositivoExistente.setEventos(eventos);;
+                
+                //genero este cambio para poder variase el encendido del primer mostrar y que se vea mejor en el front
+                SensorHumedad setActivo = (SensorHumedad)dispositivoExistente;
+
+                if(evento.getDescripcion().equals("Regar cesped")) {
+                	
+                	setActivo.setEncendido(true);;
+                	
+                }else {
+                	
+                	setActivo.setEncendido(false);;
+                	
+                }
 
                 // lo gurado en la base de datos
-                Dispositivo dispositivoActualizado = sensorHumedadRepository.save((SensorHumedad)dispositivoExistente);
+                Dispositivo dispositivoActualizado = sensorHumedadRepository.save(setActivo);
                 return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
             }
         }
      return null;
-        };
+}
         
 	
-	public MedicionHumedad traerAleatorio() {
-		MedicionHumedad medicion = new MedicionHumedad();
+	public MedicionHumedad traerUltimaMedicion() {
+		MedicionHumedad medicion; 
 		
 		List<SensorHumedad> dispositivos = getAll();
-		int posicion = (int) (Math.random()*dispositivos.size());
-		
-		Dispositivo buscar = sensorHumedadRepository.findById(dispositivos.get(posicion).getId());
-		List<Medicion> mediciones = buscar.getMediciones();
-		
-		if(mediciones.size()==0) {
-			medicion = null;
-			
-			agregarMedicion(buscar,LocalDateTime.now(),20,false);
-		}else {
-			medicion = (MedicionHumedad) mediciones.get(mediciones.size()-1);
-		}
-		
-		return medicion;
-	}
+        int id = (int) (Math.random()*dispositivos.size());
+        
+        //asigno el dispositivo a una variable dispositivo para poder consumir las mediciones
+        Dispositivo buscar = findByid(dispositivos.get(id).getId());
+        List<Medicion> mediciones = buscar.getMediciones();
+        
+        // si las mediciones estan vacias creamos la primera y devolvemos null lo usamos como flag para cuando llamemos a la funcion
+        if(mediciones.size() == 0)  
+        {
+        	medicion = null;
+        	// lo mandamos a generar la primera medicion del dispositivo con la luz apagada en la proxima variable cuando se vea nuevamente la hora y el porcentaje de luz se decidira si prenderla
+        	agregarMedicion(buscar, LocalDateTime.now(), 20,false);
+        }else {
+        	 //dejo este campo solo para agregar 10 mediciones en cada dispositivo y que no rompa
+        	 if(mediciones.size() >= 10 || buscar.isActivo() == false) {
+        	     //si entra aca ya no debemos agregar mediciones a este dispositivo
+        	     medicion= null;
+        	 }else {
+        	    //en caso de que ya tenga mediciones se va a devolver la ultima generada
+        	    medicion = (MedicionHumedad) mediciones.get(mediciones.size()-1);
+        	 }
+
+        } 
+        return medicion;
+    }
 }
