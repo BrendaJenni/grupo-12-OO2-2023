@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter
 public class MedicionRecolectorModel extends DispositivoModel {
 	boolean estaLlenoAhora;
 	

@@ -87,7 +87,9 @@ public class SensorEstacionamientoController {
     @PostMapping("/new")
     public RedirectView create(@ModelAttribute("estacionamiento") SensorEstacionamientoModel estacionamientoModel){
     	estacionamientoModel.inicializarPlazas();
+    	//estacionamientoModel.calcularPlazasLibres();
     	estacionamientoModel.setPlazas(estacionamientoService.actualizarPlazas(estacionamientoModel));
+    	estacionamientoModel.setLibres(estacionamientoModel.calcularPlazasLibres());
         estacionamientoService.insertOrUpdate(estacionamientoModel);
         return new RedirectView("/dispositivo/estacionamiento");
     }

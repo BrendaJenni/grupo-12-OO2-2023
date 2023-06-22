@@ -19,7 +19,7 @@ import lombok.Setter;
 import jakarta.persistence.InheritanceType;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter
 @Table(name = "Medicion")
 @Inheritance(strategy = InheritanceType.JOINED)
 

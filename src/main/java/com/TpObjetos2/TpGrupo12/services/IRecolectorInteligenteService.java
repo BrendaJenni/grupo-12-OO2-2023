@@ -26,5 +26,7 @@ public interface IRecolectorInteligenteService {
 
 	public Dispositivo findByid(int id);
 
-	DispositivoModel agregarEventos(Dispositivo dispositivoModel, Evento evento);
+	public DispositivoModel agregarEventos(Dispositivo dispositivoModel, Evento evento);
+
+	public DispositivoModel insertOrUpdateReco(Dispositivo sensorRecolectorModel);
 }

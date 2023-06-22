@@ -32,7 +32,7 @@ public class FuncionesEstacionamiento {
 		if(implementar == null) {
 		}else {
 			LocalTime horaMedAhora = implementar.getFechaRegistro().toLocalTime();
-			if((horaMedAhora.isAfter(horaInicio) && horaMedAhora.isBefore(horaFin))) {
+			if(!(horaMedAhora.isAfter(horaFin) && horaMedAhora.isBefore(horaInicio))) {
 						
 				if(implementar.isEstadoLibre()) { 
 					
