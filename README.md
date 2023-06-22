@@ -3,6 +3,8 @@ Repositorio para el proyecto grupal de OO2
 
 Link Drive donde se encuentra el video explicativo de la aplicacion y el script de la base de datos:
 
+https://drive.google.com/drive/folders/1azcPCEUnjPrbWKRI5o3lUUnmaO5kcHnr?usp=sharing
+
 
 --- Datos para logearse ---
 
@@ -13,10 +15,10 @@ User Auditor : user
 Password Auditor : user
 
 --- Paso a paso para levantar la aplicacion ---
-1. Primero levantar la base de datos.
+1. Primero levantar la base de datos , con el script que dejamos en el drive.
 2. importar el archivo.
 3. En la ubicacion grupo-12-OO2-2023\src\main\resources\application.yml cambiar los datos de  username y password segun sus datos del MySQL.
-4. evantar la aplicación.
+4. Levantar la aplicación.
 
 --- Detalle de lo realizado por el equipo ---
 
@@ -32,19 +34,19 @@ Todo el equipo conjunto
 
 --- Casos de uso de cada uno ---
 
-Johann
+Johann Gomez
 1. Sensor alumbrado(implementaciones y funciones)
 2. Logica de mediciones alumbrado
 
-Valentina
+Valentina Perafan
 1. Recolector Inteligente(implementaciones y funciones)
 2. Logica de mediciones Recolector
 
-Lourdes
+Lourdes Toledo
 1. Sensor Estacionamiento(implementaciones y funciones)
 2. Logica de mediciones Estacionamiento
 
-Brenda
+Brenda Stockl
 1. Sensor Humedad(implementaciones y funciones)
 2. Filtros de Evento
 
