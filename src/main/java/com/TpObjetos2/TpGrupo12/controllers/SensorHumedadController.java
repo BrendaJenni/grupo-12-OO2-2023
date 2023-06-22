@@ -94,7 +94,7 @@ public class SensorHumedadController {
        if (dispositivo != null) {      
            sensorHumedadService.agregarEventos(dispositivo,evento);
        }
-       return "redirect:/sensorhumedad/";
+       return "redirect:/evento/";
     }
 
 }

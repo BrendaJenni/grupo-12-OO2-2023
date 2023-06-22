@@ -11,13 +11,13 @@ import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
 @Getter @Setter
 @PrimaryKeyJoinColumn(name = "id")
 @Table(name="estacionamiento")
 public class SensorEstacionamiento extends Dispositivo{
-
 	@ElementCollection(targetClass = Boolean.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "plazas", joinColumns = @JoinColumn(name = "dispositivo_id"))
 	@Column(name = "booleano")
@@ -28,7 +28,7 @@ public class SensorEstacionamiento extends Dispositivo{
 	
 	@Column(name="libres")
 	private int libres;
-	
+
 	public SensorEstacionamiento(int id, String nombre, boolean activo, List<Boolean> plazas,
 			int tam, int libres) {
 		super(id, nombre, activo);
@@ -36,12 +36,12 @@ public class SensorEstacionamiento extends Dispositivo{
 		this.tam = tam;
 		this.libres=libres;
 	}
-	
+
 	public SensorEstacionamiento(String nombre, boolean activo, int libres, int tam, List<Boolean> plazas) {
 		super(nombre, activo);
-		this.libres=libres;
+		setLibres(libres);
 		this.tam=tam;
-		setPlazas(plazas);
+		this.plazas=plazas;
 	}
 
 	public SensorEstacionamiento() {
@@ -52,7 +52,7 @@ public class SensorEstacionamiento extends Dispositivo{
 	}
 
 	public void setPlazas(List<Boolean> plazas) {
-		this.plazas=inicializarPlazas();
+		this.plazas = plazas;
 	}
 
 	public int getTam() {
@@ -63,11 +63,10 @@ public class SensorEstacionamiento extends Dispositivo{
 		this.tam = tam;
 	}
 
-	public List<Boolean> inicializarPlazas() {
-		for(int i=0;i<this.tam;i++) {
-			this.plazas.add(false);
+	public void inicializarPlazas() {
+		for(int i=0;i<tam;i++) {
+			plazas.add(false);
 		}
-		return this.plazas;
 	}
 
 	public int getLibres() {
@@ -76,13 +75,17 @@ public class SensorEstacionamiento extends Dispositivo{
 
 	public void setLibres(int libres) {
 		int cont = 0;
-		for(int i=0;i<this.plazas.size();i++){
-			if(this.plazas.get(i)) {
+		for(int i=0;i<plazas.size();i++) {
+			if(plazas.get(i)) {
 				cont = cont+1;
 			}
 		}
-		this.libres=cont;
+		this.libres = cont;
+	}
+
+	@Override
+	public String toString() {
+		return "SensorEstacionamiento [plazas=" + plazas + ", tam=" + tam + ", libres=" + libres + "]";
 	}
 	
 }
-

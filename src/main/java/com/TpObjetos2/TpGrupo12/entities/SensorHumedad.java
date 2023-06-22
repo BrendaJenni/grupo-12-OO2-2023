@@ -27,7 +27,7 @@ public class SensorHumedad extends Dispositivo{
 	
 	public SensorHumedad() {}
 	
-	public SensorHumedad(int id,String nombre, boolean activo,boolean encendido) {
+	public SensorHumedad(int id,String nombre, boolean activo, boolean encendido) {
 		super(id,nombre,activo);
 		this.encendido=encendido;
 	}

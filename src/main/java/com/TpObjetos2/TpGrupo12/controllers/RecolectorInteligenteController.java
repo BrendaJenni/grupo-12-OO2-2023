@@ -40,7 +40,14 @@ public class RecolectorInteligenteController {
 	
 	@GetMapping("/") //mi index
 	public String index(Model model){
-	   model.addAttribute("dispositivos", sensorRecolectorService.getAll());
+		List<RecolectorInteligente> dispositivos = sensorRecolectorService.getAll();
+		List<RecolectorInteligente> dispositivosRecolector = new ArrayList<>();
+		for (RecolectorInteligente dispositivo : dispositivos) {
+			if (dispositivo.isActivo() == true) {
+				dispositivosRecolector.add(dispositivo);
+			}
+		}
+	   model.addAttribute("dispositivos", dispositivosRecolector);
 	   return "dispositivo/recolector";
 	}
 
@@ -85,7 +92,7 @@ public class RecolectorInteligenteController {
        if (dispositivo != null) {      
     	   sensorRecolectorService.agregarEventos(dispositivo,evento);
        }
-       return "redirect:/recolectorinteligente/";
+       return "redirect:/evento/";
     }
 	
 }

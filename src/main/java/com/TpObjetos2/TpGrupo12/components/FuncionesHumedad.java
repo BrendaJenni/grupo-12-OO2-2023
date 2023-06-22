@@ -24,7 +24,8 @@ public class FuncionesHumedad {
 	@Scheduled(fixedDelay=5000)
 	public void medicionesHumedad() {
 		MedicionHumedad implementar = sensorHumedadService.traerUltimaMedicion();
-				
+		
+		//LOS EVENTOS NO SE AGREGARÁN AUTOMÁTICAMENTE FUERA DE ESTE HORARIO: 6 am - 10 pm
 		LocalTime horaInicio = LocalTime.of(6, 0);
 		LocalTime horaFin = LocalTime.of(22, 0);
 		Random random = new Random();

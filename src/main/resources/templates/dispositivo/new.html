@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<title>Dispositivo</title>
+</head>
+<body>
+	<h1>Nuevo dispositivo</h1>
+	<br>
+	<!--
+    <table class="table table-stripped table-bordered">
+        <thead class="table-dark" align="center">
+            <tr>
+				<th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Activo</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            <tr th:each="dispositivo : ${dispositivos}">
+				<td><span th:text="${dispositivo.id}"/></td>
+                <td><span th:text="${dispositivo.nombre}"/></td>
+                <td><span th:text="${dispositivo.activo}"/></td>
+            </tr>
+        </tbody>
+    </table>-->
+    <form action="#" th:action="@{/dispositivo/new}" th:object="${dispositivo}" method="post">
+        <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
+		<p>Activo:
+          <select th:field="*{activo}">
+            <option value="true">Verdadero</option>
+            <option value="false">Falso</option>
+          </select>
+		</p>
+		<br>
+		<!--
+		<h3>Tipos de sensor</h3>
+	    <div class="form-check">
+	      <input class="form-check-input" type="radio" name="tipoDispositivo" id="sensorAlumbrado" value="sensorAlumbrado">
+	      <label class="form-check-label" for="sensorAlumbrado"><h4>Sensor de Alumbrado</h4></label>
+	      <div class="additional-fields">
+	        <p>Encendido: <input type="checkbox" name="encendido"></p>
+	      </div>
+	    </div>
+	    <div class="form-check">
+	      <input class="form-check-input" type="radio" name="tipoDispositivo" id="sensorEstacionamiento" value="sensorEstacionamiento">
+	      <label class="form-check-label" for="sensorEstacionamiento"><h4>Sensor de Estacionamiento</h4></label>
+	      <div class="additional-fields">
+	        <p>Plazas: <input type="number" name="plazas" ></p>
+	      </div>
+	    </div>
+	  </div>-->
+	
+	  <button type="submit" class="btn btn-primary">Guardar</button>
+	</form>
+	<br>
+</body>
+</html>

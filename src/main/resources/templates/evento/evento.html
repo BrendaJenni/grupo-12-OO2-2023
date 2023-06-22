@@ -6,6 +6,20 @@
     <title>Dispositivo</title>
 </head>
 <body>
+	
+	<div class="row">
+	    <div class="col text-start">
+	        <form th:action="@{/dispositivo/}" method="post">
+	            <button type="submit" class="btn btn-danger">VOLVER</button>
+	        </form>
+	    </div>
+	    <div class="col text-end">
+	        <form th:action="@{/logout}" method="post">
+	            <button type="submit" class="btn btn-danger">Logout</button>
+	        </form>
+	    </div>
+	</div>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col">
@@ -135,7 +149,7 @@
 						</div>
 						<button type="submit" class="btn btn-primary mb-3">Agregar Evento Recolector</button>
 					</form>
-					<form th:action="@{/sensorhumedad/agregarevento}" method="post">
+					<form th:action="@{/dispositivo/estacionamiento/agregarevento}" method="post">
 						<div class="form-group">
 							<label for="dispositivoId">ID del Dispositivo Estacionamiento:</label>
 							<input type="number" class="form-control" id="dispositivoId" name="dispositivoId" required>

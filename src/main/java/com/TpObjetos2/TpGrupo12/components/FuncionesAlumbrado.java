@@ -57,7 +57,7 @@ public class FuncionesAlumbrado {
 	}
 	
 	@Scheduled(fixedDelay=5000)
-	public void mostarHola() {		
+	public void mostarHola() {	
 		MedicionAlumbrado implementar = this.traerUltimaMediacion();
 		//LocalDate fecha = 
 		LocalTime horaInicio = LocalTime.of(23, 00);
@@ -80,7 +80,7 @@ public class FuncionesAlumbrado {
 					Dispositivo dispo = implementar.getDispositivo();
 					Evento agregar = new Evento("Encender Luz", implementar.getFechaRegistro(),dispo);
 					sensorAlumbradoService.agregarEventos(dispo, agregar);
-					System.out.println("\n AGREWGAMOS EVENTO");
+					System.out.println("\n AGREGAMOS EVENTO");
 				} 
 			} else if(implementar.getOscuridadActualPor() > 70) {	
 				if(implementar.isEstadoActual() == false) {	
@@ -89,16 +89,15 @@ public class FuncionesAlumbrado {
 					Dispositivo dispo = implementar.getDispositivo();
 					Evento agregar = new Evento("Encender Luz", implementar.getFechaRegistro(),dispo);
 					sensorAlumbradoService.agregarEventos(dispo, agregar);
-					System.out.println("\n AGREWGAMOS EVENTO");
+					System.out.println("\n AGREGAMOS EVENTO");
 				}			
 			}else if(implementar.isEstadoActual() == true) {
 				implementar.setEstadoActual(false);
-				System.out.println("\n\n PASO POR ACA");
 				//envio el envento al dispositivo para que se agregue correctamente
 				Dispositivo dispo = implementar.getDispositivo();
 				Evento agregar =new Evento("Apagar Luz", implementar.getFechaRegistro(),dispo);
 				sensorAlumbradoService.agregarEventos(dispo,agregar);
-				System.out.println("\n AGREWGAMOS EVENTO");			 
+				System.out.println("\n AGREGAMOS EVENTO");			 
 			}
 			List<SensorAlumbrado> dispositivos = sensorAlumbradoService.getAll();
 			boolean check = this.medicionesCompletas(dispositivos);
@@ -109,7 +108,7 @@ public class FuncionesAlumbrado {
 				//generamos un double random de 1 a 100 para poner en la obscuridad de la hora siguiente
 				double nuevaObscuridad = Math.random()*100+1;
 				sensorAlumbradoService.agregarMedicion(implementar.getDispositivo(), fechanueva, implementar.isEstadoActual(), nuevaObscuridad);
-				System.out.println("\n AGREWGAMOS Medicion");					
+				System.out.println("\n AGREGAMOS MEDICION");					
 			}
 		}
 	}

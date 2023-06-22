@@ -30,7 +30,7 @@ public class Medicion {
 	    private int idMedicion;
 	  
 	  @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "idDispositivo")
+	    @JoinColumn(name = "id")
 	    private Dispositivo dispositivo;
     
 	  @Column(name = "fechaRegistro")
@@ -39,6 +39,23 @@ public class Medicion {
 	public int getIdMedicion() {
 		return idMedicion;
 	}
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne
+    // normalmente nullable es igual a false, en este caso se deja como true porque el ejemplo es simple
+    //@JoinColumn(name="idDispositivo", nullable=false)
+
+	public Medicion(int idMedicion, Dispositivo dispositivo, LocalDateTime fechaRegistro) {
+		this.idMedicion = idMedicion;
+		this.dispositivo = dispositivo;
+		this.fechaRegistro = fechaRegistro;
+	}
+	
+	public Medicion(Dispositivo dispositivo, LocalDateTime fechaRegistro) {
+		this.dispositivo = dispositivo;
+		this.fechaRegistro = fechaRegistro;
+	}
+	
+	public Medicion() {}
 
 	protected void setIdMedicion(int idMedicion) {
 		this.idMedicion = idMedicion;
@@ -59,14 +76,4 @@ public class Medicion {
 	public void setFechaRegistro(LocalDateTime fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
-
-	public Medicion() {
-	}
-
-	public Medicion(Dispositivo dispositivo, LocalDateTime fechaRegistro) {
-		super();
-		this.dispositivo = dispositivo;
-		this.fechaRegistro = fechaRegistro;
-	}
-    
 }

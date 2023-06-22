@@ -54,7 +54,7 @@ public class SensorAlumbradoController {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	   @PostMapping("/bajaLogica")
-	    public String bajaLogica(@RequestParam("id") int id) {
+	    public String bajaLogica(@RequestParam("id") int id, SensorAlumbradoModel sensorAlumbradoModel) {
 	        Dispositivo dispositivo = sensorAlumbradoService.findByid(id);
 	        
 	        sensorAlumbradoService.insertOrUpdatealum(dispositivo);
@@ -69,7 +69,7 @@ public class SensorAlumbradoController {
 	                                 @RequestParam("estadoActual") boolean estadoActual,
 	                                 @RequestParam("obscuridadActualPor") double obscuridadActualPor) {
 	       Dispositivo dispositivo = sensorAlumbradoService.findByid(dispositivoId); 
-	       if (dispositivo != null) {      
+	       if (dispositivo != null) {
 	           sensorAlumbradoService.agregarMedicion(dispositivo,fecha,estadoActual,obscuridadActualPor);
 	       }
 	       
