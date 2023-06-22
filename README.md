@@ -14,7 +14,9 @@ Password Auditor : user
 
 --- Paso a paso para levantar la aplicacion ---
 1. Primero levantar la base de datos.
-2. importar el archivo y levantar la aplicación.
+2. importar el archivo.
+3. En la ubicacion grupo-12-OO2-2023\src\main\resources\application.yml cambiar los datos de  username y password segun sus datos del MySQL.
+4. evantar la aplicación.
 
 --- Detalle de lo realizado por el equipo ---
 
