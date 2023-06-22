@@ -39,7 +39,7 @@ public class FuncionesEstacionamiento {
 					Evento agregar = new Evento("Plazas disponibles", implementar.getFechaRegistro(),implementar.getDispositivo());
 					estacionamientoService.agregarEventos(implementar.getDispositivo(), agregar);
 						
-				}else if(!implementar.isEstadoLibre()) { //si esta mojado
+				}else if(!implementar.isEstadoLibre()) {
 					
 					Evento agregar = new Evento("Estacionamiento lleno", implementar.getFechaRegistro(),implementar.getDispositivo());
 					estacionamientoService.agregarEventos(implementar.getDispositivo(), agregar);

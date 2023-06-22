@@ -57,6 +57,8 @@ public interface ISensorEstacionamientoService {
 	DispositivoModel agregarMedicion(SensorEstacionamientoModel dispositivoModel, LocalDateTime fecha,
 		boolean estadoLibre);
 
+	DispositivoModel agregarMedicion(Dispositivo dispositivoModel, LocalDateTime fecha, boolean estadoLibre);
+
 	//public void agregarMedicion(Dispositivo dispositivo, LocalDateTime fecha, boolean estado);
 	
 	
