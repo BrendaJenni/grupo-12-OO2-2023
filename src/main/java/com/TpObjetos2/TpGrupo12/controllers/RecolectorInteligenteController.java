@@ -59,12 +59,14 @@ public class RecolectorInteligenteController {
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/bajaLogica")
-	public String eliminarSensor(@ModelAttribute("dispositivo") SensorRecolectorModel sensorRecolectorModel) {
-	   sensorRecolectorModel.setActivo(false);
-	   sensorRecolectorService.insertOrUpdate(sensorRecolectorModel);
-	   return "redirect:/recolectorinteligente/";
-	}
+    @PostMapping("/bajaLogica")
+    public String bajaLogica(@RequestParam("id") int id) {
+        Dispositivo dispositivo = sensorRecolectorService.findByid(id);
+        dispositivo.setActivo(false);
+        sensorRecolectorService.insertOrUpdateReco(dispositivo);
+
+        return "redirect:";
+    }
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/agregarmedicion")

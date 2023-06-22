@@ -34,12 +34,12 @@ public class SensorEstacionamiento extends Dispositivo{
 		super(id, nombre, activo);
 		this.plazas = plazas;
 		this.tam = tam;
-		this.libres=libres;
+		this.libres = libres;
 	}
 
 	public SensorEstacionamiento(String nombre, boolean activo, int libres, int tam, List<Boolean> plazas) {
 		super(nombre, activo);
-		setLibres(libres);
+		this.libres=libres;
 		this.tam=tam;
 		this.plazas=plazas;
 	}
@@ -74,13 +74,17 @@ public class SensorEstacionamiento extends Dispositivo{
 	}
 
 	public void setLibres(int libres) {
+		this.libres = libres;
+	}
+	
+	public int calcularPlazasLibres() {
 		int cont = 0;
 		for(int i=0;i<plazas.size();i++) {
 			if(plazas.get(i)) {
 				cont = cont+1;
 			}
 		}
-		this.libres = cont;
+		return cont;
 	}
 
 	@Override

@@ -90,6 +90,7 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 		       List<Boolean> plazas = new ArrayList<Boolean>();
 		       estacionamiento.setPlazas(plazas);
 		       estacionamiento.inicializarPlazas();
+		       estacionamiento.setLibres(estacionamiento.calcularPlazasLibres());
 		       
 		       return estacionamiento;
 		}
