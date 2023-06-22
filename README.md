@@ -1,6 +1,8 @@
 # grupo-12-OO2-2023
 Repositorio para el proyecto grupal de OO2
 
+Branch de entrega : main 
+
 Link Drive donde se encuentra el video explicativo de la aplicacion y el script de la base de datos:
 
 https://drive.google.com/drive/folders/1azcPCEUnjPrbWKRI5o3lUUnmaO5kcHnr?usp=sharing
@@ -49,5 +51,3 @@ Lourdes Toledo
 Brenda Stockl
 1. Sensor Humedad(implementaciones y funciones)
 2. Filtros de Evento
-
-
