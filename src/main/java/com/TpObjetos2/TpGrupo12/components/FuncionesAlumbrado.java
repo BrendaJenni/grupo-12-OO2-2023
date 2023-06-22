@@ -41,7 +41,7 @@ public class FuncionesAlumbrado {
 		if(mediciones.size() == 0) {
 			medi = null;
 			// lo mandamos a generar la primera medicion del dispositivo con la luz apagada en la proxima variable cuando se vea nuevamente la hora y el porcentaje de luz se decidira si prenderla
-			sensorAlumbradoService.agregarMedicion(buscar, LocalDateTime.now(), false, 20);
+			sensorAlumbradoService.agregarMedicion(buscar, LocalDateTime.of(LocalDate.of(2023, 06, 21), LocalTime.of(18, 00)), false, 20);
 		}else {
 			//dejo este campo solo para agregar 10 mediciones en cada dispositivo y que no rompa
 			//ademas me fijo que el dispositvio este activo si no esta activo devuelvo null para que no se agregue nada
