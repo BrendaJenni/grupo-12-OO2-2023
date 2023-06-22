@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
 @Getter @Setter
@@ -33,14 +34,14 @@ public class SensorEstacionamiento extends Dispositivo{
 		super(id, nombre, activo);
 		this.plazas = plazas;
 		this.tam = tam;
-		this.libres=libres;
+		this.libres = libres;
 	}
-	
+
 	public SensorEstacionamiento(String nombre, boolean activo, int libres, int tam, List<Boolean> plazas) {
 		super(nombre, activo);
 		this.libres=libres;
 		this.tam=tam;
-		setPlazas(plazas);
+		this.plazas=plazas;
 	}
 
 	public SensorEstacionamiento() {
@@ -51,7 +52,7 @@ public class SensorEstacionamiento extends Dispositivo{
 	}
 
 	public void setPlazas(List<Boolean> plazas) {
-		this.plazas=inicializarPlazas();
+		this.plazas = plazas;
 	}
 
 	public int getTam() {
@@ -62,11 +63,10 @@ public class SensorEstacionamiento extends Dispositivo{
 		this.tam = tam;
 	}
 
-	public List<Boolean> inicializarPlazas() {
-		for(int i=0;i<this.tam;i++) {
-			this.plazas.add(false);
+	public void inicializarPlazas() {
+		for(int i=0;i<tam;i++) {
+			plazas.add(false);
 		}
-		return plazas;
 	}
 
 	public int getLibres() {
@@ -74,19 +74,17 @@ public class SensorEstacionamiento extends Dispositivo{
 	}
 
 	public void setLibres(int libres) {
+		this.libres = libres;
+	}
+	
+	public int calcularPlazasLibres() {
 		int cont = 0;
-		for(int i=0;i<this.plazas.size();i++){
-			if(this.plazas.get(i)) {
-				cont = cont+1;
-			}
-		}
-		this.libres=cont;
 		for(int i=0;i<plazas.size();i++) {
 			if(plazas.get(i)) {
 				cont = cont+1;
 			}
 		}
-		this.libres = cont;
+		return cont;
 	}
 
 	@Override
@@ -95,4 +93,3 @@ public class SensorEstacionamiento extends Dispositivo{
 	}
 	
 }
-

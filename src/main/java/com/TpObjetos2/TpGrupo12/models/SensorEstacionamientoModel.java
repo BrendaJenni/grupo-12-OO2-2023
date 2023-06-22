@@ -16,8 +16,11 @@ public class SensorEstacionamientoModel extends Dispositivo{
 		this.libres=libres;
 	}
 	
-	public SensorEstacionamientoModel(int id, String nombre, boolean activo) {
-		super(id, nombre, activo);
+	public SensorEstacionamientoModel(String nombre, boolean activo, List<Boolean> plazas, int tam, int libres) {
+		super(nombre, activo);
+		this.plazas=plazas;
+		this.tam=tam;
+		this.libres=libres;
 	}
 
 	public SensorEstacionamientoModel() {
@@ -47,6 +50,16 @@ public class SensorEstacionamientoModel extends Dispositivo{
 
 	public void setLibres(int libres) {
 		this.libres = libres;
+	}
+	
+	public int calcularPlazasLibres() {
+		int cont = 0;
+		for(int i=0;i<plazas.size();i++) {
+			if(plazas.get(i)) {
+				cont = cont+1;
+			}
+		}
+		return cont;
 	}
 
 	public void inicializarPlazas() {

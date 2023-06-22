@@ -14,12 +14,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.TpObjetos2.TpGrupo12.entities.MedicionEstacionamiento;
+import com.TpObjetos2.TpGrupo12.entities.MedicionHumedad;
 import com.TpObjetos2.TpGrupo12.entities.Dispositivo;
 import com.TpObjetos2.TpGrupo12.entities.Evento;
 import com.TpObjetos2.TpGrupo12.entities.Medicion;
 import com.TpObjetos2.TpGrupo12.entities.MedicionAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorAlumbrado;
 import com.TpObjetos2.TpGrupo12.entities.SensorEstacionamiento;
+import com.TpObjetos2.TpGrupo12.entities.SensorHumedad;
 import com.TpObjetos2.TpGrupo12.models.DispositivoModel;
 import com.TpObjetos2.TpGrupo12.models.SensorEstacionamientoModel;
 import com.TpObjetos2.TpGrupo12.repositories.ISensorEstacionamientoRepository;
@@ -41,10 +43,9 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	        if (dispositivoModel != null) {
 	            SensorEstacionamiento dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
 	            if (dispositivoExistente != null) {
-	                // actualizo es status del dispositivo
+	            	
 	                dispositivoExistente.setActivo(false);
 	               
-	                // lo gurado en la base de datos
 	                SensorEstacionamiento dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
 	                return modelMapper.map(dispositivoActualizado, SensorEstacionamiento.class);
 	            }
@@ -63,10 +64,7 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	        if (dispositivoModel != null) {
 	            Dispositivo dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
 	            if (dispositivoExistente != null) {
-	                // actualizo es status del dispositivo
 	                dispositivoExistente.setActivo(false);
-	               
-	                // lo gurado en la base de datos
 	                Dispositivo dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
 	                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
 	            }
@@ -90,6 +88,7 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 		       List<Boolean> plazas = new ArrayList<Boolean>();
 		       estacionamiento.setPlazas(plazas);
 		       estacionamiento.inicializarPlazas();
+		       estacionamiento.setLibres(estacionamiento.calcularPlazasLibres());
 		       
 		       return estacionamiento;
 		}
@@ -122,7 +121,6 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	                
 	                dispositivoExistente.setMediciones(mediciones);
 	               
-	                // lo gurado en la base de datos
 	                Dispositivo dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
 	                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
 	            }
@@ -147,7 +145,6 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	                
 	                dispositivoExistente.setEventos(eventos);
 	               
-	                // lo gurado en la base de datos
 	                Dispositivo dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
 	                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
 	            }
@@ -176,8 +173,7 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	                eventos.add(eventosN);
 	                
 	                dispositivoExistente.setEventos(eventos);
-	               
-	                // lo gurado en la base de datos
+	                
 	                Dispositivo dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
 	                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
 	            }
@@ -269,20 +265,6 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 			return modelMapper.map(estacionamientoModel, estacionamientoModel.getClass());
 		}
 
-		//@Override
-		/*
-		public SensorEstacionamientoModel insertOrUpdateEst(SensorEstacionamientoModel dispositivoModel, List<Boolean> plazas) {
-		    if (dispositivoModel != null) {
-		        SensorEstacionamiento dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
-		        if (dispositivoExistente != null) {
-		            dispositivoExistente.setPlazas(actualizarPlazas(dispositivoModel));
-
-		            SensorEstacionamiento dispositivoActualizado = estacionamientoRepository.save(dispositivoExistente);
-		            return modelMapper.map(dispositivoActualizado, SensorEstacionamientoModel.class);
-		        }
-		    }
-		    return null;
-		}*/
 
 		@Override
 		public DispositivoModel insertOrUpdateEst(Dispositivo dispositivoModel, List<Boolean> plazas) {
@@ -371,21 +353,7 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
 	     return null;
 	    }
 
-		@Override
-		/*public DispositivoModel agregarMedicion(Dispositivo dispositivoModel, LocalDateTime fecha,
-				boolean estadoLibre) {
-			
-			return null;
-		}*/
-
-
-		
-		//public SensorEstacionamientoModel insertOrUpdate(SensorEstacionamientoModel estacionamientoModel) {
-			//SensorEstacionamiento estacionamiento = estacionamientoRepository.save(modelMapper.map(estacionamientoModel, SensorEstacionamiento.class));
-			//return modelMapper.map(estacionamiento, SensorEstacionamientoModel.class);
-		//}
-
-		public MedicionEstacionamiento traerUltimaMedicion() {
+		/*public MedicionEstacionamiento traerUltimaMedicion() {
 		       
 			MedicionEstacionamiento medicion; 
 			
@@ -415,14 +383,61 @@ import com.TpObjetos2.TpGrupo12.services.ISensorEstacionamientoService;
         estacionamientoService.agregarEventos(model, evento);
 		System.out.println("\n AGREGAMOS EVENTO ESTACIONAMIENTO");
         */
-    }
-
-		@Override
 		public DispositivoModel agregarMedicion(SensorEstacionamientoModel dispositivoModel, LocalDateTime fecha,
 				boolean estadoLibre) {
 			
 			return null;
 		}
+		
+		public MedicionEstacionamiento traerUltimaMedicion() {
+			MedicionEstacionamiento medicion; 
+			List<SensorEstacionamiento> dispositivos = getAll();
+	        int id = (int) (Math.random()*dispositivos.size());
+
+	        Dispositivo buscar = findByid(dispositivos.get(id).getId());
+	        List<Medicion> mediciones = buscar.getMediciones();
+	        
+	        if(mediciones.size() == 0)  
+	        {
+	        	medicion = null;
+	        	
+	        	agregarMedicion(buscar, LocalDateTime.of(LocalDate.of(2023,6,21),LocalTime.of(12,00)),false);
+	        }else {
+	        	 if(mediciones.size() >= 10 || buscar.isActivo() == false) {
+	        	     medicion= null;
+	        	 }else {
+	        	    medicion = (MedicionEstacionamiento) mediciones.get(mediciones.size()-1);
+	        	 }
+
+	        } 
+	        return medicion;
+	    }
+		
+		@Override
+		public DispositivoModel agregarMedicion(Dispositivo dispositivoModel,LocalDateTime fecha,boolean estadoLibre) {
+	        if (dispositivoModel != null) {
+	            SensorEstacionamiento dispositivoExistente = estacionamientoRepository.findById(dispositivoModel.getId());
+	            if (dispositivoExistente != null) {
+	                List<Medicion> mediciones = dispositivoExistente.getMediciones();
+	                
+	                MedicionEstacionamiento medicion = new MedicionEstacionamiento();
+	                
+	                medicion.setEstadoLibre(estadoLibre);
+	                medicion.setFechaRegistro(fecha);
+	                medicion.setDispositivo(dispositivoExistente);
+	                medicion.setEstadoLibre(estadoLibre);
+	                
+	                mediciones.add(medicion);
+	                
+	                dispositivoExistente.setMediciones(mediciones);
+	               
+	                // lo gurado en la base de datos
+	                Dispositivo dispositivoActualizado = estacionamientoRepository.save((SensorEstacionamiento)dispositivoExistente);
+	                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
+	            }
+	        }
+	     return null;
+	    }
+			
 
 	}
-

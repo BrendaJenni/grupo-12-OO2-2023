@@ -1,6 +1,8 @@
 package com.TpObjetos2.TpGrupo12.services.implementacion;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -139,7 +141,7 @@ public class SensorHumedadService implements ISensorHumedadService{
         {
         	medicion = null;
         	// lo mandamos a generar la primera medicion del dispositivo con la luz apagada en la proxima variable cuando se vea nuevamente la hora y el porcentaje de luz se decidira si prenderla
-        	agregarMedicion(buscar, LocalDateTime.now(), 20,false);
+        	agregarMedicion(buscar, LocalDateTime.of(LocalDate.of(2023,6,21),LocalTime.of(12,00)), 20,false);
         }else {
         	 //dejo este campo solo para agregar 10 mediciones en cada dispositivo y que no rompa
         	 if(mediciones.size() >= 10 || buscar.isActivo() == false) {

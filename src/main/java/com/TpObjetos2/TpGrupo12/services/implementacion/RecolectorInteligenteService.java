@@ -46,6 +46,22 @@ public class RecolectorInteligenteService implements IRecolectorInteligenteServi
 	}
     
     @Override
+    public DispositivoModel insertOrUpdateReco(Dispositivo dispositivoModel) {
+        if (dispositivoModel != null) {
+            Dispositivo dispositivoExistente = recolectorRepository.findById(dispositivoModel.getId());
+            if (dispositivoExistente != null) {
+                // actualizo es status del dispositivo
+                dispositivoExistente.setActivo(false);
+
+                // lo gurado en la base de datos
+                Dispositivo dispositivoActualizado = recolectorRepository.save((RecolectorInteligente)dispositivoExistente);
+                return modelMapper.map(dispositivoActualizado, DispositivoModel.class);
+            }
+        }
+     return null;
+    }
+    
+    @Override
     public DispositivoModel agregarMedicion(Dispositivo dispositivoModel,LocalDateTime fecha,boolean estaLlenoAhora) {
         if (dispositivoModel != null) {
             Dispositivo dispositivoExistente = recolectorRepository.findById(dispositivoModel.getId());

@@ -57,7 +57,7 @@ public class FuncionesAlumbrado {
 	}
 	
 	@Scheduled(fixedDelay=5000)
-	public void mostarHola() {	
+	public void verificarOscuridadYHora() {	
 		MedicionAlumbrado implementar = this.traerUltimaMediacion();
 		//LocalDate fecha = 
 		LocalTime horaInicio = LocalTime.of(23, 00);

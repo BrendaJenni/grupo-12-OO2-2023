@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id_medicion")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter
 @Table(name="MedicionRecolector")
 public class MedicionRecolector extends Medicion{
 	@Column(name="estaLlenoAhora")

@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter
 @Table(name="SensorHumedad")
 public class SensorHumedad extends Dispositivo{
 	@Column(name="encedido")
